@@ -49,6 +49,7 @@ class User extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ]);
+
         $customer = Customers::where('email', '=', $request->email)->first();
         if ($customer) {
             if (FacadesHash::check($request->password, $customer->password)) {

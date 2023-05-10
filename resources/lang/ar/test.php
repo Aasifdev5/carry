@@ -25,5 +25,8 @@ return [
    'Edit' => 'يحرر',
    'Save' => 'يحفظ',
    'Update' => 'تحديث',
-   'Hello' => 'مرحبًا'
+   'Hello' => 'مرحبًا',
+   'Invited Users' => 'المستخدمون المدعوون',
+   'Distributor Management' => 'إدارة الموزع',
+   'Distributor' => 'الموزع'
 ];

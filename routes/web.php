@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Currency;
+use App\Http\Controllers\Distributor;
+use App\Http\Controllers\InvitedUsers;
 use App\Http\Controllers\Languages;
 use App\Http\Controllers\Limitation;
 use App\Http\Controllers\PremiumPlan;
@@ -91,6 +93,10 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
    Route::post('/update_limit', [Limitation::class, 'update_limit'])->name('update_limit');
    Route::get('/edit_limit', [Limitation::class, 'edit_limit'])->name('edit_limit')->middleware('isLoggedIn');
    Route::get('/delete_limit', [Limitation::class, 'delete_limit'])->name('delete_limit');
+   Route::get('invited_users', [InvitedUsers::class, 'invited_users'])->name('invited_users')->middleware('isLoggedIn');
+   Route::get('/distributor_management', [Distributor::class, 'distributor_management'])->name('distributor_management')->middleware('isLoggedIn');
+   Route::get('/add_distributor', [Distributor::class, 'add_distributor'])->name('add_distributor')->middleware('isLoggedIn');
+   Route::post('/save_distributor', [Distributor::class, 'save_distributor'])->name('save_distributor');
 });
 
 Route::post('update_password', [User::class, 'update_password'])->name('update_password');

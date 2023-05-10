@@ -27,5 +27,8 @@ return [
    'Update' => 'Update',
    'List' => 'List',
    'Hello ' => 'Hello',
+   'Invited Users' => 'Invited Users',
+   'Distributor Management' => 'Distributor Management',
+   'Distributor' => 'Distributor'
 
 ];

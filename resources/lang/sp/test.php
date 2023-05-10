@@ -25,6 +25,9 @@ return [
    'Edit' => 'Editar',
    'Save' => 'Ahorrar',
    'Update' => 'Actualizar',
-   'Hello' => 'Hola'
+   'Hello' => 'Hola',
+   'Invited Users' => 'Usuarias invitadas',
+   'Distributor Management' => 'Gestión de distribuidores',
+   'Distributor' => 'distribuidores'
 
 ];
