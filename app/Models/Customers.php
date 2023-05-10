@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Customers extends Model
 {
-    use HasFactory;
+    protected $table = 'customers';
+    protected $fillable = ['name', 'is_admin', 'email', 'password', 'distributor_name', 'invite_code', 'start_date', 'end_date'];
 }

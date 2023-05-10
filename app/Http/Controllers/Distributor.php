@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Distributors;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\Customers;
@@ -13,7 +13,7 @@ class Distributor extends Controller
 {
     public function distributor_management(Request $request)
     {
-        $distributors = DB::table('distributors')->get();
+        $distributors = DB::table('customers')->get();
         $data = array();
         if (Session::has('loginId')) {
             $data = Customers::where('id', '=', Session::get('loginId'))->first();
@@ -35,31 +35,26 @@ class Distributor extends Controller
         $data = array();
         if (Session::has('loginId')) {
             $data = Customers::where('id', '=', Session::get('loginId'))->first();
-            $distributor = new Distributors();
-
+            $customer = new Customers();
             $request->validate([
                 'distributor_name' => 'required',
                 'distributor_invite_code' => 'required',
                 'distributor_start_date' => 'required',
                 'distributor_end_date' => 'required',
-                'distributor_email' => 'required|email|unique:customers',
-                // 'email' => 'required|email|unique:customers',
+                'email' => 'required|email|unique:customers',
                 'password' => 'required',
                 'confirm_password' => ['same:password']
             ]);
-            $customer = new Customers();
 
-            $distributor->distributor_name = $request->distributor_name;
-            $distributor->invite_code = $request->distributor_invite_code;
-            $distributor->start_date = $request->distributor_start_date;
-            $distributor->end_date = $request->distributor_end_date;
-            $distributor->distributor_email = $request->distributor_email;
-            $distributor->password = $request->password;
+
+            $customer->distributor_name = $request->distributor_name;
+            $customer->invite_code = $request->distributor_invite_code;
+            $customer->start_date = $request->distributor_start_date;
+            $customer->end_date = $request->distributor_end_date;
             $customer->name = $request->distributor_name;
-            $customer->email = $request->distributor_email;
+            $customer->email = $request->email;
             $customer->password = FacadesHash::make($request->password);
-            $customer->save();
-            $response = $distributor->save();
+            $response = $customer->save();
             if ($response) {
                 return redirect('distributor_management')->with('success', 'Successfully Added');
             } else {

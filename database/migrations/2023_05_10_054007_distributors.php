@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('invite_code');
             $table->date('start_date');
             $table->date('end_date');
-            $table->string('distributor_user_name');
+            $table->string('distributor_email');
             $table->string('password');
             $table->timestamps();
         });

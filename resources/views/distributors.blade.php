@@ -51,14 +51,20 @@
                   </thead>
                   <tbody>
                      @foreach($distributors as $row)
+                     <?php 
+                     if ($row->is_admin == 0) {
+
+
+                     ?>
                      <tr>
                         <td>{{$row->distributor_name}}</td>
                         <td>{{$row->invite_code}}</td>
                         <td>{{$row->start_date}}</td>
                         <td>{{$row->end_date}}</td>
-                        <td>{{$row->distributor_email}}</td>
+                        <td>{{$row->email}}</td>
                         <td>{{$row->password}}</td>
                      </tr>
+                     <?php } ?>
                      @endforeach
                   </tbody>
                </table>
