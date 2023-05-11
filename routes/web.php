@@ -4,6 +4,7 @@ use App\Http\Controllers\Currency;
 use App\Http\Controllers\Distributor;
 use App\Http\Controllers\InvitedUsers;
 use App\Http\Controllers\Languages;
+use App\Http\Controllers\LanguageTranslationController;
 use App\Http\Controllers\Limitation;
 use App\Http\Controllers\PremiumPlan;
 use Illuminate\Support\Facades\Route;
@@ -14,7 +15,7 @@ use App\Http\Controllers\MatchesList;
 use App\Http\Controllers\MultiLingual;
 use App\Http\Controllers\PaymentInterface;
 use App\Http\Controllers\UserTerms;
-
+use Illuminate\Support\Facades\App;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -97,6 +98,16 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
    Route::get('/distributor_management', [Distributor::class, 'distributor_management'])->name('distributor_management')->middleware('isLoggedIn');
    Route::get('/add_distributor', [Distributor::class, 'add_distributor'])->name('add_distributor')->middleware('isLoggedIn');
    Route::post('/save_distributor', [Distributor::class, 'save_distributor'])->name('save_distributor');
+   Route::get('languages', [LanguageTranslationController::class, 'index'])->name('languages');
+   Route::post('translations/update', [LanguageTranslationController::class, 'transUpdate'])->name('translation.update.json');
+   Route::post('translations/updateKey', [LanguageTranslationController::class, 'transUpdateKey'])->name('translation.update.json.key');
+   Route::delete('translations/destroy/{key}', [LanguageTranslationController::class, 'destroy'])->name('translations.destroy');
+   Route::post('translations/create', [LanguageTranslationController::class, 'store'])->name('translations.create');
+   Route::get('check-translation', function () {
+      App::setLocale('en');
+
+      dd(__('website'));
+   });
 });
 
 Route::post('update_password', [User::class, 'update_password'])->name('update_password');
