@@ -4,6 +4,7 @@ Edit Terms
 
 @endsection
 @section('content')
+<script src="{{ asset('js/core/libs.min.js')}}"></script>
 <div class="row">
    <center>
       <div class="col-xl-8 col-lg-12">

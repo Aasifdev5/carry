@@ -3,6 +3,7 @@
 Push Notifications
 @endsection
 @section('content')
+<script src="{{ asset('js/core/libs.min.js')}}"></script>
 <style>
    :root {
       --primary-clr: #E891B9;

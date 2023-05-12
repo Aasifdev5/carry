@@ -4,6 +4,7 @@
 {{ __('test.Add') }} {{ __('test.Luggage') }}
 @endsection
 @section('content')
+<script src="{{ asset('js/core/libs.min.js')}}"></script>
 <div class="row">
    <center>
       <div class="col-xl-8 col-lg-12">
@@ -15,8 +16,7 @@
             </div>
             <div class="card-body">
                <div class="new-user-info">
-                  <form action="{{route('save_luggage_type')}}" method="POST" enctype="multipart/form-data"
-                     class="form-horizontal">
+                  <form action="{{route('save_luggage_type')}}" method="POST" enctype="multipart/form-data" class="form-horizontal">
                      @if(Session::has('success'))
                      <div class="alert alert-success">{{Session::get('success')}}</div>
                      @endif
@@ -27,8 +27,7 @@
                      <div class="form-group row">
                         <label class="control-label col-sm-3 align-self-center mb-0" for="email1">Luggage Name:</label>
                         <div class="col-sm-9">
-                           <input type="text" class="form-control" id="luggage_name" name="luggage_name"
-                              value="{{old('luggage_name')}}" placeholder="Enter Luggage Type">
+                           <input type="text" class="form-control" id="luggage_name" name="luggage_name" value="{{old('luggage_name')}}" placeholder="Enter Luggage Type">
                            <span class="text-danger">@error ('luggage_name') {{$message}} @enderror</span>
                         </div>
                      </div>

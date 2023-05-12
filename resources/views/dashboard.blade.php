@@ -9,6 +9,7 @@ Dashboard
 @if(Session::has('fail'))
 <div class="alert alert-danger">{{Session::get('fail')}}</div>
 @endif
+<script src="{{ asset('js/core/libs.min.js')}}"></script>
 <div class="col-md-12 col-lg-12">
    <div class="row">
       <div class="col-sm-4">

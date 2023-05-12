@@ -4,6 +4,7 @@
 {{ __('test.Add') }} {{ __('test.Language') }}
 @endsection
 @section('content')
+<script src="{{ asset('js/core/libs.min.js')}}"></script>
 <div class="row">
    <center>
       <div class="col-xl-9 col-lg-12">
@@ -15,8 +16,7 @@
             </div>
             <div class="card-body">
                <div class="new-user-info">
-                  <form action="{{route('save_language')}}" method="POST" enctype="multipart/form-data"
-                     class="form-horizontal">
+                  <form action="{{route('save_language')}}" method="POST" enctype="multipart/form-data" class="form-horizontal">
                      @if(Session::has('success'))
                      <div class="alert alert-success">{{Session::get('success')}}</div>
                      @endif
@@ -27,8 +27,7 @@
                      <div class="form-group row">
                         <label class="control-label col-sm-3 align-self-center mb-0" for="email1">Language Name:</label>
                         <div class="col-sm-9">
-                           <input type="text" class="form-control" id="language_name" name="language_name"
-                              value="{{old('language_name')}}" placeholder="Enter Language Name">
+                           <input type="text" class="form-control" id="language_name" name="language_name" value="{{old('language_name')}}" placeholder="Enter Language Name">
                            <span class="text-danger">@error ('language_name') {{$message}} @enderror</span>
                         </div>
                      </div>
@@ -36,8 +35,7 @@
                         <label class="control-label col-sm-3 align-self-center mb-0" for="pwd2">Language Photo
                            Upload:</label>
                         <div class="col-sm-9">
-                           <input type="file" class="form-control" id="language_photo" name="language_photo"
-                              value="{{old('language_photo')}}">
+                           <input type="file" class="form-control" id="language_photo" name="language_photo" value="{{old('language_photo')}}">
                            <span class="text-danger">@error ('language_photo') {{$message}} @enderror</span>
 
                         </div>
@@ -46,8 +44,7 @@
 
                      <div class="form-group">
                         <div class="col-sm-12">
-                           <button type="submit"
-                              class="btn btn-primary btn-block pull-right">{{ __('test.Save') }}</button>
+                           <button type="submit" class="btn btn-primary btn-block pull-right">{{ __('test.Save') }}</button>
                         </div>
 
                      </div>

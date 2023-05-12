@@ -4,6 +4,7 @@
 {{ __('test.Languages') }} {{ __('test.List') }}
 @endsection
 @section('content')
+<script src="{{ asset('js/core/libs.min.js')}}"></script>
 <div class="row">
    <div class="table-responsive">
       <div class="col-sm-12">

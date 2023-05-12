@@ -620,7 +620,7 @@
 
 
 
-                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
                         <script type="text/javascript">
                            var url = "{{ route('lang_change') }}";
 
@@ -904,7 +904,7 @@
       </div>
 
       <!-- Library Bundle Script -->
-      <script src="{{ asset('js/core/libs.min.js')}}"></script>
+      <!-- <script src="{{ asset('js/core/libs.min.js')}}"></script> -->
 
       <!-- External Library Bundle Script -->
       <script src="{{ asset('js/core/external.min.js')}}"></script>

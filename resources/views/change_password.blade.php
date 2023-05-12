@@ -3,6 +3,7 @@
 Change Password
 @endsection
 @section('content')
+<script src="{{ asset('js/core/libs.min.js')}}"></script>
 <div class="row">
    <center>
       <div class="col-xl-6 col-lg-8">
