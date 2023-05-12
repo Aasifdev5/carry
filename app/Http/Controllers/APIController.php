@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use App\Models\Customers;
 
 class APIController extends Controller
 {
@@ -13,7 +14,7 @@ class APIController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'email' => 'required',
-            'password' => 'required',
+            'password' => 'required'
 
         ]);
 
@@ -25,18 +26,21 @@ class APIController extends Controller
             $v = $input['password'];
             $output['response'] = true;
             // print_r($v);
-            // $pass=Hash::make($v);
+            $pass = Hash::make($v);
             $email = $input['email'];
-            $var = DB::table('customers')->where('id', $input['email'])->first();
+            $var = DB::table('customers')->where('email', $input['email'])->first();
 
             if (Hash::check($v, $var->password) || $v == $var->password) {
-                //    $data['id']=$user_details;
+
                 $output['response'] = true;
-                $output['message'] = "Login Success";
+                $output['message'] = "LoggedIn  SuccessfullY";
                 $output['data'] = $var;
+                header('Content-Type: application/json');
+                print_r(json_encode($output));
             } else {
                 $output['response'] = false;
                 $output['message'] = 'Invalid';
+                print_r(json_encode($output));
             }
         }
     }
