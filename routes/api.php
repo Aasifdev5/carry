@@ -20,3 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::post('/sign_in', [APIController::class, 'sign_in']);
 Route::post('/register', [APIController::class, 'register']);
+Route::get('/languages', [APIController::class, 'languages']);

@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use App\Models\users;
-use Illuminate\Support\Facades\Hash as FacadesHash;
+use Illuminate\Support\Facades\Fi;
+use App\Models\Language;
 
 class APIController extends Controller
 {
@@ -72,5 +73,30 @@ class APIController extends Controller
                 print_r(json_encode($output));
             }
         }
+    }
+    public function deletedata(Request $request)
+    {
+        $id = $request->id;
+        $data = DB::table('users')
+            ->where('id', $id)
+            ->delete();
+
+        $output['response'] = true;
+        $output['message'] = 'Data deleted SuccessfullY';
+        // $output['data']=$c1;
+
+        header('Content-Type: application/json');
+        print_r(json_encode($output));
+    }
+    public function deleteclient(Request $request, $id)
+    {
+        $data = users::findOrFail($id);
+        $data->delete();
+        return back()->with('success', 'Data deleted successfully');
+    }
+
+    public function languages()
+    {
+        return Language::all();
     }
 }
