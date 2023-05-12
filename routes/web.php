@@ -98,7 +98,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
    Route::get('/distributor_management', [Distributor::class, 'distributor_management'])->name('distributor_management')->middleware('isLoggedIn');
    Route::get('/add_distributor', [Distributor::class, 'add_distributor'])->name('add_distributor')->middleware('isLoggedIn');
    Route::post('/save_distributor', [Distributor::class, 'save_distributor'])->name('save_distributor');
-   Route::get('languages', [LanguageTranslationController::class, 'index'])->name('languages');
+   Route::get('languages', [LanguageTranslationController::class, 'index'])->name('languages')->middleware('isLoggedIn');
    Route::post('translations/update', [LanguageTranslationController::class, 'transUpdate'])->name('translation.update.json');
    Route::post('translations/updateKey', [LanguageTranslationController::class, 'transUpdateKey'])->name('translation.update.json.key');
    Route::delete('translations/destroy/{key}', [LanguageTranslationController::class, 'destroy'])->name('translations.destroy');

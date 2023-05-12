@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 use IlLuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Session;
+use App\Models\Customers;
 
 
 class LanguageTranslationController extends Controller
@@ -33,10 +34,14 @@ class LanguageTranslationController extends Controller
                 }
                 $columns[++$key] = ['data' => $this->openJSONFile($language->code), 'lang' => $language->code];
             }
+            $data = array();
+            if (Session::has('loginId')) {
+                $data = Customers::where('id', '=', Session::get('loginId'))->first();
+            }
         }
 
 
-        return view('languages', compact('languages', 'columns', 'columnsCount'));
+        return view('languages', compact('languages', 'columns', 'columnsCount', 'data'));
     }
     /**
      * Remove the specified resource from storage.
