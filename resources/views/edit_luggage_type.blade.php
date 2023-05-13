@@ -1,7 +1,7 @@
 @extends('layout.master')
 @section('title')
 
-{{ __('test.Edit') }} {{ __('test.Luggage Type') }}
+{{ __('Edit') }} {{ __('Luggage Type') }}
 @endsection
 @section('content')
 <script src="{{ asset('js/core/libs.min.js')}}"></script>
@@ -11,7 +11,7 @@
          <div class="card">
             <div class="card-header d-flex ">
                <div class="header-title">
-                  <h4 class="card-title">{{ __('test.Edit') }} {{ __('test.Luggage Type') }}</h4>
+                  <h4 class="card-title">{{ __('Edit') }} {{ __('Luggage Type') }}</h4>
                </div>
             </div>
             <div class="card-body">
@@ -34,7 +34,7 @@
                      </div>
                      <div class="form-group">
                         <div class="col-sm-12">
-                           <button type="submit" class="btn btn-primary btn-block pull-right"> {{ __('test.Update') }}
+                           <button type="submit" class="btn btn-primary btn-block pull-right"> {{ __('Update') }}
                            </button>
                         </div>
 

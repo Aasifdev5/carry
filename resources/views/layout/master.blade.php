@@ -106,7 +106,7 @@
                               fill="currentColor"></path>
                         </svg>
                      </i>
-                     <span class="item-name"> {{ __('test.dashboard') }}</span>
+                     <span class="item-name"> {{ __('dashboard') }}</span>
                   </a>
                </li>
                <?php
@@ -140,7 +140,7 @@
                               fill="currentColor"></path>
                         </svg>
                      </i>
-                     <span class="item-name">{{ __('test.Vehicle Management') }}</span>
+                     <span class="item-name">{{ __('Vehicle Management') }}</span>
                      <i class="right-icon">
                         <svg class="icon-18" xmlns="http://www.w3.org/2000/svg" width="18" fill="none"
                            viewBox="0 0 24 24" stroke="currentColor">
@@ -161,7 +161,7 @@
                               </svg>
                            </i>
                            <i class="sidenav-mini-icon"> </i>
-                           <span class="item-name">{{ __('test.Add Vehicle') }}</span>
+                           <span class="item-name">{{ __('Add Vehicle') }}</span>
                         </a>
                      </li>
                      <li class="nav-item">
@@ -175,7 +175,7 @@
                               </svg>
                            </i>
                            <i class="sidenav-mini-icon"> U </i>
-                           <span class="item-name"> {{__('test.Vehicle List')}}</span>
+                           <span class="item-name"> {{__('Vehicle List')}}</span>
                         </a>
                      </li>
                   </ul>
@@ -206,7 +206,7 @@
                               fill="currentColor"></path>
                         </svg>
                      </i>
-                     <span class="item-name"> {{ __('test.Users Management') }}</span>
+                     <span class="item-name"> {{ __('Users Management') }}</span>
                      <i class="right-icon">
                         <svg class="icon-18" xmlns="http://www.w3.org/2000/svg" width="18" fill="none"
                            viewBox="0 0 24 24" stroke="currentColor">
@@ -252,7 +252,7 @@
                               </svg>
                            </i>
                            <i class="sidenav-mini-icon"> U </i>
-                           <span class="item-name"> {{ __('test.Users List') }}</span>
+                           <span class="item-name"> {{ __('Users List') }}</span>
                         </a>
                      </li>
                   </ul>
@@ -268,7 +268,7 @@
                         </svg>
                      </i>
                      <i class="sidenav-mini-icon"> A </i>
-                     <span class="item-name"> {{ __('test.Push Notification') }}</span>
+                     <span class="item-name"> {{ __('Push Notification') }}</span>
                   </a>
                </li>
                <li class="nav-item">
@@ -282,7 +282,7 @@
                         </svg>
                      </i>
                      <i class="sidenav-mini-icon"> A </i>
-                     <span class="item-name"> {{ __('test.Premium Plan') }}</span>
+                     <span class="item-name"> {{ __('Premium Plan') }}</span>
                   </a>
                </li>
                <li class="nav-item">
@@ -296,7 +296,7 @@
                         </svg>
                      </i>
                      <i class="sidenav-mini-icon"> A </i>
-                     <span class="item-name"> {{ __('test.Currency') }}</span>
+                     <span class="item-name"> {{ __('Currency') }}</span>
                   </a>
                </li>
                <li class="nav-item">
@@ -310,7 +310,7 @@
                         </svg>
                      </i>
                      <i class="sidenav-mini-icon"> A </i>
-                     <span class="item-name"> {{ __('test.Luggage Type') }}</span>
+                     <span class="item-name"> {{ __('Luggage Type') }}</span>
                   </a>
                </li>
                <li class="nav-item">
@@ -319,7 +319,7 @@
                      <i class="icon">
                         <img src="{{asset('download.png')}}" width="25" height="25">
                      </i>
-                     <span class="item-name"> {{ __('test.Language Management') }}</span>
+                     <span class="item-name"> {{ __('Language Management') }}</span>
                      <i class="right-icon">
                         <svg class="icon-18" xmlns="http://www.w3.org/2000/svg" width="18" fill="none"
                            viewBox="0 0 24 24" stroke="currentColor">
@@ -340,7 +340,7 @@
                               </svg>
                            </i>
                            <i class="sidenav-mini-icon"> A </i>
-                           <span class="item-name"> {{ __('test.Languages') }}</span>
+                           <span class="item-name"> {{ __('Languages') }}</span>
                         </a>
                      </li>
                      <li class="nav-item">
@@ -354,7 +354,7 @@
                               </svg>
                            </i>
                            <i class="sidenav-mini-icon"> A </i>
-                           <span class="item-name"> {{ __('test.MultiLingual') }}</span>
+                           <span class="item-name"> {{ __('MultiLingual') }}</span>
                         </a>
                      </li>
                   </ul>
@@ -371,7 +371,7 @@
                         </svg>
                      </i>
                      <i class="sidenav-mini-icon"> A </i>
-                     <span class="item-name"> {{ __('test.Payment Interface Settings') }}</span>
+                     <span class="item-name"> {{ __('Payment Interface Settings') }}</span>
                   </a>
                </li>
                <li class="nav-item">
@@ -385,7 +385,7 @@
                         </svg>
                      </i>
                      <i class="sidenav-mini-icon"> A </i>
-                     <span class="item-name"> {{ __('test.Matches List') }}</span>
+                     <span class="item-name"> {{ __('Matches List') }}</span>
                   </a>
                </li>
                <li class="nav-item">
@@ -399,7 +399,7 @@
                         </svg>
                      </i>
                      <i class="sidenav-mini-icon"> A </i>
-                     <span class="item-name"> {{ __('test.User Terms') }}</span>
+                     <span class="item-name"> {{ __('User Terms') }}</span>
                   </a>
                </li>
                <li class="nav-item">
@@ -413,7 +413,7 @@
                         </svg>
                      </i>
                      <i class="sidenav-mini-icon"> A </i>
-                     <span class="item-name"> {{ __('test.User Limitation') }}</span>
+                     <span class="item-name"> {{ __('User Limitation') }}</span>
                   </a>
                </li>
                <li class="nav-item">
@@ -427,7 +427,7 @@
                         </svg>
                      </i>
                      <i class="sidenav-mini-icon"> A </i>
-                     <span class="item-name"> {{ __('test.Invited Users') }}</span>
+                     <span class="item-name"> {{ __('Invited Users') }}</span>
                   </a>
                </li>
                <li class="nav-item">
@@ -442,7 +442,7 @@
                         </svg>
                      </i>
                      <i class="sidenav-mini-icon"> A </i>
-                     <span class="item-name"> {{ __('test.Distributor Management') }}</span>
+                     <span class="item-name"> {{ __('Distributor Management') }}</span>
                   </a>
                </li>
                <li>
@@ -520,10 +520,22 @@
                   <ul class="mb-2 navbar-nav ms-auto align-items-center navbar-list mb-lg-0">
                      <!-- <div class="col-md-3"> -->
                      <li class="nav-item dropdown">
+                        <?php
+                        $languages = DB::table('languages')->get();
+
+                        ?>
+
                         <select class="form-control lang-change">
-                           <option value="en" {{ session()->get('lang_code')=='en' ? 'selected' : ''}}>English</option>
-                           <option value="sp" {{ session()->get('lang_code')=='sp' ? 'selected' : ''}}>Spanish</option>
-                           <option value="ar" {{ session()->get('lang_code')=='ar' ? 'selected' : ''}}>Arabic</option>
+
+                           @if(count($languages)> 0)
+                           @foreach($languages as $row)
+                           <option value="{{$row->code}}"
+                              {{ session()->get('lang_code')=='$row->code' ? 'selected' : '' }}>
+                              {{$row->name}}
+                           </option>
+                           @endforeach
+                           @endif
+
                         </select>
                      </li>
 
@@ -564,12 +576,12 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                            <!-- <li><a class="dropdown-item" href="profile">Profile</a></li> -->
-                           <li><a class="dropdown-item" href="change_password"> {{ __('test.Changed Password') }}
+                           <li><a class="dropdown-item" href="change_password"> {{ __('Changed Password') }}
                               </a></li>
                            <li>
                               <hr class="dropdown-divider">
                            </li>
-                           <li><a class="dropdown-item" href="logout"> {{ __('test.Logout') }}</a></li>
+                           <li><a class="dropdown-item" href="logout"> {{ __('Logout') }}</a></li>
                         </ul>
                      </li>
                   </ul>
@@ -582,7 +594,7 @@
                   <div class="col-md-12">
                      <div class="flex-wrap d-flex justify-content-between align-items-center">
                         <div>
-                           <h1>Hello {{$data->name}}!</h1>
+                           <h1> {{ __('Hello') }} {{$data->name}}!</h1>
 
                         </div>
 
@@ -627,7 +639,7 @@
                </svg>
             </i>
             <i class="sidenav-mini-icon"> A </i>
-            <span class="item-name"> {{ __('test.Invited Users') }}</span>
+            <span class="item-name"> {{ __('Invited Users') }}</span>
          </a>
       </li>
 
@@ -704,32 +716,6 @@
                   </button>
                   <div class="collapse navbar-collapse" id="navbarSupportedContent">
                      <ul class="mb-2 navbar-nav ms-auto align-items-center navbar-list mb-lg-0">
-                        <!-- <div class="col-md-3"> -->
-                        <li class="nav-item dropdown">
-                           <select class="form-control lang-change">
-                              <option value="en" {{ session()->get('lang_code')=='en' ? 'selected' : ''}}>English
-                              </option>
-                              <option value="sp" {{ session()->get('lang_code')=='sp' ? 'selected' : ''}}>Spanish
-                              </option>
-                              <option value="ar" {{ session()->get('lang_code')=='ar' ? 'selected' : ''}}>Arabic
-                              </option>
-                           </select>
-                        </li>
-
-                        <!-- </div> -->
-
-
-
-
-                        <script type="text/javascript">
-                        var url = "{{ route('lang_change') }}";
-
-                        $('.lang-change').change(function() {
-                           let lang_code = $(this).val();
-                           window.location.href = url + "?lang=" + lang_code;
-                        });
-                        </script>
-
 
                         <li class="nav-item dropdown">
                            <a class="py-0 nav-link d-flex align-items-center" href="#" id="navbarDropdown" role="button"
@@ -748,17 +734,17 @@
                                  class="theme-color-pink-img img-fluid avatar avatar-50 avatar-rounded">
                               <div class="caption ms-3 d-none d-md-block ">
                                  <h6 class="mb-0 caption-title">{{$data->name}}</h6>
-                                 <p class="mb-0 caption-sub-title">Distributor</p>
+                                 <p class="mb-0 caption-sub-title">{{ __('Distributor')}}</p>
                               </div>
                            </a>
                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                               <!-- <li><a class="dropdown-item" href="profile">Profile</a></li> -->
-                              <li><a class="dropdown-item" href="change_password"> {{ __('test.Changed Password') }}
+                              <li><a class="dropdown-item" href="change_password"> {{ __('Changed Password') }}
                                  </a></li>
                               <li>
                                  <hr class="dropdown-divider">
                               </li>
-                              <li><a class="dropdown-item" href="logout"> {{ __('test.Logout') }}</a></li>
+                              <li><a class="dropdown-item" href="logout"> {{ __('Logout') }}</a></li>
                            </ul>
                         </li>
                      </ul>

@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('title')
-{{ __('test.Add') }} {{ __('test.Currency') }}
+{{ __('Add') }} {{ __('Currency') }}
 @endsection
 @section('content')
 <script src="{{ asset('js/core/libs.min.js')}}"></script>
@@ -10,12 +10,13 @@
          <div class="card">
             <div class="card-header d-flex ">
                <div class="header-title">
-                  <h4 class="card-title">{{ __('test.Add') }} {{ __('test.Currency') }}</h4>
+                  <h4 class="card-title">{{ __('Add') }} {{ __('Currency') }}</h4>
                </div>
             </div>
             <div class="card-body">
                <div class="new-user-info">
-                  <form action="{{route('save_currency')}}" method="POST" enctype="multipart/form-data" class="form-horizontal">
+                  <form action="{{route('save_currency')}}" method="POST" enctype="multipart/form-data"
+                     class="form-horizontal">
                      @if(Session::has('success'))
                      <div class="alert alert-success">{{Session::get('success')}}</div>
                      @endif
@@ -26,7 +27,8 @@
                      <div class="form-group row">
                         <label class="control-label col-sm-3 align-self-center mb-0" for="email1">Currency Name:</label>
                         <div class="col-sm-9">
-                           <input type="text" class="form-control" id="currency_name" name="currency_name" value="{{old('currency_name')}}" placeholder="Enter Currency Name">
+                           <input type="text" class="form-control" id="currency_name" name="currency_name"
+                              value="{{old('currency_name')}}" placeholder="Enter Currency Name">
                            <span class="text-danger">@error ('currency_name') {{$message}} @enderror</span>
                         </div>
                      </div>
@@ -34,7 +36,8 @@
                         <label class="control-label col-sm-3 align-self-center mb-0" for="email1">Currency
                            Symbol:</label>
                         <div class="col-sm-9">
-                           <input type="text" class="form-control" id="currency_symbol" name="currency_symbol" value="{{old('currency_symbol')}}" placeholder="Enter Currency Symbol">
+                           <input type="text" class="form-control" id="currency_symbol" name="currency_symbol"
+                              value="{{old('currency_symbol')}}" placeholder="Enter Currency Symbol">
                            <span class="text-danger">@error ('currency_symbol') {{$message}} @enderror</span>
                         </div>
                      </div>
@@ -52,7 +55,7 @@
 
                      <div class="form-group">
                         <div class="col-sm-12">
-                           <button type="submit" class="btn btn-primary btn-block pull-right"> {{ __('test.Save') }}
+                           <button type="submit" class="btn btn-primary btn-block pull-right"> {{ __('Save') }}
                            </button>
                         </div>
 

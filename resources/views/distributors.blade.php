@@ -1,7 +1,7 @@
 @extends('layout.master')
 @section('title')
 
-{{ __('test.Distributor') }} {{ __('test.List') }}
+{{ __('Distributor') }} {{ __('List') }}
 @endsection
 @section('content')
 <script src="{{ asset('js/core/libs.min.js')}}"></script>
@@ -11,7 +11,7 @@
          <div class="card">
             <div class="card-header d-flex justify-content-between">
                <div class="header-title">
-                  <h4 class="card-title">{{ __('test.Distributor') }} {{ __('test.List') }}</h4>
+                  <h4 class="card-title">{{ __('Distributor') }} {{ __('List') }}</h4>
                </div>
                <a class="btn btn-sm btn-icon btn-success" data-bs-toggle="tooltip" data-bs-placement="top" href="add_distributor" aria-label="Add" data-bs-original-title="Add">
                   <span class="btn-inner">

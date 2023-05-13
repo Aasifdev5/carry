@@ -1,7 +1,7 @@
 @extends('layout.master')
 @section('title')
 
-{{ __('test.Invited Users') }} {{ __('test.List') }}
+{{ __('Invited Users') }} {{ __('List') }}
 @endsection
 @section('content')
 <script src="{{ asset('js/core/libs.min.js')}}"></script>
@@ -11,7 +11,7 @@
          <div class="card">
             <div class="card-header d-flex justify-content-between">
                <div class="header-title">
-                  <h4 class="card-title">{{ __('test.Invited Users') }} {{ __('test.List') }}</h4>
+                  <h4 class="card-title">{{ __('Invited Users') }} {{ __('List') }}</h4>
                </div>
             </div>
             <div class="card-body px-0">

@@ -1,7 +1,7 @@
 @extends('layout.master')
 @section('title')
 
-{{ __('test.Add') }} {{ __('test.Premium Plan') }}
+{{ __('Add') }} {{ __('Premium Plan') }}
 @endsection
 @section('content')
 <script src="{{ asset('js/core/libs.min.js')}}"></script>
@@ -11,13 +11,12 @@
          <div class="card">
             <div class="card-header d-flex ">
                <div class="header-title">
-                  <h4 class="card-title">{{ __('test.Add') }} {{ __('test.Premium Plan') }}</h4>
+                  <h4 class="card-title">{{ __('Add') }} {{ __('Premium Plan') }}</h4>
                </div>
             </div>
             <div class="card-body">
                <div class="new-user-info">
-                  <form action="{{route('save_plan')}}" method="POST" enctype="multipart/form-data"
-                     class="form-horizontal">
+                  <form action="{{route('save_plan')}}" method="POST" enctype="multipart/form-data" class="form-horizontal">
                      @if(Session::has('success'))
                      <div class="alert alert-success">{{Session::get('success')}}</div>
                      @endif
@@ -36,8 +35,7 @@
                         <label class="control-label col-sm-3 align-self-center mb-0" for="email1">Premium Plan
                            Name:</label>
                         <div class="col-sm-9">
-                           <input type="text" class="form-control" id="plan_name" name="plan_name"
-                              value="{{old('plan_name')}}" placeholder="Enter Your Premium Plan Name">
+                           <input type="text" class="form-control" id="plan_name" name="plan_name" value="{{old('plan_name')}}" placeholder="Enter Your Premium Plan Name">
                            <span class="text-danger">@error ('plan_name') {{$message}} @enderror</span>
                         </div>
                      </div>
@@ -64,8 +62,7 @@
                         <label class="control-label col-sm-3 align-self-center mb-0" for="email1">
                            Price:</label>
                         <div class="col-sm-9">
-                           <input type="text" class="form-control" id="price" name="price" value="{{old('price')}}"
-                              placeholder="Enter Price">
+                           <input type="text" class="form-control" id="price" name="price" value="{{old('price')}}" placeholder="Enter Price">
                            <span class="text-danger">@error ('price') {{$message}} @enderror</span>
                         </div>
                      </div>
@@ -73,8 +70,7 @@
                         <label class="control-label col-sm-3 align-self-center mb-0" for="email1">
                            Price With Invite Code:</label>
                         <div class="col-sm-9">
-                           <input type="text" class="form-control" id="price_invite_code" name="price_invite_code"
-                              value="{{old('price_invite_code')}}" placeholder="Enter Price With Invite Code">
+                           <input type="text" class="form-control" id="price_invite_code" name="price_invite_code" value="{{old('price_invite_code')}}" placeholder="Enter Price With Invite Code">
                            <span class="text-danger">@error ('price_invite_code') {{$message}} @enderror</span>
                         </div>
                      </div>
@@ -83,8 +79,7 @@
                            :</label>
                         <div class="col-sm-9">
 
-                           <input type="text" class="form-control" id="duration" name="duration"
-                              value="{{old('duration')}}" placeholder="Enter Duration">
+                           <input type="text" class="form-control" id="duration" name="duration" value="{{old('duration')}}" placeholder="Enter Duration">
 
                            <span class="text-danger">@error ('duration') {{$message}} @enderror</span>
 
@@ -93,7 +88,7 @@
 
                      <div class="form-group">
                         <div class="col-sm-12">
-                           <button type="submit" class="btn btn-primary btn-block pull-right"> {{ __('test.Save') }}
+                           <button type="submit" class="btn btn-primary btn-block pull-right"> {{ __('Save') }}
                            </button>
                         </div>
 

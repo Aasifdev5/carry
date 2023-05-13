@@ -19,7 +19,7 @@ MultiLingual
 </div> -->
 
 
-<!-- <h4 class="mt-5">{{ __('test.dashboard') }}</h4> -->
+<!-- <h4 class="mt-5">{{ __('dashboard') }}</h4> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
    var url = "{{ route('lang_change') }}";

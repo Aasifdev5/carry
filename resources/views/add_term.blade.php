@@ -37,8 +37,7 @@ Add Terms
                      </div>
                      <div class="form-group">
                         <div class="col-sm-12">
-                           <button type="submit"
-                              class="btn btn-primary btn-block pull-right">{{ __('test.Save') }}</button>
+                           <button type="submit" class="btn btn-primary btn-block pull-right">{{ __('Save') }}</button>
                         </div>
 
                      </div>

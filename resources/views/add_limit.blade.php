@@ -1,7 +1,7 @@
 @extends('layout.master')
 @section('title')
 
-{{ __('test.Add') }} {{ __('test.User Limitation') }}
+{{ __('Add') }} {{ __('User Limitation') }}
 @endsection
 @section('content')
 <script src="{{ asset('js/core/libs.min.js')}}"></script>
@@ -11,7 +11,7 @@
          <div class="card">
             <div class="card-header d-flex ">
                <div class="header-title">
-                  <h4 class="card-title">{{ __('test.Add') }} {{ __('test.User Limitation') }}</h4>
+                  <h4 class="card-title">{{ __('Add') }} {{ __('User Limitation') }}</h4>
                </div>
             </div>
             <div class="card-body">
@@ -27,7 +27,8 @@
                      <div class="form-group row">
                         <label class="control-label col-sm-3 align-self-center mb-0" for="email1">Chats Limits:</label>
                         <div class="col-sm-9">
-                           <input type="text" class="form-control" id="chat_limit" name="chat_limit" value="{{old('chat_limit')}}" placeholder="Enter Chats Limits">
+                           <input type="text" class="form-control" id="chat_limit" name="chat_limit"
+                              value="{{old('chat_limit')}}" placeholder="Enter Chats Limits">
                            <span class="text-danger">@error ('chat_limit') {{$message}} @enderror</span>
                         </div>
                      </div>
@@ -35,14 +36,16 @@
                         <label class="control-label col-sm-3 align-self-center mb-0" for="email1">Add Offer
                            Limits:</label>
                         <div class="col-sm-9">
-                           <input type="text" class="form-control" id="add_offer_limit" name="add_offer_limit" value="{{old('add_offer_limit')}}" placeholder="Enter Add Offer Limits">
+                           <input type="text" class="form-control" id="add_offer_limit" name="add_offer_limit"
+                              value="{{old('add_offer_limit')}}" placeholder="Enter Add Offer Limits">
                            <span class="text-danger">@error ('add_offer_limit') {{$message}} @enderror</span>
                         </div>
                      </div>
                      <div class="form-group row">
                         <label class="control-label col-sm-3 align-self-center mb-0" for="email1">Swipe Limits:</label>
                         <div class="col-sm-9">
-                           <input type="text" class="form-control" id="swipe_limit" name="swipe_limit" value="{{old('swipe_limit')}}" placeholder="Enter Chats Limits">
+                           <input type="text" class="form-control" id="swipe_limit" name="swipe_limit"
+                              value="{{old('swipe_limit')}}" placeholder="Enter Chats Limits">
                            <span class="text-danger">@error ('swipe_limit') {{$message}} @enderror</span>
                         </div>
                      </div>
@@ -51,7 +54,7 @@
                      <div class="form-group">
                         <div class="col-sm-12">
                            <button type="submit" class="btn btn-primary btn-block pull-right">
-                              {{ __('test.Save') }}</button>
+                              {{ __('Save') }}</button>
                         </div>
 
                      </div>
