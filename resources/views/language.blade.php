@@ -57,7 +57,7 @@
                               height="70"></td>
                         <td>
                            <div class="flex align-items-center list-user-action">
-
+                              @if($row->name!="English")
                               <a class="btn btn-sm btn-icon btn-warning" data-bs-toggle="tooltip"
                                  data-bs-placement="top" data-original-title="Edit"
                                  href="{{ route('edit_language', ['id' => $row->id]) }}" aria-label="Edit"
@@ -78,6 +78,7 @@
                                     </svg>
                                  </span>
                               </a>
+
                               <a class="btn btn-sm btn-icon btn-danger" data-bs-toggle="tooltip" data-bs-placement="top"
                                  href="{{ route('delete_language', ['id' => $row->id]) }}" aria-label="Delete"
                                  data-bs-original-title="Delete">
@@ -97,6 +98,7 @@
                                     </svg>
                                  </span>
                               </a>
+                              @endif
                            </div>
                         </td>
                      </tr>

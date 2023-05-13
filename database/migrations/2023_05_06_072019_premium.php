@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('premium', function (Blueprint $table) {
             $table->id();
             $table->string('premium_plan');
+            $table->string('currency');
             $table->decimal('price');
             $table->decimal('price_invite_code');
             $table->integer('duration');

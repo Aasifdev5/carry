@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash as FacadesHash;
 use Illuminate\Support\Facades\Session;
 use App\Models\Customers;
 use App\Models\Premium;
+use App\Models\Currencies;
 use Illuminate\Support\Facades\DB;
 
 class PremiumPlan extends Controller
@@ -14,15 +15,17 @@ class PremiumPlan extends Controller
     public function premium_plan(Request $request)
     {
         $premium = DB::table('premium')->get();
+        $curreny = DB::table('currency')->get();
         $data = array();
         if (Session::has('loginId')) {
             $data = Customers::where('id', '=', Session::get('loginId'))->first();
         }
-        return view('premium_plan', compact('data'), ['premium' => $premium]);
+        return view('premium_plan', compact('data'), ['premium' => $premium, 'currency' => $curreny]);
     }
 
     public function add_plan(Request $request)
     {
+
         $data = array();
         if (Session::has('loginId')) {
             $data = Customers::where('id', '=', Session::get('loginId'))->first();
@@ -39,11 +42,13 @@ class PremiumPlan extends Controller
             $premium = new Premium();
             $request->validate([
                 'plan_name' => 'required',
+                'currency' => 'required',
                 'price' => 'required',
                 'price_invite_code' => 'required',
                 'duration' => 'required'
             ]);
             $premium->premium_plan = $request->plan_name;
+            $premium->currency = $request->currency;
             $premium->price = $request->price;
             $premium->price_invite_code = $request->price_invite_code;
             $premium->duration = $request->duration;
@@ -81,12 +86,14 @@ class PremiumPlan extends Controller
             $data = Customers::where('id', '=', Session::get('loginId'))->first();
             $request->validate([
                 'plan_name' => 'required',
+                'currency' => 'required',
                 'price' => 'required',
                 'price_invite_code' => 'required',
                 'duration' => 'required'
             ]);
             $premium = Premium::where('id', '=', $request->premium_id)->first();
             $premium->premium_plan = $request->plan_name;
+            $premium->currency = $request->currency;
             $premium->price = $request->price;
             $premium->price_invite_code = $request->price_invite_code;
             $premium->duration = $request->duration;

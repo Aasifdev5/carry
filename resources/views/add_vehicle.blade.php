@@ -16,7 +16,8 @@
             </div>
             <div class="card-body">
                <div class="new-user-info">
-                  <form action="{{route('save_vehicle')}}" method="POST" enctype="multipart/form-data" class="form-horizontal">
+                  <form action="{{route('save_vehicle')}}" method="POST" enctype="multipart/form-data"
+                     class="form-horizontal">
                      @if(Session::has('success'))
                      <div class="alert alert-success">{{Session::get('success')}}</div>
                      @endif
@@ -27,7 +28,8 @@
                      <div class="form-group row">
                         <label class="control-label col-sm-3 align-self-center mb-0" for="email1">Vehicle Name:</label>
                         <div class="col-sm-9">
-                           <input type="text" class="form-control" id="vehicle_name" name="vehicle_name" value="{{old('vehicle_name')}}" placeholder="Enter Your Vehicle Name">
+                           <input type="text" class="form-control" id="vehicle_name" name="vehicle_name"
+                              value="{{old('vehicle_name')}}" placeholder="Enter Your Vehicle Name">
                            <span class="text-danger">@error ('vehicle_name') {{$message}} @enderror</span>
                         </div>
                      </div>
@@ -35,7 +37,8 @@
                         <label class="control-label col-sm-3 align-self-center mb-0" for="pwd2">Vehicle Photo
                            Upload:</label>
                         <div class="col-sm-9">
-                           <input type="file" class="form-control" id="vehicle_photo_name" name="vehicle_photo_name" value="{{old('vehicle_photo_name')}}" placeholder="Enter Your Vehicle Name">
+                           <input type="file" class="form-control" id="vehicle_photo_name" name="vehicle_photo_name"
+                              value="{{old('vehicle_photo_name')}}" placeholder="Enter Your Vehicle Name">
                            <span class="text-danger">@error ('vehicle_photo_name') {{$message}} @enderror</span>
 
                         </div>
@@ -45,7 +48,7 @@
                            :</label>
                         <div class="col-sm-9">
 
-                           <textarea class="form-control" name="description" autofocus>
+                           <textarea class="form-control" rows="4" name="description" autofocus>
                            {{old('description')}}
                            </textarea>
 
@@ -56,7 +59,8 @@
 
                      <div class="form-group">
                         <div class="col-sm-12">
-                           <button type="submit" class="btn btn-primary btn-block pull-right">{{ __('test.Save') }}</button>
+                           <button type="submit"
+                              class="btn btn-primary btn-block pull-right">{{ __('test.Save') }}</button>
                         </div>
 
                      </div>

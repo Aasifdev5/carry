@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Http\Controllers;
-
 
 use Illuminate\Http\Request;
 use IlLuminate\Support\Facades\Response;
@@ -26,20 +24,18 @@ class LanguageTranslationController extends Controller
         $columns = [];
         $columnsCount = $languages->count();
 
-
-        if ($languages->count() > 0) {
-            foreach ($languages as $key => $language) {
-                if ($key == 0) {
-                    $columns[$key] = $this->openJSONFile($language->code);
+        $data = array();
+        if (Session::has('loginId')) {
+            $data = Customers::where('id', '=', Session::get('loginId'))->first();
+            if ($languages->count() > 0) {
+                foreach ($languages as $key => $language) {
+                    if ($key == 0) {
+                        $columns[$key] = $this->openJSONFile($language->code);
+                    }
+                    $columns[++$key] = ['data' => $this->openJSONFile($language->code), 'lang' => $language->code];
                 }
-                $columns[++$key] = ['data' => $this->openJSONFile($language->code), 'lang' => $language->code];
-            }
-            $data = array();
-            if (Session::has('loginId')) {
-                $data = Customers::where('id', '=', Session::get('loginId'))->first();
             }
         }
-
 
         return view('languages', compact('languages', 'columns', 'columnsCount', 'data'));
     }

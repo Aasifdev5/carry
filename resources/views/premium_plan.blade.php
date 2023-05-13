@@ -36,6 +36,7 @@ Premium Plan
                   <thead>
                      <tr class="ligth">
                         <th>Plan Name</th>
+                        <th>Currency</th>
                         <th>Price</th>
                         <th>Price With Invite Code</th>
                         <th>Duration</th>
@@ -44,8 +45,10 @@ Premium Plan
                   </thead>
                   <tbody>
                      @foreach($premium as $row)
+
                      <tr>
                         <td>{{$row->premium_plan}}</td>
+                        <td>{{$row->currency}}</td>
                         <td>{{$row->price}}</td>
                         <td>{{$row->price_invite_code}}</td>
                         <td>{{$row->duration}}</td>

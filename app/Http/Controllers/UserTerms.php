@@ -39,7 +39,7 @@ class UserTerms extends Controller
                 'term_name' => 'required',
 
             ]);
-            $terms->term_name = $request->term_name;
+            $terms->term_name = rtrim($request->term_name);
             $response = $terms->save();
             if ($response) {
                 return redirect('user_term')->with('success', 'Successfully Added');
@@ -79,7 +79,7 @@ class UserTerms extends Controller
 
             ]);
             $terms = Terms::where('id', '=', $request->term_id)->first();
-            $terms->term_name = $request->term_name;
+            $terms->term_name = rtrim($request->term_name);
 
             $terms->update();
             if ($terms) {
