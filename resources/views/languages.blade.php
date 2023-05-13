@@ -1,13 +1,23 @@
 @extends('layout.master')
+@section('title')
+Multi Language Translation
+@endsection
 @Section('content')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" />
-<link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet" />
+<link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css"
+   rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js">
 </script>
-
+<style>
+.table {
+   --mdb-table-font-size: 1.9rem;
+   --mdb-table-divider-color: rgba(0, 0, 0, 0.1);
+   font-size: var(--mdb-table-font-size);
+}
+</style>
 <div class="container">
    <h1> Multi Language Translation</h1>
 
@@ -46,12 +56,16 @@
          @foreach($columns[0] as $columnKey => $columnValue)
          <tr>
             <td>
-               <a href="#" class="translate-key" data-title="Enter Key" data-type="text" data-pk="{{ $columnKey }}" data-url="{{ route('translation.update.json.key') }}">{{ $columnKey }}</a>
+               <a href="#" class="translate-key" data-title="Enter Key" data-type="text" data-pk="{{ $columnKey }}"
+                  data-url="{{ route('translation.update.json.key') }}">{{ $columnKey }}</a>
             </td>
-            @for($i=1; $i<=$columnsCount; ++$i) <td><a href="#" data-title="Enter Translate" class="translate" data-code="{{ $columns[$i]['lang'] }}" data-type="textarea" data-pk="{{ $columnKey }}" data-url="{{ route('translation.update.json') }}">{{ isset($columns[$i]['data'][$columnKey]) ? $columns[$i]['data'][$columnKey] : '' }}</a>
+            @for($i=1; $i<=$columnsCount; ++$i) <td><a href="#" data-title="Enter Translate" class="translate"
+                  data-code="{{ $columns[$i]['lang'] }}" data-type="textarea" data-pk="{{ $columnKey }}"
+                  data-url="{{ route('translation.update.json') }}">{{ isset($columns[$i]['data'][$columnKey]) ? $columns[$i]['data'][$columnKey] : '' }}</a>
                </td>
                @endfor
-               <td><button data-action="{{ route('translations.destroy', $columnKey) }}" class="btn btn-danger btn-xs remove-key">Delete</button></td>
+               <td><button data-action="{{ route('translations.destroy', $columnKey) }}"
+                     class="btn btn-danger btn-xs remove-key">Delete</button></td>
          </tr>
          @endforeach
          @endif
@@ -61,46 +75,46 @@
 
 
 <script type="text/javascript">
-   $.ajaxSetup({
-      headers: {
-         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+$.ajaxSetup({
+   headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+   }
+});
+
+
+$('.translate').editable({
+   params: function(params) {
+      params.code = $(this).editable().data('code');
+      return params;
+   }
+});
+
+
+$('.translate-key').editable({
+   validate: function(value) {
+      if ($.trim(value) == '') {
+         return 'Key is required';
       }
-   });
+   }
+});
 
 
-   $('.translate').editable({
-      params: function(params) {
-         params.code = $(this).editable().data('code');
-         return params;
-      }
-   });
+$('container').on('click', '.remove-key', function() {
+   var cObj = $(this);
 
 
-   $('.translate-key').editable({
-      validate: function(value) {
-         if ($.trim(value) == '') {
-            return 'Key is required';
+   if (confirm("Are you sure want to remove this item?")) {
+      $.ajax({
+         url: cObj.data('action'),
+         method: 'DELETE',
+         success: function(data) {
+            cObj.parents("tr").remove();
+            alert("Your imaginary file has been deleted.");
          }
-      }
-   });
+      });
+   }
 
 
-   $('container').on('click', '.remove-key', function() {
-      var cObj = $(this);
-
-
-      if (confirm("Are you sure want to remove this item?")) {
-         $.ajax({
-            url: cObj.data('action'),
-            method: 'DELETE',
-            success: function(data) {
-               cObj.parents("tr").remove();
-               alert("Your imaginary file has been deleted.");
-            }
-         });
-      }
-
-
-   });
+});
 </script>
 @endsection

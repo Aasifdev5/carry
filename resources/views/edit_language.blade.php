@@ -29,8 +29,15 @@
                         <input type="hidden" name="language_id" value="{{$language->id}}">
                         <label class="control-label col-sm-3 align-self-center mb-0" for="email1">Language Name:</label>
                         <div class="col-sm-9">
-                           <input type="text" class="form-control" id="language_name" name="language_name" value="{{$language->language_name}}" placeholder="Enter Your Vehicle Name">
+                           <input type="text" class="form-control" id="language_name" name="language_name" value="{{$language->name}}" placeholder="Enter Your Vehicle Name">
                            <span class="text-danger">@error ('language_name') {{$message}} @enderror</span>
+                        </div>
+                     </div>
+                     <div class="form-group row">
+                        <label class="control-label col-sm-3 align-self-center mb-0" for="email1">Language Code:</label>
+                        <div class="col-sm-9">
+                           <input type="text" class="form-control" id="language_code" name="language_code" value="{{$language->code}}" placeholder="Enter Language Code">
+                           <span class="text-danger">@error ('language_code') {{$message}} @enderror</span>
                         </div>
                      </div>
                      <div class="form-group row">

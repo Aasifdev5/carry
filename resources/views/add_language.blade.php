@@ -32,6 +32,13 @@
                         </div>
                      </div>
                      <div class="form-group row">
+                        <label class="control-label col-sm-3 align-self-center mb-0" for="email1">Language Code:</label>
+                        <div class="col-sm-9">
+                           <input type="text" class="form-control" id="language_code" name="language_code" value="{{old('language_code')}}" placeholder="Enter Language Code">
+                           <span class="text-danger">@error ('language_code') {{$message}} @enderror</span>
+                        </div>
+                     </div>
+                     <div class="form-group row">
                         <label class="control-label col-sm-3 align-self-center mb-0" for="pwd2">Language Photo
                            Upload:</label>
                         <div class="col-sm-9">

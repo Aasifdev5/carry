@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Language extends Model
 {
-    protected $table = 'language';
-    protected $fillable = ['language_name', 'language_photo'];
+    protected $table = 'languages';
+    protected $fillable = ['name', 'language_photo', 'code'];
 }

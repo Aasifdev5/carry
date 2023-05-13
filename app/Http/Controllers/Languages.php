@@ -12,7 +12,7 @@ class Languages extends Controller
 {
     public function language(Request $request)
     {
-        $language = DB::table('language')->get();
+        $language = DB::table('languages')->get();
         $data = array();
         if (Session::has('loginId')) {
             $data = Customers::where('id', '=', Session::get('loginId'))->first();
@@ -37,15 +37,17 @@ class Languages extends Controller
             $language = new Language();
             $request->validate([
                 'language_name' => 'required',
+                'language_code' => 'required',
                 'language_photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
 
             ]);
-            $language->language_name = $request->language_name;
+            $language->name = $request->language_name;
+
             $language->language_photo = $request->file('language_photo')->getClientOriginalName();
             // $vehicle->vehicle_photo_path = $request->file('vehicle_photo_name')->store('images/vehicles');
             $image = $request->file('language_photo')->getClientOriginalName();
             $request->language_photo->move(public_path('images/language'), $image);
-
+            $language->code = $request->language_code;
             $response = $language->save();
 
             if ($response) {
@@ -81,12 +83,13 @@ class Languages extends Controller
             $data = Customers::where('id', '=', Session::get('loginId'))->first();
             $request->validate([
                 'language_name' => 'required',
+                'language_code' => 'required',
                 'language_photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
 
             ]);
             $language = Language::where('id', '=', $request->language_id)->first();
-            $language->language_name = $request->language_name;
-
+            $language->name = $request->language_name;
+            $language->code = $request->language_code;
             if (!empty($request->language_photo)) {
                 $language->language_photo = $request->file('language_photo')->getClientOriginalName();
 
