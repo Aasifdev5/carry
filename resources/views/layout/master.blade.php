@@ -525,11 +525,14 @@
 
                         ?>
 
-                        <select class="form-control lang-change">
+                        <select class="form-control lang-change" name="lang">
 
                            @if(count($languages)> 0)
                            @foreach($languages as $row)
-                           <option value="{{$row->code}}"
+                           <option @if($row->code==session()->get('lang_code'))
+                              selected
+                              @endif
+                              value="{{$row->code}}"
                               {{ session()->get('lang_code')=='$row->code' ? 'selected' : '' }}>
                               {{$row->name}}
                            </option>
