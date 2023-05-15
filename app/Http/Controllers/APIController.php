@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use App\Models\users;
 use App\Models\Currencies;
 use App\Models\Language;
@@ -13,6 +14,7 @@ use App\Models\LuggageType;
 use App\Models\Vehicle;
 use App\Models\Premium;
 use App\Models\Terms;
+use App\Models\PersonalAccess;
 
 class APIController extends Controller
 {
@@ -36,6 +38,7 @@ class APIController extends Controller
             if (Hash::check($v, $var->password) || $v == $var->password) {
 
                 $output['response'] = true;
+
                 $output['message'] = "LoggedIn  SuccessfullY";
                 $output['data'] = $var;
                 header('Content-Type: application/json');
@@ -125,5 +128,20 @@ class APIController extends Controller
     public function user_terms()
     {
         return Terms::all();
+    }
+    public function logout(Request $request)
+    {
+
+        $token = Session::get('token');
+        $personal = new PersonalAccess();
+
+        $personal->each(function ($token, $key) {
+            $token->delete();
+        });
+        session()->flush();
+        return response()->json([
+            'message' => 'Logged out successfully!',
+            'status_code' => 200
+        ], 200);
     }
 }

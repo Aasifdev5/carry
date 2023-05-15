@@ -9,6 +9,7 @@ use App\Models\Customers;
 use App\Models\Premium;
 use App\Models\Currencies;
 use Illuminate\Support\Facades\DB;
+use App\Models\PersonalAccess;
 
 class PremiumPlan extends Controller
 {
@@ -20,7 +21,16 @@ class PremiumPlan extends Controller
         if (Session::has('loginId')) {
             $data = Customers::where('id', '=', Session::get('loginId'))->first();
         }
-        return view('premium_plan', compact('data'), ['premium' => $premium, 'currency' => $curreny]);
+
+        $token = Session::get('token');
+        $check = PersonalAccess::where('token', '=', $token)->first();
+        if (!empty($check)) {
+            return view('premium_plan', compact('data'), ['premium' => $premium, 'currency' => $curreny]);
+        } else {
+            Session::forget('loginId');
+            $request->session()->invalidate();
+            return redirect('/');
+        }
     }
 
     public function add_plan(Request $request)
@@ -30,7 +40,16 @@ class PremiumPlan extends Controller
         if (Session::has('loginId')) {
             $data = Customers::where('id', '=', Session::get('loginId'))->first();
         }
-        return view('add_plan', compact('data'));
+
+        $token = Session::get('token');
+        $check = PersonalAccess::where('token', '=', $token)->first();
+        if (!empty($check)) {
+            return view('add_plan', compact('data'));
+        } else {
+            Session::forget('loginId');
+            $request->session()->invalidate();
+            return redirect('/');
+        }
     }
 
     public function save_plan(Request $request)
@@ -76,7 +95,16 @@ class PremiumPlan extends Controller
         if (Session::has('loginId')) {
             $data = Customers::where('id', '=', Session::get('loginId'))->first();
         }
-        return view('edit_plan', compact('data'), ['premium' => $premium]);
+
+        $token = Session::get('token');
+        $check = PersonalAccess::where('token', '=', $token)->first();
+        if (!empty($check)) {
+            return view('edit_plan', compact('data'), ['premium' => $premium]);
+        } else {
+            Session::forget('loginId');
+            $request->session()->invalidate();
+            return redirect('/');
+        }
     }
     public function update_plan(Request $request)
     {

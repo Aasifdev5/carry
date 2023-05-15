@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\Customers;
 use Illuminate\Support\Facades\DB;
+use App\Models\PersonalAccess;
 
 class Languages extends Controller
 {
@@ -17,7 +18,16 @@ class Languages extends Controller
         if (Session::has('loginId')) {
             $data = Customers::where('id', '=', Session::get('loginId'))->first();
         }
-        return view('language', compact('data'), ['language' => $language]);
+
+        $token = Session::get('token');
+        $check = PersonalAccess::where('token', '=', $token)->first();
+        if (!empty($check)) {
+            return view('language', compact('data'), ['language' => $language]);
+        } else {
+            Session::forget('loginId');
+            $request->session()->invalidate();
+            return redirect('/');
+        }
     }
     public function add_language(Request $request)
     {
@@ -25,7 +35,16 @@ class Languages extends Controller
         if (Session::has('loginId')) {
             $data = Customers::where('id', '=', Session::get('loginId'))->first();
         }
-        return view('add_language', compact('data'));
+
+        $token = Session::get('token');
+        $check = PersonalAccess::where('token', '=', $token)->first();
+        if (!empty($check)) {
+            return view('add_language', compact('data'));
+        } else {
+            Session::forget('loginId');
+            $request->session()->invalidate();
+            return redirect('/');
+        }
     }
 
     public function save_language(Request $request)
@@ -73,7 +92,16 @@ class Languages extends Controller
         if (Session::has('loginId')) {
             $data = Customers::where('id', '=', Session::get('loginId'))->first();
         }
-        return view('edit_language', compact('data'), ['language' => $language]);
+
+        $token = Session::get('token');
+        $check = PersonalAccess::where('token', '=', $token)->first();
+        if (!empty($check)) {
+            return view('edit_language', compact('data'), ['language' => $language]);
+        } else {
+            Session::forget('loginId');
+            $request->session()->invalidate();
+            return redirect('/');
+        }
     }
     public function update_language(Request $request)
     {

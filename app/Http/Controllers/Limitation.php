@@ -6,7 +6,7 @@ use App\Models\UserLimitation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\Customers;
-
+use App\Models\PersonalAccess;
 use Illuminate\Support\Facades\DB;
 
 class Limitation extends Controller
@@ -18,7 +18,16 @@ class Limitation extends Controller
         if (Session::has('loginId')) {
             $data = Customers::where('id', '=', Session::get('loginId'))->first();
         }
-        return view('limitation', compact('data'), ['user_limitation' => $user_limitation]);
+
+        $token = Session::get('token');
+        $check = PersonalAccess::where('token', '=', $token)->first();
+        if (!empty($check)) {
+            return view('limitation', compact('data'), ['user_limitation' => $user_limitation]);
+        } else {
+            Session::forget('loginId');
+            $request->session()->invalidate();
+            return redirect('/');
+        }
     }
 
     public function add_limit(Request $request)
@@ -27,7 +36,16 @@ class Limitation extends Controller
         if (Session::has('loginId')) {
             $data = Customers::where('id', '=', Session::get('loginId'))->first();
         }
-        return view('add_limit', compact('data'));
+
+        $token = Session::get('token');
+        $check = PersonalAccess::where('token', '=', $token)->first();
+        if (!empty($check)) {
+            return view('add_limit', compact('data'));
+        } else {
+            Session::forget('loginId');
+            $request->session()->invalidate();
+            return redirect('/');
+        }
     }
 
     public function save_limit(Request $request)
@@ -72,7 +90,16 @@ class Limitation extends Controller
         if (Session::has('loginId')) {
             $data = Customers::where('id', '=', Session::get('loginId'))->first();
         }
-        return view('edit_limit', compact('data'), ['user_limitation' => $user_limitation]);
+
+        $token = Session::get('token');
+        $check = PersonalAccess::where('token', '=', $token)->first();
+        if (!empty($check)) {
+            return view('edit_limit', compact('data'), ['user_limitation' => $user_limitation]);
+        } else {
+            Session::forget('loginId');
+            $request->session()->invalidate();
+            return redirect('/');
+        }
     }
     public function update_limit(Request $request)
     {

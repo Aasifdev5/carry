@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Models\Customers;
+use App\Models\PersonalAccess;
 
 
 class LanguageTranslationController extends Controller
@@ -16,7 +17,7 @@ class LanguageTranslationController extends Controller
      * Remove the specified resource from storage.
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $languages = DB::table('languages')->get();
 
@@ -37,7 +38,16 @@ class LanguageTranslationController extends Controller
             }
         }
 
-        return view('languages', compact('languages', 'columns', 'columnsCount', 'data'));
+
+        $token = Session::get('token');
+        $check = PersonalAccess::where('token', '=', $token)->first();
+        if (!empty($check)) {
+            return view('languages', compact('languages', 'columns', 'columnsCount', 'data'));
+        } else {
+            Session::forget('loginId');
+            $request->session()->invalidate();
+            return redirect('/');
+        }
     }
     /**
      * Remove the specified resource from storage.

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Customers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash as FacadesHash;
+use App\Models\PersonalAccess;
 
 class Distributor extends Controller
 {
@@ -18,7 +19,16 @@ class Distributor extends Controller
         if (Session::has('loginId')) {
             $data = Customers::where('id', '=', Session::get('loginId'))->first();
         }
-        return view('distributors', compact('data'), ['distributors' => $distributors]);
+
+        $token = Session::get('token');
+        $check = PersonalAccess::where('token', '=', $token)->first();
+        if (!empty($check)) {
+            return view('distributors', compact('data'), ['distributors' => $distributors]);
+        } else {
+            Session::forget('loginId');
+            $request->session()->invalidate();
+            return redirect('/');
+        }
     }
     public function add_distributor(Request $request)
     {
@@ -26,7 +36,16 @@ class Distributor extends Controller
         if (Session::has('loginId')) {
             $data = Customers::where('id', '=', Session::get('loginId'))->first();
         }
-        return view('add_distributor', compact('data'));
+
+        $token = Session::get('token');
+        $check = PersonalAccess::where('token', '=', $token)->first();
+        if (!empty($check)) {
+            return view('add_distributor', compact('data'));
+        } else {
+            Session::forget('loginId');
+            $request->session()->invalidate();
+            return redirect('/');
+        }
     }
 
     public function save_distributor(Request $request)

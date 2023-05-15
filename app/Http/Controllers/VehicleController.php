@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash as FacadesHash;
 use Illuminate\Support\Facades\Session;
 use App\Models\Vehicle;
 use Illuminate\Support\Facades\DB;
+use App\Models\PersonalAccess;
 
 class VehicleController extends Controller
 {
@@ -18,16 +19,34 @@ class VehicleController extends Controller
         if (Session::has('loginId')) {
             $data = Customers::where('id', '=', Session::get('loginId'))->first();
         }
-        return view('vehicle_list', compact('data'), ['vehicles' => $vehicles]);
+
+        $token = Session::get('token');
+        $check = PersonalAccess::where('token', '=', $token)->first();
+        if (!empty($check)) {
+            return view('vehicle_list', compact('data'), ['vehicles' => $vehicles]);
+        } else {
+            Session::forget('loginId');
+            $request->session()->invalidate();
+            return redirect('/');
+        }
     }
 
-    public function add_vehicle()
+    public function add_vehicle(Request $request)
     {
         $data = array();
         if (Session::has('loginId')) {
             $data = Customers::where('id', '=', Session::get('loginId'))->first();
         }
-        return view('add_vehicle', compact('data'));
+
+        $token = Session::get('token');
+        $check = PersonalAccess::where('token', '=', $token)->first();
+        if (!empty($check)) {
+            return view('add_vehicle', compact('data'));
+        } else {
+            Session::forget('loginId');
+            $request->session()->invalidate();
+            return redirect('/');
+        }
     }
     public function delete_vehicle(Request $request)
     {
@@ -45,7 +64,16 @@ class VehicleController extends Controller
         if (Session::has('loginId')) {
             $data = Customers::where('id', '=', Session::get('loginId'))->first();
         }
-        return view('edit_vehicle', compact('data'), ['vehicle' => $vehicle]);
+
+        $token = Session::get('token');
+        $check = PersonalAccess::where('token', '=', $token)->first();
+        if (!empty($check)) {
+            return view('edit_vehicle', compact('data'), ['vehicle' => $vehicle]);
+        } else {
+            Session::forget('loginId');
+            $request->session()->invalidate();
+            return redirect('/');
+        }
     }
     public function update_vehicle(Request $request)
     {

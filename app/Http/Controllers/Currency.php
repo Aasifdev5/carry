@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash as FacadesHash;
 use Illuminate\Support\Facades\DB;
 use App\Models\Currencies;
+use App\Models\PersonalAccess;
 
 class Currency extends Controller
 {
@@ -19,7 +20,16 @@ class Currency extends Controller
         if (Session::has('loginId')) {
             $data = Customers::where('id', '=', Session::get('loginId'))->first();
         }
-        return view('currency', compact('data'), ['currency' => $currency]);
+
+        $token = Session::get('token');
+        $check = PersonalAccess::where('token', '=', $token)->first();
+        if (!empty($check)) {
+            return view('currency', compact('data'), ['currency' => $currency]);
+        } else {
+            Session::forget('loginId');
+            $request->session()->invalidate();
+            return redirect('/');
+        }
     }
 
     public function add_currency(Request $request)
@@ -28,7 +38,16 @@ class Currency extends Controller
         if (Session::has('loginId')) {
             $data = Customers::where('id', '=', Session::get('loginId'))->first();
         }
-        return view('add_currency', compact('data'));
+
+        $token = Session::get('token');
+        $check = PersonalAccess::where('token', '=', $token)->first();
+        if (!empty($check)) {
+            return view('add_currency', compact('data'));
+        } else {
+            Session::forget('loginId');
+            $request->session()->invalidate();
+            return redirect('/');
+        }
     }
 
     public function save_currency(Request $request)
@@ -71,7 +90,16 @@ class Currency extends Controller
         if (Session::has('loginId')) {
             $data = Customers::where('id', '=', Session::get('loginId'))->first();
         }
-        return view('edit_currency', compact('data'), ['currency' => $currency]);
+
+        $token = Session::get('token');
+        $check = PersonalAccess::where('token', '=', $token)->first();
+        if (!empty($check)) {
+            return view('edit_currency', compact('data'), ['currency' => $currency]);
+        } else {
+            Session::forget('loginId');
+            $request->session()->invalidate();
+            return redirect('/');
+        }
     }
     public function update_currency(Request $request)
     {

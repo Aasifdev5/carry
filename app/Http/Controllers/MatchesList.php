@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\Customers;
 use Illuminate\Support\Facades\DB;
+use App\Models\PersonalAccess;
 
 class MatchesList extends Controller
 {
@@ -16,6 +17,15 @@ class MatchesList extends Controller
         if (Session::has('loginId')) {
             $data = Customers::where('id', '=', Session::get('loginId'))->first();
         }
-        return view('matches_list', compact('data'), ['matches_list' => $matches_list]);
+
+        $token = Session::get('token');
+        $check = PersonalAccess::where('token', '=', $token)->first();
+        if (!empty($check)) {
+            return view('matches_list', compact('data'), ['matches_list' => $matches_list]);
+        } else {
+            Session::forget('loginId');
+            $request->session()->invalidate();
+            return redirect('/');
+        }
     }
 }

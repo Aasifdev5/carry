@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Customers;
 use Illuminate\Support\Facades\Hash as FacadesHash;
 use Illuminate\Support\Facades\DB;
+use App\Models\PersonalAccess;
 
 class Luggage extends Controller
 {
@@ -18,7 +19,16 @@ class Luggage extends Controller
         if (Session::has('loginId')) {
             $data = Customers::where('id', '=', Session::get('loginId'))->first();
         }
-        return view('luggages', compact('data'), ['luggage' => $luggage]);
+
+        $token = Session::get('token');
+        $check = PersonalAccess::where('token', '=', $token)->first();
+        if (!empty($check)) {
+            return view('luggages', compact('data'), ['luggage' => $luggage]);
+        } else {
+            Session::forget('loginId');
+            $request->session()->invalidate();
+            return redirect('/');
+        }
     }
 
     public function add_luggage(Request $request)
@@ -27,7 +37,16 @@ class Luggage extends Controller
         if (Session::has('loginId')) {
             $data = Customers::where('id', '=', Session::get('loginId'))->first();
         }
-        return view('add_luggage', compact('data'));
+
+        $token = Session::get('token');
+        $check = PersonalAccess::where('token', '=', $token)->first();
+        if (!empty($check)) {
+            return view('add_luggage', compact('data'));
+        } else {
+            Session::forget('loginId');
+            $request->session()->invalidate();
+            return redirect('/');
+        }
     }
 
     public function save_luggage_type(Request $request)
@@ -66,7 +85,16 @@ class Luggage extends Controller
         if (Session::has('loginId')) {
             $data = Customers::where('id', '=', Session::get('loginId'))->first();
         }
-        return view('edit_luggage_type', compact('data'), ['luggage' => $luggage]);
+
+        $token = Session::get('token');
+        $check = PersonalAccess::where('token', '=', $token)->first();
+        if (!empty($check)) {
+            return view('edit_luggage_type', compact('data'), ['luggage' => $luggage]);
+        } else {
+            Session::forget('loginId');
+            $request->session()->invalidate();
+            return redirect('/');
+        }
     }
     public function update_luggage_type(Request $request)
     {
