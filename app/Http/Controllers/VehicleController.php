@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Customers;
-use Illuminate\Support\Facades\Hash as FacadesHash;
 use Illuminate\Support\Facades\Session;
 use App\Models\Vehicle;
 use Illuminate\Support\Facades\DB;
@@ -90,7 +89,6 @@ class VehicleController extends Controller
             $vehicle->vehicle_name = $request->vehicle_name;
             if (!empty($request->vehicle_photo_name)) {
                 $vehicle->vehicle_photo_name = $request->file('vehicle_photo_name')->getClientOriginalName();
-                // $vehicle->vehicle_photo_path = $request->file('vehicle_photo_name')->store('images/vehicles');
                 $image = $request->file('vehicle_photo_name')->getClientOriginalName();
                 $request->vehicle_photo_name->move(public_path('images/vehicles'), $image);
             }
@@ -99,7 +97,6 @@ class VehicleController extends Controller
             $vehicle->update();
             if ($vehicle) {
                 return redirect('vehicle_list')->with('success', 'Successfully Updated');
-                // return redirect('vehicle_list');
             } else {
                 return back()->with('fail', 'Something wrong');
             }

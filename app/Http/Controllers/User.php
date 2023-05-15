@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Customers;
 use Illuminate\Support\Facades\Hash as FacadesHash;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Language;
 use Illuminate\Support\Facades\App;
 use App\Models\PersonalAccess;
 

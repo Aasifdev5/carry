@@ -6,7 +6,6 @@ use App\Models\LuggageType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\Customers;
-use Illuminate\Support\Facades\Hash as FacadesHash;
 use Illuminate\Support\Facades\DB;
 use App\Models\PersonalAccess;
 
