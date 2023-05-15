@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class UserLimitation extends Model
 {
     protected $table = 'user_limitation';
-    protected $fillable = ['chat_limit', 'add_offer_limit', 'swipe_limit'];
+    protected $fillable = ['user_type', 'chat_limit', 'add_offer_limit', 'swipe_limit'];
 }

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('user_limitation', function (Blueprint $table) {
             $table->id();
+            $table->string('user_type');
             $table->integer('chat_limit');
             $table->integer('add_offer_limit');
             $table->integer('swipe_limit');
