@@ -7,8 +7,12 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use App\Models\users;
-use Illuminate\Support\Facades\Fi;
+use App\Models\Currencies;
 use App\Models\Language;
+use App\Models\LuggageType;
+use App\Models\Vehicle;
+use App\Models\Premium;
+use App\Models\Terms;
 
 class APIController extends Controller
 {
@@ -98,5 +102,28 @@ class APIController extends Controller
     public function languages()
     {
         return Language::all();
+    }
+
+    public function currency()
+    {
+        return Currencies::all();
+    }
+    public function luggage()
+    {
+        return LuggageType::all();
+    }
+    public function vehicle()
+    {
+        return Vehicle::all();
+    }
+
+    public function premium_plan()
+    {
+        return Premium::all();
+    }
+
+    public function user_terms()
+    {
+        return Terms::all();
     }
 }

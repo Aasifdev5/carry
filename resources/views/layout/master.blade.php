@@ -111,6 +111,8 @@
                </li>
                <?php
 
+             
+
                use Illuminate\Support\Facades\DB;
 
                $statement = "select * from customers where id='" . $data->id . "' and is_admin=1";
