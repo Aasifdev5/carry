@@ -35,6 +35,7 @@
                   @endif
                   <thead>
                      <tr class="ligth">
+                        <th>#</th>
                         <th>Distributor Name</th>
                         <th>Distributor Invite Code</th>
                         <th>Distribution StartDate</th>
@@ -45,6 +46,7 @@
                      </tr>
                   </thead>
                   <tbody>
+                     <?php echo $count = 1; ?>
                      @foreach($distributors as $row)
                      <?php
                      if ($row->is_admin == 0) {
@@ -52,6 +54,7 @@
 
                      ?>
                         <tr>
+                           <td><?php echo $count++; ?></td>
                            <td>{{$row->distributor_name}}</td>
                            <td>{{$row->invite_code}}</td>
                            <td>{{$row->start_date}}</td>

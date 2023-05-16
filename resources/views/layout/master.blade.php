@@ -111,7 +111,7 @@
                </li>
                <?php
 
-             
+
 
                use Illuminate\Support\Facades\DB;
 
@@ -259,14 +259,15 @@
                      </li>
                   </ul>
                </li>
+               <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
                <li class="nav-item">
                   <a class="nav-link {{ request()->is('push_notice') ? 'active':'' }}" href="push_notice">
                      <i class="icon">
-                        <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24"
-                           fill="currentColor">
-                           <g>
-                              <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
-                           </g>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                           class="feather feather-bell">
+                           <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                           <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
                         </svg>
                      </i>
                      <i class="sidenav-mini-icon"> A </i>
@@ -276,11 +277,12 @@
                <li class="nav-item">
                   <a class="nav-link {{ request()->is('premium_plan') ? 'active':'' }}" href="premium_plan">
                      <i class="icon">
-                        <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24"
-                           fill="currentColor">
-                           <g>
-                              <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
-                           </g>
+                        <svg class="svg-icon" id="p-dash16" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
+                           viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                           stroke-linejoin="round">
+                           <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                           <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                           <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
                         </svg>
                      </i>
                      <i class="sidenav-mini-icon"> A </i>
@@ -290,12 +292,7 @@
                <li class="nav-item">
                   <a class="nav-link {{ request()->is('currency') ? 'active':'' }}" href="currency">
                      <i class="icon">
-                        <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24"
-                           fill="currentColor">
-                           <g>
-                              <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
-                           </g>
-                        </svg>
+                        <img src="{{asset('icons8-currency-64.png')}}" width="25" height="25">
                      </i>
                      <i class="sidenav-mini-icon"> A </i>
                      <span class="item-name"> {{ __('Currency') }}</span>
@@ -304,12 +301,7 @@
                <li class="nav-item">
                   <a class="nav-link {{ request()->is('luggages') ? 'active':'' }}" href="luggages">
                      <i class="icon">
-                        <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24"
-                           fill="currentColor">
-                           <g>
-                              <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
-                           </g>
-                        </svg>
+                        <img src="{{asset('icons8-luggage-64.png')}}" width="25" height="25">
                      </i>
                      <i class="sidenav-mini-icon"> A </i>
                      <span class="item-name"> {{ __('Luggage Type') }}</span>
@@ -365,12 +357,7 @@
                <li class="nav-item">
                   <a class="nav-link {{ request()->is('api_keys') ? 'active':'' }}" href="api_keys">
                      <i class="icon">
-                        <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24"
-                           fill="currentColor">
-                           <g>
-                              <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
-                           </g>
-                        </svg>
+                        <img src="{{asset('icons8-api-64.png')}}" width="25" height="25">
                      </i>
                      <i class="sidenav-mini-icon"> A </i>
                      <span class="item-name"> {{ __('Payment Interface Settings') }}</span>
@@ -379,12 +366,7 @@
                <li class="nav-item">
                   <a class="nav-link {{ request()->is('matches') ? 'active':'' }}" href="matches">
                      <i class="icon">
-                        <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24"
-                           fill="currentColor">
-                           <g>
-                              <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
-                           </g>
-                        </svg>
+                        <img src="{{asset('icons8-list-64.png')}}" width="25" height="25">
                      </i>
                      <i class="sidenav-mini-icon"> A </i>
                      <span class="item-name"> {{ __('Matches List') }}</span>
@@ -393,12 +375,7 @@
                <li class="nav-item">
                   <a class="nav-link {{ request()->is('user_term') ? 'active':'' }}" href="user_term">
                      <i class="icon">
-                        <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24"
-                           fill="currentColor">
-                           <g>
-                              <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
-                           </g>
-                        </svg>
+                        <img src="{{asset('icons8-rules-book-50.png')}}" width="25" height="25">
                      </i>
                      <i class="sidenav-mini-icon"> A </i>
                      <span class="item-name"> {{ __('User Terms') }}</span>
@@ -407,12 +384,7 @@
                <li class="nav-item">
                   <a class="nav-link {{ request()->is('limitation') ? 'active':'' }}" href="limitation">
                      <i class="icon">
-                        <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24"
-                           fill="currentColor">
-                           <g>
-                              <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
-                           </g>
-                        </svg>
+                        <img src="{{asset('icons8-user-locked-24.png')}}" width="25" height="25">
                      </i>
                      <i class="sidenav-mini-icon"> A </i>
                      <span class="item-name"> {{ __('User Limitation') }}</span>
@@ -421,12 +393,7 @@
                <li class="nav-item">
                   <a class="nav-link {{ request()->is('invited_users') ? 'active':'' }}" href="invited_users">
                      <i class="icon">
-                        <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24"
-                           fill="currentColor">
-                           <g>
-                              <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
-                           </g>
-                        </svg>
+                        <img src="{{asset('icons8-invite-100.png')}}" width="25" height="25">
                      </i>
                      <i class="sidenav-mini-icon"> A </i>
                      <span class="item-name"> {{ __('Invited Users') }}</span>
@@ -436,12 +403,7 @@
                   <a class="nav-link {{ request()->is('distributor_management') ? 'active':'' }}"
                      href="distributor_management">
                      <i class="icon">
-                        <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24"
-                           fill="currentColor">
-                           <g>
-                              <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
-                           </g>
-                        </svg>
+                        <img src="{{asset('icons8-distributor-64.png')}}" width="25" height="25">
                      </i>
                      <i class="sidenav-mini-icon"> A </i>
                      <span class="item-name"> {{ __('Distributor Management') }}</span>

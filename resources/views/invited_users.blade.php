@@ -18,7 +18,9 @@
 
                <table id="datatable" class="table table-striped" data-toggle="data-table">
                   <thead>
+                     <th>#</th>
                      <tr class="ligth">
+                        <th>#</th>
                         <th>User Type</th>
                         <th>Invite Code</th>
                         <th>User registration date</th>
@@ -26,19 +28,19 @@
                   </thead>
                   <tbody>
                      <tr>
-
+                        <td>1</td>
                         <td>Premium</td>
                         <td>7567568</td>
                         <td>10/05/2022</td>
                      </tr>
                      <tr>
-
+                        <td>2</td>
                         <td>Premium</td>
                         <td>123</td>
                         <td>10/05/2022</td>
                      </tr>
                      <tr>
-
+                        <td>3</td>
                         <td>Premium</td>
                         <td>4482</td>
                         <td>10/05/2022</td>

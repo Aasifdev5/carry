@@ -41,14 +41,17 @@ ApI List
                   @endif
                   <thead>
                      <tr class="ligth">
+                        <th>#</th>
                         <th>API Name</th>
                         <th>API Key</th>
                         <th style="min-width: 100px">Action</th>
                      </tr>
                   </thead>
                   <tbody>
+                     <?php $count=1;?>
                      @foreach($apis as $row)
                      <tr>
+                        <td><?php echo $count++; ?></td>
                         <td>{{$row->api_name}}</td>
                         <td>{{$row->api_key}}</td>
 

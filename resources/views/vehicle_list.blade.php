@@ -33,6 +33,7 @@ Vehicle List
                   @endif
                   <thead>
                      <tr>
+                        <th>#</th>
                         <th>Vehicle Name</th>
                         <th>Vehicle Photo</th>
                         <th>Vehicle Description</th>
@@ -40,8 +41,12 @@ Vehicle List
                      </tr>
                   </thead>
                   <tbody>
+                     <?php
+                     $count = 1;
+                     ?>
                      @foreach($vehicles as $vehicle)
                      <tr>
+                        <td><?php echo $count++; ?></td>
                         <td>{{$vehicle->vehicle_name}}</td>
                         <td><img src="images/vehicles/{{$vehicle->vehicle_photo_name}}" width="100" height="100"></td>
                         <td>{{$vehicle->description}}</td>

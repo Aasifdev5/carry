@@ -18,6 +18,7 @@ Users List
                <table id="datatable" class="table table-striped" data-toggle="data-table">
                   <thead>
                      <tr class="ligth">
+                        <th>#</th>
                         <th>Profile Photo</th>
                         <th>Full Name</th>
                         <th>Contact</th>
@@ -30,6 +31,7 @@ Users List
                   </thead>
                   <tbody>
                      <tr>
+                        <td>1</td>
                         <td class="text-center"><img class="bg-soft-primary rounded img-fluid avatar-40 me-3" src="{{asset('images/shapes/01.png')}}" alt="profile"></td>
                         <td>Anna Sthesia</td>
                         <td>(760) 756 7568</td>
@@ -63,6 +65,7 @@ Users List
                         </td>
                      </tr>
                      <tr>
+                        <td>2</td>
                         <td class="text-center"><img class="bg-soft-primary rounded img-fluid avatar-40 me-3" src="{{asset('images/shapes/02.png')}}" alt="profile"></td>
                         <td>Brock Lee</td>
                         <td>+62 5689 458 658</td>
@@ -96,6 +99,7 @@ Users List
                         </td>
                      </tr>
                      <tr>
+                        <td>3</td>
                         <td class="text-center"><img class="bg-soft-primary rounded img-fluid avatar-40 me-3" src="{{asset('images/shapes/03.png')}}" alt="profile"></td>
                         <td>Dan Druff</td>
                         <td>+55 6523 456 856</td>
@@ -129,6 +133,7 @@ Users List
                         </td>
                      </tr>
                      <tr>
+                        <td>4</td>
                         <td class="text-center"><img class="bg-soft-primary rounded img-fluid avatar-40 me-3" src="{{asset('images/shapes/04.png')}}" alt="profile"></td>
                         <td>Hans Olo</td>
                         <td>+91 2586 253 125</td>
@@ -162,6 +167,7 @@ Users List
                         </td>
                      </tr>
                      <tr>
+                        <td>5</td>
                         <td class="text-center"><img class="bg-soft-primary rounded img-fluid avatar-40 me-3" src="{{asset('images/shapes/05.png')}}" alt="profile"></td>
                         <td>Lynn Guini</td>
                         <td>+27 2563 456 589</td>
@@ -195,6 +201,7 @@ Users List
                         </td>
                      </tr>
                      <tr>
+                        <td>6</td>
                         <td class="text-center"><img class="bg-soft-primary rounded img-fluid avatar-40 me-3" src="{{asset('images/shapes/06.png')}}" alt="profile"></td>
                         <td>Eric Shun</td>
                         <td>+55 25685 256 589</td>
@@ -228,6 +235,7 @@ Users List
                         </td>
                      </tr>
                      <tr>
+                        <td>7</td>
                         <td class="text-center"><img class="bg-soft-primary rounded img-fluid avatar-40 me-3" src="{{asset('images/shapes/03.png')}}" alt="profile"></td>
                         <td>aaronottix</td>
                         <td>(760) 765 2658</td>
@@ -261,12 +269,13 @@ Users List
                         </td>
                      </tr>
                      <tr>
+                        <td>8</td>
                         <td class="text-center"><img class="bg-soft-primary rounded img-fluid avatar-40 me-3" src="{{asset('images/shapes/05.png')}}" alt="profile"></td>
                         <td>Marge Arita</td>
                         <td>+27 5625 456 589</td>
                         <td>margearita@gmail.com</td>
 
-                        <td><span class="badge bg-success">Complite</span></td>
+                        <td><span class="badge bg-success">Complete</span></td>
 
                         <td>2019/12/01</td>
                         <td>
@@ -294,12 +303,13 @@ Users List
                         </td>
                      </tr>
                      <tr>
+                        <td>9</td>
                         <td class="text-center"><img class="bg-soft-primary rounded img-fluid avatar-40 me-3" src="{{asset('images/shapes/02.png')}}" alt="profile"></td>
                         <td>Bill Dabear</td>
                         <td>+55 2563 456 589</td>
                         <td>billdabear@gmail.com</td>
 
-                        <td><span class="badge bg-primary">active</span></td>
+                        <td><span class="badge bg-primary">Active</span></td>
 
                         <td>2019/12/01</td>
                         <td>

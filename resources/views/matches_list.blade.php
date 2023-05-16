@@ -25,7 +25,7 @@ Matches List
                         <th>Price</th>
                         <th>Initialisation Date time</th>
 
-                        <th style="min-width: 100px">Delete</th>
+                        <th style="min-width: 100px">Action</th>
                      </tr>
                   </thead>
 

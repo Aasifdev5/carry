@@ -42,6 +42,7 @@ Multi Language Translation
    <table class="table table-hover table-bordered">
       <thead>
          <tr>
+            <th>#</th>
             <th>Key</th>
             @if($languages->count() > 0)
             @foreach($languages as $language)
@@ -52,9 +53,11 @@ Multi Language Translation
          </tr>
       </thead>
       <tbody>
+         <?php $count = 1; ?>
          @if($columnsCount > 0)
          @foreach($columns[0] as $columnKey => $columnValue)
          <tr>
+            <td><?php echo $count++; ?></td>
             <td>
                <a href="#" class="translate-key" data-title="Enter Key" data-type="text" data-pk="{{ $columnKey }}"
                   data-url="{{ route('translation.update.json.key') }}">{{ $columnKey }}</a>

@@ -41,6 +41,7 @@ Currency List
                   @endif
                   <thead>
                      <tr class="ligth">
+                        <th>#</th>
                         <th>Currency Name</th>
                         <th>Currency Symbol</th>
 
@@ -48,8 +49,10 @@ Currency List
                      </tr>
                   </thead>
                   <tbody>
+                     <?php $count=1;?>
                      @foreach($currency as $row)
                      <tr>
+                        <td><?php echo $count++; ?></td>
                         <td>{{$row->currency_name}}</td>
                         <td>{{$row->currency_symbol}}</td>
 
