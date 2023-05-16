@@ -56,11 +56,13 @@ class Limitation extends Controller
             $data = Customers::where('id', '=', Session::get('loginId'))->first();
             $user_limitation = new UserLimitation();
             $request->validate([
+                'user_type' => 'required',
                 'swipe_limit' => 'required',
                 'add_offer_limit' => 'required',
                 'chat_limit' => 'required',
 
             ]);
+            $user_limitation->user_type = $request->user_type;
             $user_limitation->chat_limit = $request->chat_limit;
             $user_limitation->swipe_limit = $request->swipe_limit;
             $user_limitation->add_offer_limit = $request->add_offer_limit;
@@ -108,17 +110,19 @@ class Limitation extends Controller
         if (Session::has('loginId')) {
             $data = Customers::where('id', '=', Session::get('loginId'))->first();
             $request->validate([
+                'user_type' => 'required',
                 'swipe_limit' => 'required',
                 'add_offer_limit' => 'required',
                 'chat_limit' => 'required',
 
             ]);
+
             $user_limitation = UserLimitation::where('id', '=', $request->user_limitation_id)->first();
 
+            $user_limitation->user_type = $request->user_type;
             $user_limitation->chat_limit = $request->chat_limit;
             $user_limitation->swipe_limit = $request->swipe_limit;
             $user_limitation->add_offer_limit = $request->add_offer_limit;
-
             $user_limitation->update();
             if ($user_limitation) {
                 return redirect('limitation')->with('success', 'Successfully Updated');
