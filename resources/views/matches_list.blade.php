@@ -24,7 +24,6 @@ Matches List
                         <th>Destination</th>
                         <th>Price</th>
                         <th>Initialisation Date time</th>
-
                         <th style="min-width: 100px">Action</th>
                      </tr>
                   </thead>
