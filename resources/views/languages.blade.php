@@ -4,6 +4,7 @@ Multi Language Translation
 @endsection
 @Section('content')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" />
 <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css"
    rel="stylesheet" />

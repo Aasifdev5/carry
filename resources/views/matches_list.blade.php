@@ -18,8 +18,8 @@ Matches List
                <table id="datatable" class="table table-striped" data-toggle="data-table">
                   <thead>
                      <tr class="ligth">
-                        <th>Vehicle type
-                        </th>
+                        <th>#</th>
+                        <th>Vehicle type</th>
                         <th>Departure</th>
                         <th>Destination</th>
                         <th>Price</th>
