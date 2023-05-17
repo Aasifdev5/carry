@@ -145,7 +145,7 @@ class APIController extends Controller
             'status_code' => 200
         ], 200);
     }
-    public function openJSONFile(Request $request)
+    public function multilanguage(Request $request)
     {
         $code = $request->code;
         $jsonString = [];
