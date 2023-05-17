@@ -13,6 +13,7 @@ use App\Models\Language;
 use App\Models\LuggageType;
 use App\Models\Vehicle;
 use App\Models\Premium;
+use Illuminate\Support\Facades\File;
 use App\Models\Terms;
 use App\Models\PersonalAccess;
 
@@ -143,5 +144,16 @@ class APIController extends Controller
             'message' => 'Logged out successfully!',
             'status_code' => 200
         ], 200);
+    }
+    public function openJSONFile(Request $request)
+    {
+        $code = $request->code;
+        $jsonString = [];
+        if (File::exists(base_path('resources/lang/' . $code . '.json'))) {
+            $jsonString = file_get_contents(base_path('resources/lang/' . $code . '.json'));
+            $jsonString = json_decode($jsonString, true);
+        }
+
+        return $jsonString;
     }
 }

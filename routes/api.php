@@ -27,3 +27,4 @@ Route::get('/luggage', [APIController::class, 'luggage']);
 Route::get('/vehicle', [APIController::class, 'vehicle']);
 Route::get('/premium_plan', [APIController::class, 'premium_plan']);
 Route::get('/user_terms', [APIController::class, 'user_terms']);
+Route::get('/openJSONFile', [APIController::class, 'openJSONFile']);
