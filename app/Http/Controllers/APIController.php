@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Hash as FacadesHash;
+use Illuminate\Contracts\Mail;
 use App\Models\users;
 use App\Models\Currencies;
 use App\Models\Language;
@@ -16,6 +18,8 @@ use App\Models\Premium;
 use Illuminate\Support\Facades\File;
 use App\Models\Terms;
 use App\Models\PersonalAccess;
+use App\Models\PushNotification;
+use App\Models\Customers;
 
 class APIController extends Controller
 {
@@ -155,5 +159,73 @@ class APIController extends Controller
         }
 
         return $jsonString;
+    }
+
+    public function push_notification()
+    {
+        return PushNotification::all();
+    }
+
+    public function change_password(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'old_password' => 'required',
+            'new_password' => 'required',
+            'confirm_password' => ['same:new_password']
+        ]);
+
+        if ($validator->fails()) {
+            $output['response'] = false;
+            $output['message'] = $validator->errors();
+        } else {
+            $output['response'] = true;
+            $data = Customers::find('3');
+            if (!FacadesHash::check($request->old_password, $data->password)) {
+                $output['response'] = false;
+                $output['message'] = 'Old Password Does not match!';
+                return json_encode($output);
+            } elseif (FacadesHash::check($request->new_password, $data->password)) {
+                $output['response'] = false;
+                $output['message'] = 'Please enter a password which is not similar then current password!';
+                return json_encode($output);
+            } else {
+                #Update the new Password
+                $data = Customers::where('id', '=', $data->id)->update([
+                    'password' => FacadesHash::make($request->new_password)
+
+                ]);
+                $output['response'] = true;
+
+                $output['message'] = "Password Changed SuccessfullY";
+
+                header('Content-Type: application/json');
+                return json_encode($output);
+            }
+        }
+    }
+
+    public function forgotPassword(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|exists:customers',
+        ]);
+
+        $token = Str::random(64);
+        $code = mt_rand(100000, 999999);
+
+        DB::table('password_reset_tokens')->insert([
+            'email' => $request->email,
+            'token' => $token,
+            'code' => $code,
+            'created_at' => now()
+        ]);
+
+
+        Mail::to(request('email'))->send(new ForgotPassword([
+            'token' => $token,
+            'code' => $code,
+        ]));
+
+        return response()->json(['status' => true, 'message' => 'Reset password link has been sent to your email id.!']);
     }
 }

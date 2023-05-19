@@ -176,6 +176,9 @@ class User extends Controller
         if (!FacadesHash::check($request->old_password, $data->password)) {
             return back()->with("fail", "Old Password Doesn't match!");
         }
+        if (FacadesHash::check($request->new_password, $data->password)) {
+            return back()->with("fail", "Please enter a password which is not similar then current password!!");
+        }
         #Update the new Password
         $data = Customers::where('id', '=', $data->id)->update([
             'password' => FacadesHash::make($request->new_password)
