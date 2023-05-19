@@ -206,26 +206,5 @@ class APIController extends Controller
 
     public function forgotPassword(Request $request)
     {
-        $request->validate([
-            'email' => 'required|email|exists:customers',
-        ]);
-
-        $token = Str::random(64);
-        $code = mt_rand(100000, 999999);
-
-        DB::table('password_reset_tokens')->insert([
-            'email' => $request->email,
-            'token' => $token,
-            'code' => $code,
-            'created_at' => now()
-        ]);
-
-
-        Mail::to(request('email'))->send(new ForgotPassword([
-            'token' => $token,
-            'code' => $code,
-        ]));
-
-        return response()->json(['status' => true, 'message' => 'Reset password link has been sent to your email id.!']);
     }
 }

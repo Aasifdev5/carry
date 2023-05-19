@@ -171,6 +171,7 @@ class User extends Controller
             'confirm_password' => ['same:new_password']
         ]);
 
+
         $data = Customers::find(Session::get('loginId'));
         // $data = Customers::where('id', '=', Session::get('loginId'))->first();
         if (!FacadesHash::check($request->old_password, $data->password)) {
