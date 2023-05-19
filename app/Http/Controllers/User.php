@@ -104,23 +104,7 @@ class User extends Controller
         session()->put('lang_code', $request->lang);
         return redirect()->back();
     }
-    public function push_notice(Request $request)
-    {
-        $data = array();
-        if (Session::has('loginId')) {
-            $data = Customers::where('id', '=', Session::get('loginId'))->first();
-        }
 
-        $token = Session::get('token');
-        $check = PersonalAccess::where('token', '=', $token)->first();
-        if (!empty($check)) {
-            return view('push_notice', compact('data'));
-        } else {
-            Session::forget('loginId');
-            $request->session()->invalidate();
-            return redirect('/');
-        }
-    }
 
     public function users_list(Request $request)
     {

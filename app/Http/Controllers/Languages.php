@@ -63,7 +63,7 @@ class Languages extends Controller
             $language->name = $request->language_name;
 
             $language->language_photo = $request->file('language_photo')->getClientOriginalName();
-            // $vehicle->vehicle_photo_path = $request->file('vehicle_photo_name')->store('images/vehicles');
+
             $image = $request->file('language_photo')->getClientOriginalName();
             $request->language_photo->move(public_path('images/language'), $image);
             $language->code = $request->language_code;

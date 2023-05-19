@@ -14,6 +14,7 @@ use App\Http\Controllers\Luggage;
 use App\Http\Controllers\MatchesList;
 use App\Http\Controllers\MultiLingual;
 use App\Http\Controllers\PaymentInterface;
+use App\Http\Controllers\Push;
 use App\Http\Controllers\UserTerms;
 use Illuminate\Support\Facades\App;
 /*
@@ -40,7 +41,12 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
    Route::get('/users_list', [User::class, 'users_list'])->name('users_list')->middleware('isLoggedIn');
    Route::get('/add_user', [User::class, 'add_user'])->name('add_user')->middleware('isLoggedIn');
    Route::get('/profile', [User::class, 'profile'])->name('profile')->middleware('isLoggedIn');
-   Route::get('/push_notice', [User::class, 'push_notice'])->name('push_notice')->middleware('isLoggedIn');
+   Route::get('/push_notice', [Push::class, 'push_notice'])->name('push_notice')->middleware('isLoggedIn');
+   Route::get('/add_push_notification', [Push::class, 'add_push_notification'])->name('add_push_notification')->middleware('isLoggedIn');
+   Route::post('/save_push_notification', [Push::class, 'save_push_notification'])->name('save_push_notification');
+   Route::get('/edit_push_notification', [Push::class, 'edit_push_notification'])->name('edit_push_notification')->middleware('isLoggedIn');
+   Route::post('/update_push_notification', [Push::class, 'update_push_notification'])->name('update_push_notification');
+   Route::get('/delete_push_notification', [Push::class, 'delete_push_notification'])->name('delete_push_notification');
    Route::get('/change_password', [User::class, 'change_password'])->name('change_password')->middleware('isLoggedIn');
    Route::get('/vehicle_list', [VehicleController::class, 'vehicle_list'])->name('vehicle_list')->middleware('isLoggedIn');
    Route::get('/add_vehicle', [VehicleController::class, 'add_vehicle'])->name('add_vehicle')->middleware('isLoggedIn');
