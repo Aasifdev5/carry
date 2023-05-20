@@ -275,7 +275,8 @@ class APIController extends Controller
         ]);
 
         $data = Customers::find($request->user_id);
-        $data->password = FacadesHash::make($request->password);
+
+        $data->password = FacadesHash::make($request->new_password);
         $data->update();
 
         PasswordReset::where('email', $data->email)->delete();

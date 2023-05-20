@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 17, 2023 at 02:59 PM
+-- Generation Time: May 20, 2023 at 02:56 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -91,7 +91,9 @@ CREATE TABLE `customers` (
 
 INSERT INTO `customers` (`id`, `name`, `is_admin`, `email`, `distributor_name`, `invite_code`, `start_date`, `end_date`, `password`, `created_at`, `updated_at`) VALUES
 (1, 'Carry Me', 1, 'Admin@carryme.com', '', '', '0000-00-00', '0000-00-00', '$2y$10$cfm6TvsPpNjkSAd2n2ZOi.LfDkfeYV1INVRjY8Y/HXh0b/taQ/P7G', '2023-05-09 17:11:09', '2023-05-09 17:11:09'),
-(3, 'Ankita', 0, 'ankita@gmail.com', 'Ankita', '985252', '2023-05-04', '2023-05-12', '$2y$10$ItBLREVuLl59gt3J301zgOLQpRaf.OCvPElTgqQQXdeOWcPSd1Lti', '2023-05-13 04:02:37', '2023-05-13 04:02:37');
+(3, 'Ankita', 0, 'ankita@gmail.com', 'Ankita', '985252', '2023-05-04', '2023-05-12', '$2y$10$nzlXYKsp43k74aFGZT4k2uaXMDQQAAEDfN7bQsSMuljrJv9A6sbEm', '2023-05-13 04:02:37', '2023-05-19 05:21:34'),
+(4, 'Aasif Ahmed', 0, 'aasifdev5@gmail.com', 'Aasif Ahmed', '5', '2023-05-03', '2023-05-31', '$2y$10$ajdwRh9TO1S7by1QGaWFz.V/rurwfVHZWTV0RxlgfBTdQCjUpnZWG', '2023-05-20 00:44:45', '2023-05-20 07:22:50'),
+(5, 'kishan', 0, 'jwd3@infocentroidtech.com', 'kishan', 'pawar', '2023-04-01', '2023-05-20', '$2y$10$n7ncp3mCe2dtU0ZzqDqqoOnKvxupUkcVT5ePiwFhuoSD01pYOEy/i', '2023-05-20 04:59:26', '2023-05-20 04:59:26');
 
 -- --------------------------------------------------------
 
@@ -239,7 +241,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (18, '2023_05_10_090934_customers', 13),
 (19, '2023_05_10_100906_customers', 14),
 (20, '2023_05_11_065859_create_language_table', 15),
-(21, '2023_05_17_102658_users', 16);
+(21, '2023_05_17_102658_users', 16),
+(22, '2023_05_19_053909_create_push_notifications_table', 17),
+(23, '2023_05_20_103415_password_reset_tokens', 18);
 
 -- --------------------------------------------------------
 
@@ -248,10 +252,18 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `password_reset_tokens` (
+  `id` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
   `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `password_reset_tokens`
+--
+
+INSERT INTO `password_reset_tokens` (`id`, `email`, `token`, `created_at`) VALUES
+(1, 'jwd3@infocentroidtech.com', 'IG8nu0G8wLSo6Y1HVHbFcYPj838DnlwsJVoIoIv9', '2023-05-20 05:05:12');
 
 -- --------------------------------------------------------
 
@@ -282,7 +294,9 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (20, 'App\\Models\\Customers', 1, 'Carry Me', 'mYDuPgDADYEB01x0yM8uEBSVLyoKbYQ2GTt7tnfK', NULL, NULL, NULL, '2023-05-16 05:44:57', '2023-05-16 05:44:57'),
 (21, 'App\\Models\\Customers', 1, 'Carry Me', 'fQwyZEi0wIuk93NAHPKTYOE4SsPrQ8n5Gc5Bw74f', NULL, NULL, NULL, '2023-05-16 23:26:20', '2023-05-16 23:26:20'),
 (22, 'App\\Models\\Customers', 1, 'Carry Me', 'FwrVLlIwXDznUufmnjbz13sbOLZwcrf1n8ysKUt4', NULL, NULL, NULL, '2023-05-17 04:58:09', '2023-05-17 04:58:09'),
-(23, 'App\\Models\\Customers', 1, 'Carry Me', 'kSouKNOjrJvHvHcC7e94ugFR69Ih60OoqZSAq6rA', NULL, NULL, NULL, '2023-05-17 07:13:33', '2023-05-17 07:13:33');
+(23, 'App\\Models\\Customers', 1, 'Carry Me', 'kSouKNOjrJvHvHcC7e94ugFR69Ih60OoqZSAq6rA', NULL, NULL, NULL, '2023-05-17 07:13:33', '2023-05-17 07:13:33'),
+(30, 'App\\Models\\Customers', 1, 'Carry Me', 'cHxmwJ16hQLbDbROyS55TzzJvpEaOcjauC8OI56m', NULL, NULL, NULL, '2023-05-19 05:31:52', '2023-05-19 05:31:52'),
+(31, 'App\\Models\\Customers', 1, 'Carry Me', 'JbpFoSINsoFpkxb6yM0bVtVzsjxQybFG96025aKY', NULL, NULL, NULL, '2023-05-19 23:29:52', '2023-05-19 23:29:52');
 
 -- --------------------------------------------------------
 
@@ -307,6 +321,28 @@ CREATE TABLE `premium` (
 
 INSERT INTO `premium` (`id`, `premium_plan`, `currency`, `price`, `price_invite_code`, `duration`, `created_at`, `updated_at`) VALUES
 (4, 'Silver', '₹', 1500.00, 750.00, 60, '2023-05-13 01:39:42', '2023-05-13 01:55:32');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `push_notifications`
+--
+
+CREATE TABLE `push_notifications` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_type` varchar(255) NOT NULL,
+  `message` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `push_notifications`
+--
+
+INSERT INTO `push_notifications` (`id`, `user_type`, `message`, `created_at`, `updated_at`) VALUES
+(1, 'premium_users', 'Hey You have Special Offer', '2023-05-19 00:44:50', '2023-05-19 01:19:26'),
+(2, 'users_invite_code', 'kishan you have offer claim it asap', '2023-05-19 01:20:20', '2023-05-19 01:20:20');
 
 -- --------------------------------------------------------
 
@@ -391,6 +427,13 @@ CREATE TABLE `vehicles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
+-- Dumping data for table `vehicles`
+--
+
+INSERT INTO `vehicles` (`id`, `vehicle_name`, `vehicle_photo_name`, `description`, `created_at`, `updated_at`) VALUES
+(2, 'Auto Riksha', '00.png', 'Auto', '2023-05-19 04:04:51', '2023-05-19 04:04:51');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -454,7 +497,7 @@ ALTER TABLE `migrations`
 -- Indexes for table `password_reset_tokens`
 --
 ALTER TABLE `password_reset_tokens`
-  ADD PRIMARY KEY (`email`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `personal_access_tokens`
@@ -468,6 +511,12 @@ ALTER TABLE `personal_access_tokens`
 -- Indexes for table `premium`
 --
 ALTER TABLE `premium`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `push_notifications`
+--
+ALTER TABLE `push_notifications`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -515,7 +564,7 @@ ALTER TABLE `currency`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `distributors`
@@ -551,19 +600,31 @@ ALTER TABLE `luggage`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT for table `password_reset_tokens`
+--
+ALTER TABLE `password_reset_tokens`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `premium`
 --
 ALTER TABLE `premium`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `push_notifications`
+--
+ALTER TABLE `push_notifications`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -587,7 +648,7 @@ ALTER TABLE `user_terms`
 -- AUTO_INCREMENT for table `vehicles`
 --
 ALTER TABLE `vehicles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
