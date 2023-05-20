@@ -17,6 +17,7 @@ use App\Http\Controllers\PaymentInterface;
 use App\Http\Controllers\Push;
 use App\Http\Controllers\UserTerms;
 use Illuminate\Support\Facades\App;
+use App\Http\Controllers\APIController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,11 +29,9 @@ use Illuminate\Support\Facades\App;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
-
+Route::get('/ResetPasswordLoad', [APIController::class, 'ResetPasswordLoad'])->name('ResetPasswordLoad');
+Route::post('/ResetPassword', [APIController::class, 'ResetPassword'])->name('ResetPassword');
 Route::group(['middleware' => 'prevent-back-history'], function () {
    Route::get('/index', [User::class, 'index'])->name('index')->middleware('alreadyLoggedIn');
    Route::get('/', [User::class, 'index'])->name('index')->middleware('alreadyLoggedIn');

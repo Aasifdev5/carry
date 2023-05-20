@@ -187,6 +187,7 @@ class User extends Controller
         ]);
         return redirect('dashboard')->with('success', 'Successfully Updated');
     }
+
     public function profile(Request $request)
     {
         $data = array();

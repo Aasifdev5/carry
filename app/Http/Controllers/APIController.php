@@ -218,7 +218,7 @@ class APIController extends Controller
 
                 $token = Str::random(40);
                 $domain = URL::to('/');
-                $url = $domain . 'reset-password?token=' . $token;
+                $url = $domain . '/ResetPasswordLoad?token=' . $token;
 
                 $data['url'] = $url;
                 $data['email'] = $request->email;
@@ -253,5 +253,33 @@ class APIController extends Controller
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'msg' => $e->getMessage()]);
         }
+    }
+
+    public function ResetPasswordLoad(Request $request)
+    {
+
+        $resetData =  PasswordReset::where('token', $request->token)->get();
+        if (isset($request->token) && count($resetData) > 0) {
+            $customer = Customers::where('email', $resetData[0]['email'])->get();
+            return view('ResetPasswordLoad', ['customer' => $customer]);
+        }
+    }
+
+    public function ResetPassword(Request $request)
+    {
+
+        $request->validate([
+
+            'new_password' => 'required',
+            'confirm_password' => ['same:new_password']
+        ]);
+
+        $data = Customers::find($request->user_id);
+        $data->password = FacadesHash::make($request->password);
+        $data->update();
+
+        PasswordReset::where('email', $data->email)->delete();
+
+        echo "<h1>Successfully Reset Password</h1>";
     }
 }
