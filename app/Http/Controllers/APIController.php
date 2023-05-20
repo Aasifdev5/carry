@@ -224,12 +224,16 @@ class APIController extends Controller
                 $data['email'] = $request->email;
                 $data['title'] = "Password Reset";
                 $data['body'] = "Please click on below link to reset your password.";
+                $data['auth'] = "Carry Me";
 
-                // Mail::send('reset-password', ['data' => $data, function ($message) use ($data) {
+                Mail::to($request->email)->send(
+                    new SendMailreset(
+                        $token,
+                        $request->email,
+                        $data
+                    )
+                );
 
-                //     $message->to($data['email'])->subject($data['title']);
-                // }]);
-                Mail::to($request->email)->send(new SendMailreset($token, $request->email));
 
                 $datetime = Carbon::now()->format('Y-m-d H:i:s');
 
@@ -249,9 +253,5 @@ class APIController extends Controller
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'msg' => $e->getMessage()]);
         }
-    }
-
-    public function resetpassword()
-    {
     }
 }
