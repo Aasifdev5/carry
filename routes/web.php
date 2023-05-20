@@ -31,9 +31,8 @@ use Illuminate\Support\Facades\App;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-// Route::get('/',function(){
-// return view('index');
-// });
+
+
 Route::group(['middleware' => 'prevent-back-history'], function () {
    Route::get('/index', [User::class, 'index'])->name('index')->middleware('alreadyLoggedIn');
    Route::get('/', [User::class, 'index'])->name('index')->middleware('alreadyLoggedIn');

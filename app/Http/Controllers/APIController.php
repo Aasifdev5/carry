@@ -24,6 +24,7 @@ use App\Models\Terms;
 use App\Models\PersonalAccess;
 use App\Models\PushNotification;
 use App\Models\Customers;
+use App\Mail\SendMailreset;
 
 class APIController extends Controller
 {
@@ -217,17 +218,18 @@ class APIController extends Controller
 
                 $token = Str::random(40);
                 $domain = URL::to('/');
-                $url = $domain . '/reset-password?token=' . $token;
+                $url = $domain . 'reset-password?token=' . $token;
 
                 $data['url'] = $url;
                 $data['email'] = $request->email;
                 $data['title'] = "Password Reset";
                 $data['body'] = "Please click on below link to reset your password.";
 
-                Mail::send('reset-password', ['data' => $data, function ($message) use ($data) {
+                // Mail::send('reset-password', ['data' => $data, function ($message) use ($data) {
 
-                    $message->to($data['email'])->subject($data['title']);
-                }]);
+                //     $message->to($data['email'])->subject($data['title']);
+                // }]);
+                Mail::to($request->email)->send(new SendMailreset($token, $request->email));
 
                 $datetime = Carbon::now()->format('Y-m-d H:i:s');
 
@@ -247,5 +249,9 @@ class APIController extends Controller
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'msg' => $e->getMessage()]);
         }
+    }
+
+    public function resetpassword()
+    {
     }
 }
