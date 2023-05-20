@@ -8,7 +8,11 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash as FacadesHash;
-use Illuminate\Contracts\Mail;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\URL;
+use App\Models\PasswordReset;
 use App\Models\users;
 use App\Models\Currencies;
 use App\Models\Language;
@@ -206,5 +210,42 @@ class APIController extends Controller
 
     public function forgotPassword(Request $request)
     {
+        try {
+            $customer = Customers::where('email', $request->email)->get();
+
+            if (count($customer) > 0) {
+
+                $token = Str::random(40);
+                $domain = URL::to('/');
+                $url = $domain . '/reset-password?token=' . $token;
+
+                $data['url'] = $url;
+                $data['email'] = $request->email;
+                $data['title'] = "Password Reset";
+                $data['body'] = "Please click on below link to reset your password.";
+
+                Mail::send('reset-password', ['data' => $data, function ($message) use ($data) {
+
+                    $message->to($data['email'])->subject($data['title']);
+                }]);
+
+                $datetime = Carbon::now()->format('Y-m-d H:i:s');
+
+                PasswordReset::updateOrCreate(
+                    ['email' => $request->email],
+                    [
+                        'email' => $request->email,
+                        'token' => $token,
+                        'created_at' => $datetime
+                    ]
+                );
+
+                return response()->json(['success' => true, 'msg' => 'Please check your mail to reset your password.']);
+            } else {
+                return response()->json(['success' => false, 'msg' => 'Customer not found']);
+            }
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'msg' => $e->getMessage()]);
+        }
     }
 }
