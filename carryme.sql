@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 20, 2023 at 02:56 PM
+-- Generation Time: May 23, 2023 at 01:27 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -92,7 +92,7 @@ CREATE TABLE `customers` (
 INSERT INTO `customers` (`id`, `name`, `is_admin`, `email`, `distributor_name`, `invite_code`, `start_date`, `end_date`, `password`, `created_at`, `updated_at`) VALUES
 (1, 'Carry Me', 1, 'Admin@carryme.com', '', '', '0000-00-00', '0000-00-00', '$2y$10$cfm6TvsPpNjkSAd2n2ZOi.LfDkfeYV1INVRjY8Y/HXh0b/taQ/P7G', '2023-05-09 17:11:09', '2023-05-09 17:11:09'),
 (3, 'Ankita', 0, 'ankita@gmail.com', 'Ankita', '985252', '2023-05-04', '2023-05-12', '$2y$10$nzlXYKsp43k74aFGZT4k2uaXMDQQAAEDfN7bQsSMuljrJv9A6sbEm', '2023-05-13 04:02:37', '2023-05-19 05:21:34'),
-(4, 'Aasif Ahmed', 0, 'aasifdev5@gmail.com', 'Aasif Ahmed', '5', '2023-05-03', '2023-05-31', '$2y$10$ajdwRh9TO1S7by1QGaWFz.V/rurwfVHZWTV0RxlgfBTdQCjUpnZWG', '2023-05-20 00:44:45', '2023-05-20 07:22:50'),
+(4, 'Aasif Ahmed', 0, 'aasifdev5@gmail.com', 'Aasif Ahmed', '5', '2023-05-03', '2023-05-31', '$2y$10$BmdeiwZDLK60GiZNzxiE7Oa1NDVIqpX9YAcJzV444ljb9PU8r/vW6', '2023-05-20 00:44:45', '2023-05-20 07:54:03'),
 (5, 'kishan', 0, 'jwd3@infocentroidtech.com', 'kishan', 'pawar', '2023-04-01', '2023-05-20', '$2y$10$n7ncp3mCe2dtU0ZzqDqqoOnKvxupUkcVT5ePiwFhuoSD01pYOEy/i', '2023-05-20 04:59:26', '2023-05-20 04:59:26');
 
 -- --------------------------------------------------------
@@ -243,7 +243,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (20, '2023_05_11_065859_create_language_table', 15),
 (21, '2023_05_17_102658_users', 16),
 (22, '2023_05_19_053909_create_push_notifications_table', 17),
-(23, '2023_05_20_103415_password_reset_tokens', 18);
+(23, '2023_05_20_103415_password_reset_tokens', 18),
+(24, '2023_05_23_102215_sessions', 19),
+(25, '2023_05_23_102356_add_social_login_field', 19);
 
 -- --------------------------------------------------------
 
@@ -263,7 +265,8 @@ CREATE TABLE `password_reset_tokens` (
 --
 
 INSERT INTO `password_reset_tokens` (`id`, `email`, `token`, `created_at`) VALUES
-(1, 'jwd3@infocentroidtech.com', 'IG8nu0G8wLSo6Y1HVHbFcYPj838DnlwsJVoIoIv9', '2023-05-20 05:05:12');
+(1, 'jwd3@infocentroidtech.com', 'IG8nu0G8wLSo6Y1HVHbFcYPj838DnlwsJVoIoIv9', '2023-05-20 05:05:12'),
+(11, 'aasifdev5@gmail.com', 'P5nHNTjyDf4hh8rh2UEKBvHqayI3GpHcjEau4oKm', '2023-05-22 00:29:16');
 
 -- --------------------------------------------------------
 
@@ -295,8 +298,7 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (21, 'App\\Models\\Customers', 1, 'Carry Me', 'fQwyZEi0wIuk93NAHPKTYOE4SsPrQ8n5Gc5Bw74f', NULL, NULL, NULL, '2023-05-16 23:26:20', '2023-05-16 23:26:20'),
 (22, 'App\\Models\\Customers', 1, 'Carry Me', 'FwrVLlIwXDznUufmnjbz13sbOLZwcrf1n8ysKUt4', NULL, NULL, NULL, '2023-05-17 04:58:09', '2023-05-17 04:58:09'),
 (23, 'App\\Models\\Customers', 1, 'Carry Me', 'kSouKNOjrJvHvHcC7e94ugFR69Ih60OoqZSAq6rA', NULL, NULL, NULL, '2023-05-17 07:13:33', '2023-05-17 07:13:33'),
-(30, 'App\\Models\\Customers', 1, 'Carry Me', 'cHxmwJ16hQLbDbROyS55TzzJvpEaOcjauC8OI56m', NULL, NULL, NULL, '2023-05-19 05:31:52', '2023-05-19 05:31:52'),
-(31, 'App\\Models\\Customers', 1, 'Carry Me', 'JbpFoSINsoFpkxb6yM0bVtVzsjxQybFG96025aKY', NULL, NULL, NULL, '2023-05-19 23:29:52', '2023-05-19 23:29:52');
+(30, 'App\\Models\\Customers', 1, 'Carry Me', 'cHxmwJ16hQLbDbROyS55TzzJvpEaOcjauC8OI56m', NULL, NULL, NULL, '2023-05-19 05:31:52', '2023-05-19 05:31:52');
 
 -- --------------------------------------------------------
 
@@ -347,6 +349,28 @@ INSERT INTO `push_notifications` (`id`, `user_type`, `message`, `created_at`, `u
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sessions`
+--
+
+CREATE TABLE `sessions` (
+  `id` varchar(255) NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `ip_address` varchar(45) DEFAULT NULL,
+  `user_agent` text DEFAULT NULL,
+  `payload` longtext NOT NULL,
+  `last_activity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `sessions`
+--
+
+INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
+('aeM1rFYQcUPS7rj990Tt7PGlAVy82Fke8fKbIIVU', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiQ1NMSXB6SldwdG1IM2hITG5mZGNCcGs3WThBU29wUFJJSmZxcWI1USI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1OiJzdGF0ZSI7czo0MDoidDMyN3o0Mk1Kd1ZIZjhmaWkzQUhWbWZlVk0xRVVicGdTMGIwQkVxZyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzU6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hdXRoL2ZhY2Vib29rIjt9fQ==', 1684839938);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -362,7 +386,9 @@ CREATE TABLE `users` (
   `name` varchar(255) NOT NULL,
   `profile_photo` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `social_id` varchar(255) DEFAULT NULL,
+  `social_type` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -520,6 +546,14 @@ ALTER TABLE `push_notifications`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `sessions`
+--
+ALTER TABLE `sessions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sessions_user_id_index` (`user_id`),
+  ADD KEY `sessions_last_activity_index` (`last_activity`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -600,19 +634,19 @@ ALTER TABLE `luggage`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `password_reset_tokens`
 --
 ALTER TABLE `password_reset_tokens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `premium`

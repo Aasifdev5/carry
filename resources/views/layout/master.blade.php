@@ -111,17 +111,13 @@
                </li>
                <?php
 
-
-
                use Illuminate\Support\Facades\DB;
 
                $statement = "select * from customers where id='" . $data->id . "' and is_admin=1";
                $query = DB::select($statement);
                // print_r($query);
                if ($query) {
-
-
-               ?>
+                  ?>
                <li class="nav-item">
                   <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-vehicle" role="button"
                      aria-expanded="false" aria-controls="sidebar-vehicle">
