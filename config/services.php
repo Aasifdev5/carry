@@ -13,7 +13,11 @@ return [
     | a conventional file to locate the various service credentials.
     |
     */
-
+    'facebook' => [
+        'client_id' => '198916766388393',
+        'client_secret' => '422132eea0721b8b1c370e8f165cc14d',
+        'redirect' => 'https://carryme.joblly.in/callback/facebook',
+    ],
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),
