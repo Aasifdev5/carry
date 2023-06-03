@@ -99,11 +99,7 @@ Admin Login
                               <div class="d-flex justify-content-center">
                                  <button type="submit" class="btn btn-primary">Sign In</button>
                               </div>
-                              <a href="{{ url('auth/facebook') }}"
-                                 style="margin-top: 0px !important;background: green;color: #ffffff;padding: 5px;border-radius:7px;"
-                                 class="ml-2">
-                                 <strong>Facebook Login</strong>
-                              </a>
+
 
                               <!-- <p class="mt-3 text-center">
                                  Don’t have an account? <a href="register" class="text-underline">Click here to sign
