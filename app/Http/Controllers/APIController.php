@@ -43,7 +43,7 @@ class APIController extends Controller
             $input = $request->all();
             $v = $input['password'];
             $output['response'] = true;
-            $var = DB::table('customers')->where('email', $input['email'])->first();
+            $var = DB::table('users')->where('email', $input['email'])->first();
 
             if (Hash::check($v, $var->password) || $v == $var->password) {
 
@@ -63,17 +63,32 @@ class APIController extends Controller
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
+            'lang_id'=>'required',
+            'workman_id'=>'required',
             'email' => 'required|email',
             'password' => 'required',
-
-        ]);
+            'invite_code'=>'required',
+            'security_date'=>'required',
+            'name' => 'required',
+            'profile_photo'=>'required',
+            
+            ]);
 
         if ($validator->fails()) {
             $output['response'] = false;
             $output['message'] = $validator->errors();
         } else {
-            $customer = new users();
+            $users = new users();
+             $users->lang_id = $request->lang_id;
+             $users->workman_id = $request->workman_id;
+             $users->email = $request->email;
+             $users->password = FacadesHash::make($request->password);
+             $users->invite_code = $request->invite_code;
+             $users->security_date = $request->security_date;
+             $users->name = $request->name;
+             $users->profile_photo = $request->profile_photo;
+            
+            
             $output['response'] = true;
             $input = $request->all();
             $response = users::create($input);
@@ -184,7 +199,7 @@ class APIController extends Controller
             $output['message'] = $validator->errors();
         } else {
             $output['response'] = true;
-            $data = Customers::find('3');
+            $data = Customers::find('7');
             if (!FacadesHash::check($request->old_password, $data->password)) {
                 $output['response'] = false;
                 $output['message'] = 'Old Password Does not match!';
