@@ -82,6 +82,7 @@ class VehicleController extends Controller
             $data = Customers::where('id', '=', Session::get('loginId'))->first();
             $request->validate([
                 'vehicle_name' => 'required',
+                'nick_name' => 'required',
                 'ride_type' => 'required',
                 'seats' => 'required',
                 'departure_address' => 'required',
@@ -93,6 +94,7 @@ class VehicleController extends Controller
             ]);
             $vehicle = vehicle::where('id', '=', $request->vehicle_id)->first();
             $vehicle->vehicle_name = $request->vehicle_name;
+            $vehicle->nick_name = $request->nick_name;
             $vehicle->ride_type = $request->ride_type;
             $vehicle->seats = $request->seats;
             $vehicle->departure_address = $request->departure_address;
@@ -123,6 +125,7 @@ class VehicleController extends Controller
             $vehicle = new Vehicle();
             $request->validate([
                 'vehicle_name' => 'required',
+                'nick_name' => 'required',
                 'ride_type' => 'required',
                 'seats' => 'required',
                 'departure_address' => 'required',
@@ -133,6 +136,7 @@ class VehicleController extends Controller
                 'description' => 'required'
             ]);
             $vehicle->vehicle_name = $request->vehicle_name;
+            $vehicle->nick_name = $request->nick_name;
             $vehicle->ride_type = $request->ride_type;
             $vehicle->seats = $request->seats;
             $vehicle->departure_address = $request->departure_address;
