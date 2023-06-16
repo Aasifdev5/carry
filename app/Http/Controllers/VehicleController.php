@@ -82,11 +82,23 @@ class VehicleController extends Controller
             $data = Customers::where('id', '=', Session::get('loginId'))->first();
             $request->validate([
                 'vehicle_name' => 'required',
+                'ride_type' => 'required',
+                'seats' => 'required',
+                'departure_address' => 'required',
+                'destination_address' => 'required',
+                'fixed_price' => 'required',
+                'luggage' => 'required',
                 'vehicle_photo_name' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'description' => 'required'
             ]);
             $vehicle = vehicle::where('id', '=', $request->vehicle_id)->first();
             $vehicle->vehicle_name = $request->vehicle_name;
+            $vehicle->ride_type = $request->ride_type;
+            $vehicle->seats = $request->seats;
+            $vehicle->departure_address = $request->departure_address;
+            $vehicle->destination_address = $request->destination_address;
+            $vehicle->fixed_price = $request->fixed_price;
+            $vehicle->luggage = $request->luggage;
             if (!empty($request->vehicle_photo_name)) {
                 $vehicle->vehicle_photo_name = $request->file('vehicle_photo_name')->getClientOriginalName();
                 $image = $request->file('vehicle_photo_name')->getClientOriginalName();
@@ -111,10 +123,22 @@ class VehicleController extends Controller
             $vehicle = new Vehicle();
             $request->validate([
                 'vehicle_name' => 'required',
+                'ride_type' => 'required',
+                'seats' => 'required',
+                'departure_address' => 'required',
+                'destination_address' => 'required',
+                'fixed_price' => 'required',
+                'luggage' => 'required',
                 'vehicle_photo_name' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'description' => 'required'
             ]);
             $vehicle->vehicle_name = $request->vehicle_name;
+            $vehicle->ride_type = $request->ride_type;
+            $vehicle->seats = $request->seats;
+            $vehicle->departure_address = $request->departure_address;
+            $vehicle->destination_address = $request->destination_address;
+            $vehicle->fixed_price = $request->fixed_price;
+            $vehicle->luggage = $request->luggage;
             $vehicle->vehicle_photo_name = $request->file('vehicle_photo_name')->getClientOriginalName();
 
             $image = $request->file('vehicle_photo_name')->getClientOriginalName();
