@@ -78,20 +78,20 @@ class APIController extends Controller
             $output['response'] = false;
             $output['message'] = $validator->errors();
         } else {
-            $users = new users();
-            $users->lang_id = $request->lang_id;
-            $users->workman_id = $request->workman_id;
-            $users->email = $request->email;
-            $users->password = FacadesHash::make($request->password);
-            $users->invite_code = $request->invite_code;
-            $users->security_date = $request->security_date;
-            $users->name = $request->name;
-            $users->profile_photo = $request->profile_photo;
 
 
             $output['response'] = true;
-            $input = $request->all();
-            $response = users::create($input);
+
+            $response = users::create([
+                'lang_id' => $request->lang_id,
+                'workman_id' => $request->workman_id,
+                'email' => $request->email,
+                'password' => FacadesHash::make($request->password),
+                'invite_code' => $request->invite_code,
+                'security_date' => $request->security_date,
+                'name' => $request->name,
+                'profile_photo' => $request->profile_photo,
+            ]);
             if ($response) {
 
                 $output['response'] = true;
