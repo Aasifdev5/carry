@@ -106,6 +106,55 @@ class APIController extends Controller
             }
         }
     }
+
+    public function PostVehicle(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'vehicle_photo_name' => 'required',
+            'ride_type' => 'required',
+            'seats' => 'required|email',
+            'departure_address' => 'required',
+            'destination_address' => 'required',
+            'description' => 'required',
+            'transport_type' => 'required',
+            'destination_type' => 'required',
+            'currency' => 'required',
+
+        ]);
+
+        if ($validator->fails()) {
+            $output['response'] = false;
+            $output['message'] = $validator->errors();
+        } else {
+
+
+            $output['response'] = true;
+
+            $response = Vehicle::create([
+                'vehicle_photo_name' => $request->vehicle_photo_name,
+                'ride_type' => $request->ride_type,
+                'seats' => $request->seats,
+                'departure_address' => $request->departure_address,
+                'destination_address' => $request->destination_address,
+                'description' => $request->description,
+                'transport_type' => $request->transport_type,
+                'destination_type' => $request->destination_type,
+                'currency' => $request->currency,
+            ]);
+            if ($response) {
+
+                $output['response'] = true;
+                $output['message'] = "Vehicle Add Successfully";
+                $output['data'] = $response;
+                header('Content-Type: application/json');
+                print_r(json_encode($output));
+            } else {
+                $output['response'] = false;
+                $output['message'] = 'Invalid';
+                print_r(json_encode($output));
+            }
+        }
+    }
     public function deletedata(Request $request)
     {
         $id = $request->id;
