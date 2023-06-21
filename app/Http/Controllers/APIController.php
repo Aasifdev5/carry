@@ -272,6 +272,35 @@ class APIController extends Controller
             }
         }
     }
+    public function editProfile(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required',
+
+        ]);
+
+        if ($validator->fails()) {
+            $output['response'] = false;
+            $output['message'] = $validator->errors();
+        } else {
+            $output['response'] = true;
+            $data = users::find($request->user_id);
+
+            #Update the new Password
+            $data = users::where('id', '=', $data->id)->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'security_date' => $request->security_date,
+            ]);
+            $output['response'] = true;
+
+            $output['message'] = "Profile Updated Successfully";
+
+            header('Content-Type: application/json');
+            return json_encode($output);
+        }
+    }
 
     public function forgotPassword(Request $request)
     {
