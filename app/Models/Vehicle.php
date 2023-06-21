@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Vehicle extends Model
 {
-    use HasFactory;
+
+    protected $table = 'vehicles';
+    protected $fillable = ['vehicle_name', 'nick_name', 'vehicle_photo_name', 'ride_type', 'transport_type', 'seats', 'departure_address', 'destination_address', 'fixed_price', 'luggage_type', 'description'];
 }

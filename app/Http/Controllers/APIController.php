@@ -110,15 +110,14 @@ class APIController extends Controller
     public function PostVehicle(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'vehicle_photo_name' => 'required',
+
             'ride_type' => 'required',
-            'seats' => 'required|email',
-            'departure_address' => 'required',
-            'destination_address' => 'required',
-            'description' => 'required',
-            'transport_type' => 'required',
+            'luggage_type' => 'required',
             'destination_type' => 'required',
             'currency' => 'required',
+            'departure_address' => 'required',
+            'description' => 'required',
+
 
         ]);
 
@@ -133,13 +132,14 @@ class APIController extends Controller
             $response = Vehicle::create([
                 'vehicle_photo_name' => $request->vehicle_photo_name,
                 'ride_type' => $request->ride_type,
+                'transport_type' => $request->transport_type,
                 'seats' => $request->seats,
+                'luggage_type' => $request->luggage_type,
+                'destination_type' => $request->destination_type,
+                'currency' => $request->currency,
                 'departure_address' => $request->departure_address,
                 'destination_address' => $request->destination_address,
                 'description' => $request->description,
-                'transport_type' => $request->transport_type,
-                'destination_type' => $request->destination_type,
-                'currency' => $request->currency,
             ]);
             if ($response) {
 
