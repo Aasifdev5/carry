@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash as FacadesHash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\App;
 use App\Models\PersonalAccess;
+use App\Models\Users;
 
 class User extends Controller
 {
@@ -116,7 +117,8 @@ class User extends Controller
         $token = Session::get('token');
         $check = PersonalAccess::where('token', '=', $token)->first();
         if (!empty($check)) {
-            return view('users', compact('data'));
+            $users = Users::all();
+            return view('users', compact('data', 'users'));
         } else {
             Session::forget('loginId');
             $request->session()->invalidate();
