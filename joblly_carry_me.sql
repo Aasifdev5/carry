@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 21, 2023 at 04:13 AM
+-- Generation Time: Jun 23, 2023 at 08:01 AM
 -- Server version: 5.7.42-log
 -- PHP Version: 8.1.16
 
@@ -255,7 +255,8 @@ CREATE TABLE `password_reset_tokens` (
 --
 
 INSERT INTO `password_reset_tokens` (`id`, `email`, `token`, `created_at`) VALUES
-(1, 'jwd3@infocentroidtech.com', 'IG8nu0G8wLSo6Y1HVHbFcYPj838DnlwsJVoIoIv9', '2023-05-20 05:05:12');
+(1, 'jwd3@infocentroidtech.com', 'IG8nu0G8wLSo6Y1HVHbFcYPj838DnlwsJVoIoIv9', '2023-05-20 05:05:12'),
+(11, 'aasifdev5@gmail.com', 'mHbNoInHQwAyscDBu8OmE5CiyXCVX1AuNzBQG8jK', '2023-06-21 17:41:56');
 
 -- --------------------------------------------------------
 
@@ -300,7 +301,8 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (24, 'App\\Models\\Customers', 1, 'Carry Me', 'TPFRjU8bSGlArpx1RI8arKwIY4SWLRLr2s4fWdfy', NULL, NULL, NULL, '2023-05-23 16:55:12', '2023-05-23 16:55:12'),
 (25, 'App\\Models\\Customers', 1, 'Carry Me', 'VC5131Bv3lDYQH5O8IFrfgajDMLDbAURwgyn3sij', NULL, NULL, NULL, '2023-05-23 16:57:34', '2023-05-23 16:57:34'),
 (29, 'App\\Models\\Customers', 1, 'Carry Me', 'dT2BJSZiQNHSBImyxlfneLq9IgL4FeIj1ldyObCj', NULL, NULL, NULL, '2023-06-12 11:38:51', '2023-06-12 11:38:51'),
-(30, 'App\\Models\\Customers', 1, 'Carry Me', 'hTAVN9XfILKUzP1Ya8iBfkkYOucqnxqFVXozqjaj', NULL, NULL, NULL, '2023-06-16 14:03:27', '2023-06-16 14:03:27');
+(30, 'App\\Models\\Customers', 1, 'Carry Me', 'hTAVN9XfILKUzP1Ya8iBfkkYOucqnxqFVXozqjaj', NULL, NULL, NULL, '2023-06-16 14:03:27', '2023-06-16 14:03:27'),
+(31, 'App\\Models\\Customers', 1, 'Carry Me', 'do5iZcLxa1JqsdMtiQ92qrDPf3r2OhwakPdhHSWm', NULL, NULL, NULL, '2023-06-22 16:50:11', '2023-06-22 16:50:11');
 
 -- --------------------------------------------------------
 
@@ -390,8 +392,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `user_type`, `lang_id`, `workman_id`, `email`, `password`, `invite_code`, `security_date`, `name`, `profile_photo`, `created_at`, `updated_at`) VALUES
-(1, 'free', 'ru', '540FB0A11002548', 'test1@gmail.com', '$2y$10$OwEQYgGh6IpVYq8ZFbAKX.0Or//KUQ2jka0B8iMNhE40LIz4k7T/O', '12345', '2023-06-17', 'test1', 'file:///storage/emulated/0/Android/data/com.toneop/files/Pictures/2814272a-bb67-44b2-9a83-f647ba075b01.jpg', '2023-06-17 17:55:00', '2023-06-17 17:58:38'),
-(2, 'free', 'en', '326F6B334BF580A', 'test01@gmail.com', '$2y$10$ZlazYVDvzKGJ/NTWrEwfoedGKHD4COxmbbcZglHiHlyEBNsWnb2uO', '12345', '2023-06-18', 'test01', 'file:///storage/emulated/0/Android/data/com.toneop/files/Pictures/c12fa888-b622-4421-afed-0d46ff55887d.jpg', '2023-06-18 19:23:39', '2023-06-18 20:11:23');
+(1, 'free', 'ru', '540FB0A11002548', 'arsh@gmail.com', '$2y$10$OwEQYgGh6IpVYq8ZFbAKX.0Or//KUQ2jka0B8iMNhE40LIz4k7T/O', '12345', '2023-06-21', 'arsh', 'file:///storage/emulated/0/Android/data/com.toneop/files/Pictures/2814272a-bb67-44b2-9a83-f647ba075b01.jpg', '2023-06-17 17:55:00', '2023-06-21 15:21:16'),
+(2, 'free', 'en', '326F6B334BF580A', 'mg02@gmail.com', '$2y$10$ZlazYVDvzKGJ/NTWrEwfoedGKHD4COxmbbcZglHiHlyEBNsWnb2uO', '12345', '2020-10-20', 'Mukesh kr', 'file:///storage/emulated/0/Android/data/com.toneop/files/Pictures/c12fa888-b622-4421-afed-0d46ff55887d.jpg', '2023-06-18 19:23:39', '2023-06-22 12:37:23'),
+(3, 'free', 'en', 'FC6F3313E4E418C', 'mg1234@gmail.com', '$2y$10$a2RVTvUg36bqjQLbffHJ1eWcmc/EsnQSE6PSxuLwhPeoA4GD0dDbG', NULL, '2023-05-22', 'Mukesh', 'file:///storage/emulated/0/Android/data/com.toneop/files/Pictures/3689257e-d0f3-4aa7-bc79-06ca60acc8c3.jpg', '2023-06-22 13:49:22', '2023-06-22 13:49:22');
 
 -- --------------------------------------------------------
 
@@ -447,15 +450,17 @@ INSERT INTO `user_terms` (`id`, `term_name`, `created_at`, `updated_at`) VALUES
 
 CREATE TABLE `vehicles` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `vehicle_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nick_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `vehicle_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nick_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `vehicle_photo_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ride_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `seats` int(11) NOT NULL,
-  `departure_address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `destination_address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fixed_price` decimal(32,2) NOT NULL,
-  `luggage` int(11) NOT NULL,
+  `transport_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `seats` int(11) DEFAULT NULL,
+  `departure_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `destination_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `currency` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fixed_price` decimal(32,2) DEFAULT NULL,
+  `luggage_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -465,9 +470,21 @@ CREATE TABLE `vehicles` (
 -- Dumping data for table `vehicles`
 --
 
-INSERT INTO `vehicles` (`id`, `vehicle_name`, `nick_name`, `vehicle_photo_name`, `ride_type`, `seats`, `departure_address`, `destination_address`, `fixed_price`, `luggage`, `description`, `created_at`, `updated_at`) VALUES
-(2, 'car', 'cargo', 'Mahindra-Scorpio-N-300620221053.jpg', 'car', 8, 'burhanpur', 'indore', 3500.00, 5, 'car', '2023-05-08 15:10:50', '2023-06-16 14:04:15'),
-(5, 'Auto', 'riksha', '00.png', 'auto', 4, 'indore', 'burhanpur', 5000.00, 2, 'auto', '2023-05-13 11:45:26', '2023-06-16 14:10:08');
+INSERT INTO `vehicles` (`id`, `vehicle_name`, `nick_name`, `vehicle_photo_name`, `ride_type`, `transport_type`, `seats`, `departure_address`, `destination_address`, `currency`, `fixed_price`, `luggage_type`, `description`, `created_at`, `updated_at`) VALUES
+(2, 'car', 'cargo', 'Mahindra-Scorpio-N-300620221053.jpg', 'car', NULL, 8, 'burhanpur', 'indore', '', 3500.00, '5', 'car', '2023-05-08 15:10:50', '2023-06-16 14:04:15'),
+(5, 'Auto', 'riksha', '00.png', 'auto', NULL, 4, 'indore', 'burhanpur', '', 5000.00, '2', 'auto', '2023-05-13 11:45:26', '2023-06-16 14:10:08'),
+(6, NULL, NULL, 'platine.png', 'bike', 'passebger', 2, 'indore', 'rau', '', NULL, 'bags', 'indore to rau', '2023-06-21 14:47:25', '2023-06-21 14:47:25'),
+(7, NULL, NULL, 'file:///storage/emulated/0/Android/data/com.toneop/files/Pictures/cf73243e-dc5b-421d-820d-157c402cb020.jpg', 'car', 'passenger', 4, 'sdffdsfdfds', 'sdfsdf', '', NULL, 'Bag', 'asdsfsafafsfsa', '2023-06-22 09:40:56', '2023-06-22 09:40:56'),
+(8, NULL, NULL, 'file:///storage/emulated/0/Android/data/com.toneop/files/Pictures/54e9ea27-4cb4-4435-9c59-6a131a362402.jpg', 'Car', 'Passenger', 4, 'Rewdf', 'Rrdff', '', NULL, 'Bags', 'Wwdd', '2023-06-22 10:28:59', '2023-06-22 10:28:59'),
+(9, NULL, NULL, 'file:///storage/emulated/0/Android/data/com.toneop/files/Pictures/a10b1e48-864a-4b76-82af-9e969d7822ee.jpg', 'Bicycle', 'Passenger', 2, 'Hii', 'Hii', '', NULL, 'Bags', 'Hii', '2023-06-23 17:11:20', '2023-06-23 17:11:20'),
+(10, NULL, NULL, 'file:///storage/emulated/0/Android/data/com.toneop/files/Pictures/958051f5-7441-41db-91f7-5ce582a2c44f.jpg', 'Car', 'Passenger', 4, 'Dhanbad', 'Ranchi', '', NULL, 'big cartoon', 'Nice', '2023-06-23 17:20:05', '2023-06-23 17:20:05'),
+(11, NULL, NULL, 'file:///storage/emulated/0/Android/data/com.toneop/files/Pictures/7d92e7a1-007c-4a25-b139-e0ce0ebb5a96.jpg', 'Motorbike', 'Passenger', 2, 'Delhi', 'Noida', '', NULL, 'Garment Bags', 'Hii', '2023-06-23 17:27:35', '2023-06-23 17:27:35'),
+(12, NULL, NULL, 'file:///storage/emulated/0/Android/data/com.toneop/files/Pictures/3f54ed71-89e8-47ab-aa08-8e7d181c7293.jpg', 'Truck', 'Passenger', 4, 'Ranchi', 'Patna', '', 1300.00, 'Garment Bags', 'Hii', '2023-06-23 17:30:59', '2023-06-23 17:30:59'),
+(13, NULL, NULL, 'file:///storage/emulated/0/Android/data/com.toneop/files/Pictures/d572f652-4e10-40df-9309-a86e5807102a.jpg', 'Bicycle', 'Passenger', 2, 'Patna', 'Ranchi', NULL, 1500.00, 'Bags', 'Hii', '2023-06-23 17:35:14', '2023-06-23 17:35:14'),
+(14, NULL, NULL, 'file:///storage/emulated/0/Android/data/com.toneop/files/Pictures/f0787093-2269-4ce8-8f37-a2f19c062f88.jpg', 'Bicycle', 'Passenger', 3, 'Def', 'Ds', NULL, 1400.00, 'Bags', 'Fii', '2023-06-23 17:36:23', '2023-06-23 17:36:23'),
+(15, NULL, NULL, 'file:///storage/emulated/0/Android/data/com.toneop/files/Pictures/fe5d3a17-96c1-49ab-a750-1e4484311385.jpg', 'Car', 'Passenger', 3, 'Gredd', 'Dhhg', 'Dollar', 455.00, 'big cartoon', 'Fii', '2023-06-23 17:39:51', '2023-06-23 17:39:51'),
+(16, NULL, NULL, 'file:///storage/emulated/0/Android/data/com.toneop/files/Pictures/675b2c33-948b-46e7-8823-6d4addb5eb51.jpg', 'Bicycle', 'Passenger', 2, 'New', 'York', '$', 15.00, 'Garment Bags', 'Hii', '2023-06-23 17:44:46', '2023-06-23 17:44:46'),
+(17, NULL, NULL, 'file:///storage/emulated/0/Android/data/com.toneop/files/Pictures/c2dd30c7-a76a-4466-b379-5269bffe485c.jpg', 'Tricycle', 'Passenger', 3, 'Trfghj', 'Gedhj', '₦', 8000.00, 'big cartoon', 'Reshhj', '2023-06-23 17:56:38', '2023-06-23 17:56:38');
 
 --
 -- Indexes for dumped tables
@@ -649,13 +666,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `password_reset_tokens`
 --
 ALTER TABLE `password_reset_tokens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `premium`
@@ -673,7 +690,7 @@ ALTER TABLE `push_notifications`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user_limitation`
@@ -691,7 +708,7 @@ ALTER TABLE `user_terms`
 -- AUTO_INCREMENT for table `vehicles`
 --
 ALTER TABLE `vehicles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
