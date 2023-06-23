@@ -131,6 +131,7 @@ class APIController extends Controller
 
             $response = Vehicle::create([
                 'vehicle_photo_name' => $request->vehicle_photo_name,
+                'nick_name' => $request->nick_name,
                 'ride_type' => $request->ride_type,
                 'transport_type' => $request->transport_type,
                 'seats' => $request->seats,
@@ -139,6 +140,7 @@ class APIController extends Controller
                 'currency' => $request->currency,
                 'departure_address' => $request->departure_address,
                 'destination_address' => $request->destination_address,
+                'fixed_price' => $request->fixed_price,
                 'description' => $request->description,
             ]);
             if ($response) {
@@ -375,5 +377,14 @@ class APIController extends Controller
         PasswordReset::where('email', $data->email)->delete();
 
         echo "<h1>Successfully Reset Password</h1>";
+    }
+    function search($name)
+    {
+        $result = Vehicle::where('name', 'LIKE', '%' . $name . '%')->get();
+        if (count($result)) {
+            return Response()->json($result);
+        } else {
+            return response()->json(['Result' => 'No Data not found'], 404);
+        }
     }
 }
