@@ -67,7 +67,6 @@ class APIController extends Controller
             'workman_id' => 'required',
             'email' => 'required|email',
             'password' => 'required',
-            'invite_code' => 'required',
             'security_date' => 'required',
             'name' => 'required',
             'profile_photo' => 'required',
@@ -79,18 +78,21 @@ class APIController extends Controller
             $output['message'] = $validator->errors();
         } else {
 
-
             $output['response'] = true;
-
+            $image = $request->file('profile_photo')->getClientOriginalName();
+            $image_path = $request->file('profile_photo')->store('images/profile', 'public');
+            $request->profile_photo->move($image_path, $image);
+            $final = $image_path . '/' . $image;
             $response = users::create([
                 'lang_id' => $request->lang_id,
                 'workman_id' => $request->workman_id,
                 'email' => $request->email,
                 'password' => FacadesHash::make($request->password),
                 'invite_code' => $request->invite_code,
+                'remainder' => $request->remainder,
                 'security_date' => $request->security_date,
                 'name' => $request->name,
-                'profile_photo' => $request->profile_photo,
+                'profile_photo' => $final,
             ]);
             if ($response) {
 
@@ -106,11 +108,9 @@ class APIController extends Controller
             }
         }
     }
-
     public function PostVehicle(Request $request)
     {
         $validator = Validator::make($request->all(), [
-
             'ride_type' => 'required',
             'luggage_type' => 'required',
             'destination_type' => 'required',
@@ -128,9 +128,12 @@ class APIController extends Controller
 
 
             $output['response'] = true;
-
+            $image = $request->file('vehicle_photo_name')->getClientOriginalName();
+            $image_path = $request->file('vehicle_photo_name')->store('images/vehicles', 'public');
+            $request->vehicle_photo_name->move($image_path, $image);
+            $final = $image_path . '/' . $image;
             $response = Vehicle::create([
-                'vehicle_photo_name' => $request->vehicle_photo_name,
+                'vehicle_photo_name' => $final,
                 'nick_name' => $request->nick_name,
                 'ride_type' => $request->ride_type,
                 'transport_type' => $request->transport_type,
@@ -166,7 +169,7 @@ class APIController extends Controller
 
         $output['response'] = true;
         $output['message'] = 'Data deleted SuccessfullY';
-        // $output['data']=$c1;
+
 
         header('Content-Type: application/json');
         print_r(json_encode($output));
@@ -182,7 +185,36 @@ class APIController extends Controller
     {
         return Language::all();
     }
+    public function editProfile(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required',
 
+        ]);
+
+        if ($validator->fails()) {
+            $output['response'] = false;
+            $output['message'] = $validator->errors();
+        } else {
+            $output['response'] = true;
+            $data = users::find($request->user_id);
+
+            #Update the new Password
+            $data = users::where('id', '=', $data->id)->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'remainder' => $request->remainder,
+                'security_date' => $request->security_date,
+            ]);
+            $output['response'] = true;
+
+            $output['message'] = "Profile Updated Successfully";
+
+            header('Content-Type: application/json');
+            return json_encode($output);
+        }
+    }
     public function currency()
     {
         return Currencies::all();
@@ -251,6 +283,7 @@ class APIController extends Controller
         } else {
             $output['response'] = true;
             $data = users::find($request->user_id);
+
             if (!FacadesHash::check($request->old_password, $data->password)) {
                 $output['response'] = false;
                 $output['message'] = 'Old Password Does not match!';
@@ -272,35 +305,6 @@ class APIController extends Controller
                 header('Content-Type: application/json');
                 return json_encode($output);
             }
-        }
-    }
-    public function editProfile(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required',
-
-        ]);
-
-        if ($validator->fails()) {
-            $output['response'] = false;
-            $output['message'] = $validator->errors();
-        } else {
-            $output['response'] = true;
-            $data = users::find($request->user_id);
-
-            #Update the new Password
-            $data = users::where('id', '=', $data->id)->update([
-                'name' => $request->name,
-                'email' => $request->email,
-                'security_date' => $request->security_date,
-            ]);
-            $output['response'] = true;
-
-            $output['message'] = "Profile Updated Successfully";
-
-            header('Content-Type: application/json');
-            return json_encode($output);
         }
     }
 
@@ -377,14 +381,5 @@ class APIController extends Controller
         PasswordReset::where('email', $data->email)->delete();
 
         echo "<h1>Successfully Reset Password</h1>";
-    }
-    function search($name)
-    {
-        $result = Vehicle::where('name', 'LIKE', '%' . $name . '%')->get();
-        if (count($result)) {
-            return Response()->json($result);
-        } else {
-            return response()->json(['Result' => 'No Data not found'], 404);
-        }
     }
 }
