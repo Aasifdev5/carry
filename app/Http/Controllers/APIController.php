@@ -67,6 +67,7 @@ class APIController extends Controller
             'workman_id' => 'required',
             'email' => 'required|email',
             'password' => 'required',
+
             'security_date' => 'required',
             'name' => 'required',
             'profile_photo' => 'required',
@@ -80,7 +81,7 @@ class APIController extends Controller
 
             $output['response'] = true;
             $image = $request->file('profile_photo')->getClientOriginalName();
-            $image_path = $request->file('profile_photo')->store('images/profile', 'public');
+            $image_path = 'images/profile/' . $request->name;
             $request->profile_photo->move($image_path, $image);
             $final = $image_path . '/' . $image;
             $response = users::create([
@@ -129,7 +130,7 @@ class APIController extends Controller
 
             $output['response'] = true;
             $image = $request->file('vehicle_photo_name')->getClientOriginalName();
-            $image_path = $request->file('vehicle_photo_name')->store('images/vehicles', 'public');
+            $image_path = 'images/vehicles';
             $request->vehicle_photo_name->move($image_path, $image);
             $final = $image_path . '/' . $image;
             $response = Vehicle::create([
@@ -169,7 +170,7 @@ class APIController extends Controller
 
         $output['response'] = true;
         $output['message'] = 'Data deleted SuccessfullY';
-
+        // $output['data']=$c1;
 
         header('Content-Type: application/json');
         print_r(json_encode($output));
@@ -311,7 +312,7 @@ class APIController extends Controller
     public function forgotPassword(Request $request)
     {
         try {
-            $customer = Customers::where('email', $request->email)->get();
+            $customer = users::where('email', $request->email)->get();
 
             if (count($customer) > 0) {
 
@@ -359,7 +360,7 @@ class APIController extends Controller
 
         $resetData =  PasswordReset::where('token', $request->token)->get();
         if (isset($request->token) && count($resetData) > 0) {
-            $customer = Customers::where('email', $resetData[0]['email'])->get();
+            $customer = users::where('email', $resetData[0]['email'])->get();
             return view('ResetPasswordLoad', ['customer' => $customer]);
         }
     }
@@ -373,7 +374,7 @@ class APIController extends Controller
             'confirm_password' => ['same:new_password']
         ]);
 
-        $data = Customers::find($request->user_id);
+        $data = users::find($request->user_id);
 
         $data->password = FacadesHash::make($request->new_password);
         $data->update();
