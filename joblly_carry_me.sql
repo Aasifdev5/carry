@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 23, 2023 at 08:01 AM
+-- Generation Time: Jun 24, 2023 at 07:25 AM
 -- Server version: 5.7.42-log
 -- PHP Version: 8.1.16
 
@@ -380,21 +380,13 @@ CREATE TABLE `users` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `invite_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remainder` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `security_date` date DEFAULT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `profile_photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `user_type`, `lang_id`, `workman_id`, `email`, `password`, `invite_code`, `security_date`, `name`, `profile_photo`, `created_at`, `updated_at`) VALUES
-(1, 'free', 'ru', '540FB0A11002548', 'arsh@gmail.com', '$2y$10$OwEQYgGh6IpVYq8ZFbAKX.0Or//KUQ2jka0B8iMNhE40LIz4k7T/O', '12345', '2023-06-21', 'arsh', 'file:///storage/emulated/0/Android/data/com.toneop/files/Pictures/2814272a-bb67-44b2-9a83-f647ba075b01.jpg', '2023-06-17 17:55:00', '2023-06-21 15:21:16'),
-(2, 'free', 'en', '326F6B334BF580A', 'mg02@gmail.com', '$2y$10$ZlazYVDvzKGJ/NTWrEwfoedGKHD4COxmbbcZglHiHlyEBNsWnb2uO', '12345', '2020-10-20', 'Mukesh kr', 'file:///storage/emulated/0/Android/data/com.toneop/files/Pictures/c12fa888-b622-4421-afed-0d46ff55887d.jpg', '2023-06-18 19:23:39', '2023-06-22 12:37:23'),
-(3, 'free', 'en', 'FC6F3313E4E418C', 'mg1234@gmail.com', '$2y$10$a2RVTvUg36bqjQLbffHJ1eWcmc/EsnQSE6PSxuLwhPeoA4GD0dDbG', NULL, '2023-05-22', 'Mukesh', 'file:///storage/emulated/0/Android/data/com.toneop/files/Pictures/3689257e-d0f3-4aa7-bc79-06ca60acc8c3.jpg', '2023-06-22 13:49:22', '2023-06-22 13:49:22');
 
 -- --------------------------------------------------------
 
@@ -484,7 +476,8 @@ INSERT INTO `vehicles` (`id`, `vehicle_name`, `nick_name`, `vehicle_photo_name`,
 (14, NULL, NULL, 'file:///storage/emulated/0/Android/data/com.toneop/files/Pictures/f0787093-2269-4ce8-8f37-a2f19c062f88.jpg', 'Bicycle', 'Passenger', 3, 'Def', 'Ds', NULL, 1400.00, 'Bags', 'Fii', '2023-06-23 17:36:23', '2023-06-23 17:36:23'),
 (15, NULL, NULL, 'file:///storage/emulated/0/Android/data/com.toneop/files/Pictures/fe5d3a17-96c1-49ab-a750-1e4484311385.jpg', 'Car', 'Passenger', 3, 'Gredd', 'Dhhg', 'Dollar', 455.00, 'big cartoon', 'Fii', '2023-06-23 17:39:51', '2023-06-23 17:39:51'),
 (16, NULL, NULL, 'file:///storage/emulated/0/Android/data/com.toneop/files/Pictures/675b2c33-948b-46e7-8823-6d4addb5eb51.jpg', 'Bicycle', 'Passenger', 2, 'New', 'York', '$', 15.00, 'Garment Bags', 'Hii', '2023-06-23 17:44:46', '2023-06-23 17:44:46'),
-(17, NULL, NULL, 'file:///storage/emulated/0/Android/data/com.toneop/files/Pictures/c2dd30c7-a76a-4466-b379-5269bffe485c.jpg', 'Tricycle', 'Passenger', 3, 'Trfghj', 'Gedhj', '₦', 8000.00, 'big cartoon', 'Reshhj', '2023-06-23 17:56:38', '2023-06-23 17:56:38');
+(17, NULL, NULL, 'file:///storage/emulated/0/Android/data/com.toneop/files/Pictures/c2dd30c7-a76a-4466-b379-5269bffe485c.jpg', 'Tricycle', 'Passenger', 3, 'Trfghj', 'Gedhj', '₦', 8000.00, 'big cartoon', 'Reshhj', '2023-06-23 17:56:38', '2023-06-23 17:56:38'),
+(18, NULL, 'kishan', '/tmp/phpc5x8q0', 'bike', 'passebger', 2, 'indore', 'rau', '$', 7500.00, 'bags', 'indore to rau', '2023-06-24 13:07:21', '2023-06-24 13:07:21');
 
 --
 -- Indexes for dumped tables
@@ -690,7 +683,7 @@ ALTER TABLE `push_notifications`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user_limitation`
@@ -708,7 +701,7 @@ ALTER TABLE `user_terms`
 -- AUTO_INCREMENT for table `vehicles`
 --
 ALTER TABLE `vehicles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
