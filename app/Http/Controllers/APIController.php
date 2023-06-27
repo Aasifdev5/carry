@@ -40,6 +40,7 @@ class APIController extends Controller
             $output['response'] = false;
             $output['message'] = $validator->errors();
         } else {
+
             $input = $request->all();
             $v = $input['password'];
             $output['response'] = true;
@@ -80,10 +81,11 @@ class APIController extends Controller
         } else {
 
             $output['response'] = true;
-            $image = $request->file('profile_photo')->getClientOriginalName();
-            $image_path = 'images/profile/' . $request->name;
-            $request->profile_photo->move($image_path, $image);
-            $final = $image_path . '/' . $image;
+
+            // $image = $request->file('profile_photo')->getClientOriginalName();
+            // $image_path = 'images/profile/'.$request->name;
+            // $request->profile_photo->move($image_path, $image);
+            // $final=$image_path.'/'.$image;
             $response = users::create([
                 'lang_id' => $request->lang_id,
                 'workman_id' => $request->workman_id,
@@ -93,7 +95,8 @@ class APIController extends Controller
                 'remainder' => $request->remainder,
                 'security_date' => $request->security_date,
                 'name' => $request->name,
-                'profile_photo' => $final,
+                'profile_photo' => $request->profile_photo,
+                'type' => $request->type,
             ]);
             if ($response) {
 
@@ -129,12 +132,13 @@ class APIController extends Controller
 
 
             $output['response'] = true;
-            $image = $request->file('vehicle_photo_name')->getClientOriginalName();
-            $image_path = 'images/vehicles';
-            $request->vehicle_photo_name->move($image_path, $image);
-            $final = $image_path . '/' . $image;
+            // $image = $request->file('vehicle_photo_name')->getClientOriginalName();
+            // $image_path = 'images/vehicles';
+            // $request->vehicle_photo_name->move($image_path, $image);
+            // $final=$image_path.'/'.$image;
             $response = Vehicle::create([
-                'vehicle_photo_name' => $final,
+                'vehicle_photo_name' => vehicle_photo_name,
+                'type' => $request->type,
                 'nick_name' => $request->nick_name,
                 'ride_type' => $request->ride_type,
                 'transport_type' => $request->transport_type,
@@ -348,7 +352,7 @@ class APIController extends Controller
 
                 return response()->json(['success' => true, 'msg' => 'Please check your mail to reset your password.']);
             } else {
-                return response()->json(['success' => false, 'msg' => 'Customer not found']);
+                return response()->json(['success' => false, 'msg' => 'User not found']);
             }
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'msg' => $e->getMessage()]);
