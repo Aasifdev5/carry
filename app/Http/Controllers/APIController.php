@@ -137,8 +137,10 @@ class APIController extends Controller
             // $request->vehicle_photo_name->move($image_path, $image);
             // $final=$image_path.'/'.$image;
             $response = Vehicle::create([
-                'vehicle_photo_name' => vehicle_photo_name,
+                'vehicle_photo_name' => $request->vehicle_photo_name,
                 'type' => $request->type,
+                'driver_photo' => $request->driver_photo,
+                'photo_type' => $request->photo_type,
                 'nick_name' => $request->nick_name,
                 'ride_type' => $request->ride_type,
                 'transport_type' => $request->transport_type,
