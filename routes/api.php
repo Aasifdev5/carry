@@ -27,7 +27,7 @@ Route::post('/forgotPassword', [APIController::class, 'forgotPassword']);
 Route::get('/languages', [APIController::class, 'languages']);
 
 Route::get('/currency', [APIController::class, 'currency']);
-Route::get('/search', [APIController::class, 'search']);
+Route::get('/search/{name}', [APIController::class, 'search']);
 Route::get('/luggage', [APIController::class, 'luggage']);
 Route::post('/PostVehicle', [APIController::class, 'PostVehicle']);
 Route::post('/editProfile', [APIController::class, 'editProfile']);

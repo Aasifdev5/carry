@@ -389,4 +389,14 @@ class APIController extends Controller
 
         echo "<h1>Successfully Reset Password</h1>";
     }
+
+    function search($name)
+    {
+        $result = Vehicle::where('departure_address', 'LIKE', '%' . $name . '%')->get();
+        if (count($result)) {
+            return Response()->json($result);
+        } else {
+            return response()->json(['Result' => 'No Data not found'], 404);
+        }
+    }
 }
