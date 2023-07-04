@@ -30,9 +30,13 @@ use App\Mail\SendMailreset;
 
 class APIController extends Controller
 {
-    function search($name)
+    function search(Request $request)
     {
-        $result = Vehicle::where('departure_address', 'LIKE', '%' . $name . '%')->get();
+        $result = Vehicle::where('departure_address', 'LIKE', '%' . $request->departure_address . '%')
+            ->where('destination_address', 'LIKE', '%' . $request->destination_address . '%')
+            ->get();
+        // $statement = "select * from vehicles where departure_address LIKE   '%". $request->departure_address ."%'   and destination_address LIKE  '%". $request->destination_address ."%'";
+        //       $query = DB::select($statement);
         if (count($result)) {
             return Response()->json($result);
         } else {
@@ -214,6 +218,56 @@ class APIController extends Controller
             }
         }
     }
+    public function UpdateVehicle(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            // 'ride_type' => 'required',
+            // 'luggage_type' => 'required',
+            // 'destination_type' => 'required',
+            // 'currency' => 'required',
+            // 'departure_address' => 'required',
+            // 'description' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            $output['response'] = false;
+            $output['message'] = $validator->errors();
+        } else {
+
+
+            $output['response'] = true;
+
+            $response = Vehicle::where('id', '=', $request->id)->update([
+                'vehicle_photo_name' => $request->vehicle_photo_name,
+                'type' => $request->type,
+                'driver_photo' => $request->driver_photo,
+                'photo_type' => $request->photo_type,
+                'nick_name' => $request->nick_name,
+                'ride_type' => $request->ride_type,
+                'transport_type' => $request->transport_type,
+                'seats' => $request->seats,
+                'luggage_type' => $request->luggage_type,
+
+                'currency' => $request->currency,
+                'departure_address' => $request->departure_address,
+                'destination_address' => $request->destination_address,
+                'fixed_price' => $request->fixed_price,
+                'description' => $request->description,
+            ]);
+            if ($response) {
+
+                $output['response'] = true;
+                $output['message'] = "Offer Update Successfully";
+                $output['data'] = $response;
+                header('Content-Type: application/json');
+                print_r(json_encode($output));
+            } else {
+                $output['response'] = false;
+                $output['message'] = 'Invalid';
+                print_r(json_encode($output));
+            }
+        }
+    }
     public function SwipAccepted(Request $request)
     {
         $validator = Validator::make($request->all(), []);
@@ -287,6 +341,20 @@ class APIController extends Controller
         print_r(json_encode($output));
     }
 
+    public function deleteVehicle(Request $request)
+    {
+        $id = $request->id;
+        $data = DB::table('vehicles')
+            ->where('id', $id)
+            ->delete();
+
+        $output['response'] = true;
+        $output['message'] = 'Offer deleted Successfully';
+
+
+        header('Content-Type: application/json');
+        print_r(json_encode($output));
+    }
 
     public function languages()
     {
@@ -473,6 +541,17 @@ class APIController extends Controller
         if (isset($request->token) && count($resetData) > 0) {
             $customer = users::where('email', $resetData[0]['email'])->get();
             return view('ResetPasswordLoad', ['customer' => $customer]);
+        }
+    }
+
+    public function editVehicle(Request $request)
+    {
+
+        $result = Vehicle::where('id', $request->id)->get();
+        if (count($result)) {
+            return Response()->json($result);
+        } else {
+            return response()->json(['Result' => 'No vehicle'], 404);
         }
     }
 

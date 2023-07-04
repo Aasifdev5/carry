@@ -27,10 +27,12 @@ Route::post('/forgotPassword', [APIController::class, 'forgotPassword']);
 Route::get('/languages', [APIController::class, 'languages']);
 Route::get('/getRequests', [APIController::class, 'getRequests']);
 Route::post('/deleteRequest', [APIController::class, 'deleteRequest']);
-
+Route::post('/deleteVehicle', [APIController::class, 'deleteVehicle']);
+Route::post('/editVehicle', [APIController::class, 'editVehicle']);
+Route::post('/UpdateVehicle', [APIController::class, 'UpdateVehicle']);
 
 Route::get('/getMatches', [APIController::class, 'getMatches']);
-Route::get('/search/{name}', [APIController::class, 'search']);
+Route::post('/search', [APIController::class, 'search']);
 Route::post('/deleteuser', [APIController::class, 'deleteuser']);
 Route::post('/UpdateTravelverData', [APIController::class, 'UpdateTravelverData']);
 Route::get('/currency', [APIController::class, 'currency']);
