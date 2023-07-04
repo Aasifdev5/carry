@@ -25,13 +25,20 @@ Route::post('/register', [APIController::class, 'register']);
 Route::post('/change_password', [APIController::class, 'change_password']);
 Route::post('/forgotPassword', [APIController::class, 'forgotPassword']);
 Route::get('/languages', [APIController::class, 'languages']);
+Route::get('/getRequests', [APIController::class, 'getRequests']);
+Route::post('/deleteRequest', [APIController::class, 'deleteRequest']);
 
-Route::get('/currency', [APIController::class, 'currency']);
+
+Route::get('/getMatches', [APIController::class, 'getMatches']);
 Route::get('/search/{name}', [APIController::class, 'search']);
+Route::post('/deleteuser', [APIController::class, 'deleteuser']);
+Route::post('/UpdateTravelverData', [APIController::class, 'UpdateTravelverData']);
+Route::get('/currency', [APIController::class, 'currency']);
 Route::get('/luggage', [APIController::class, 'luggage']);
-Route::post('/PostVehicle', [APIController::class, 'PostVehicle']);
-Route::post('/editProfile', [APIController::class, 'editProfile']);
 Route::get('/vehicle', [APIController::class, 'vehicle']);
+Route::post('/PostVehicle', [APIController::class, 'PostVehicle']);
+Route::post('/SwipAccepted', [APIController::class, 'SwipAccepted']);
+Route::post('/editProfile', [APIController::class, 'editProfile']);
 Route::get('/premium_plan', [APIController::class, 'premium_plan']);
 Route::get('/user_terms', [APIController::class, 'user_terms']);
 Route::get('/multilanguage', [APIController::class, 'multilanguage']);

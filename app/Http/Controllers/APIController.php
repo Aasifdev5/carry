@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 use App\Models\PasswordReset;
 use App\Models\users;
+use App\Models\Travelver;
+use App\Models\SwipAccepted;
 use App\Models\Currencies;
 use App\Models\Language;
 use App\Models\LuggageType;
@@ -28,6 +30,15 @@ use App\Mail\SendMailreset;
 
 class APIController extends Controller
 {
+    function search($name)
+    {
+        $result = Vehicle::where('departure_address', 'LIKE', '%' . $name . '%')->get();
+        if (count($result)) {
+            return Response()->json($result);
+        } else {
+            return response()->json(['Result' => 'No vehicle available for this route'], 404);
+        }
+    }
     public function sign_in(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -112,6 +123,44 @@ class APIController extends Controller
             }
         }
     }
+
+    public function UpdateTravelverData(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'passenger_name' => 'required',
+            'passenger_mobile_number' => 'required',
+            'name_next_kind' => 'required',
+            'mobile_number_next_kind' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            $output['response'] = false;
+            $output['message'] = $validator->errors();
+        } else {
+
+            $output['response'] = true;
+
+
+            $response = Travelver::updateOrCreate([
+                'passenger_name' => $request->passenger_name,
+                'passenger_mobile_number' => $request->passenger_mobile_number,
+                'name_next_kind' => $request->name_next_kind,
+                'mobile_number_next_kind' => $request->mobile_number_next_kind,
+            ]);
+            if ($response) {
+
+                $output['response'] = true;
+                $output['message'] = "Updated Travelver Manifest Data";
+                $output['data'] = $response;
+                header('Content-Type: application/json');
+                print_r(json_encode($output));
+            } else {
+                $output['response'] = false;
+                $output['message'] = 'Invalid';
+                print_r(json_encode($output));
+            }
+        }
+    }
     public function PostVehicle(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -121,8 +170,6 @@ class APIController extends Controller
             'currency' => 'required',
             'departure_address' => 'required',
             'description' => 'required',
-
-
         ]);
 
         if ($validator->fails()) {
@@ -167,31 +214,89 @@ class APIController extends Controller
             }
         }
     }
-    public function deletedata(Request $request)
+    public function SwipAccepted(Request $request)
     {
-        $id = $request->id;
+        $validator = Validator::make($request->all(), []);
+
+        if ($validator->fails()) {
+            $output['response'] = false;
+            $output['message'] = $validator->errors();
+        } else {
+
+
+            $output['response'] = true;
+
+            $response = SwipAccepted::create([
+                'vehicle_photo_name' => $request->vehicle_photo_name,
+                'type' => $request->type,
+                'driver_photo' => $request->driver_photo,
+                'photo_type' => $request->photo_type,
+                'nick_name' => $request->nick_name,
+                'ride_type' => $request->ride_type,
+                'transport_type' => $request->transport_type,
+                'seats' => $request->seats,
+                'luggage_type' => $request->luggage_type,
+                'destination_type' => $request->destination_type,
+                'currency' => $request->currency,
+                'departure_address' => $request->departure_address,
+                'destination_address' => $request->destination_address,
+                'fixed_price' => $request->fixed_price,
+                'description' => $request->description,
+            ]);
+            if ($response) {
+
+                $output['response'] = true;
+                $output['message'] = "Request Add Successfully";
+                $output['data'] = $response;
+                header('Content-Type: application/json');
+                print_r(json_encode($output));
+            } else {
+                $output['response'] = false;
+                $output['message'] = 'Invalid';
+                print_r(json_encode($output));
+            }
+        }
+    }
+    public function deleteuser(Request $request)
+    {
+        $id = $request->user_id;
         $data = DB::table('users')
             ->where('id', $id)
             ->delete();
 
         $output['response'] = true;
-        $output['message'] = 'Data deleted SuccessfullY';
-        // $output['data']=$c1;
+        $output['message'] = 'Account deleted Successfully';
+
 
         header('Content-Type: application/json');
         print_r(json_encode($output));
     }
-    public function deleteclient(Request $request, $id)
+
+    public function deleteRequest(Request $request)
     {
-        $data = users::findOrFail($id);
-        $data->delete();
-        return back()->with('success', 'Data deleted successfully');
+        $id = $request->id;
+        $data = DB::table('ride_requests')
+            ->where('id', $id)
+            ->delete();
+
+        $output['response'] = true;
+        $output['message'] = 'Request deleted Successfully';
+
+
+        header('Content-Type: application/json');
+        print_r(json_encode($output));
     }
+
 
     public function languages()
     {
         return Language::all();
     }
+    public function getRequests()
+    {
+        return SwipAccepted::all();
+    }
+
     public function editProfile(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -388,15 +493,5 @@ class APIController extends Controller
         PasswordReset::where('email', $data->email)->delete();
 
         echo "<h1>Successfully Reset Password</h1>";
-    }
-
-    function search($name)
-    {
-        $result = Vehicle::where('departure_address', 'LIKE', '%' . $name . '%')->get();
-        if (count($result)) {
-            return Response()->json($result);
-        } else {
-            return response()->json(['Result' => 'No Data not found'], 404);
-        }
     }
 }
