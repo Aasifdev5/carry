@@ -16,6 +16,7 @@ use App\Models\PasswordReset;
 use App\Models\users;
 use App\Models\Travelver;
 use App\Models\SwipAccepted;
+use App\Models\MatchesRequest;
 use App\Models\Currencies;
 use App\Models\Language;
 use App\Models\LuggageType;
@@ -33,11 +34,11 @@ class APIController extends Controller
     function search(Request $request)
     {
         $result = Vehicle::where('departure_address', 'LIKE', '%' . $request->departure_address . '%')
-            ->where('destination_address', 'LIKE', '%' . $request->destination_address . '%')
+            // ->where('destination_address', 'LIKE', '%' . $request->destination_address . '%')
             ->get();
-        // $statement = "select * from vehicles where departure_address LIKE   '%". $request->departure_address ."%'   and destination_address LIKE  '%". $request->destination_address ."%'";
-        //       $query = DB::select($statement);
-        if (count($result)) {
+        $statement = "select * from vehicles where departure_address LIKE   '%" . $request->departure_address . "%'   and destination_address LIKE  '%" . $request->destination_address . "%'";
+        $query = DB::select($statement);
+        if (count($query)) {
             return Response()->json($result);
         } else {
             return response()->json(['Result' => 'No vehicle available for this route'], 404);
@@ -218,6 +219,26 @@ class APIController extends Controller
             }
         }
     }
+    public function editVehicle(Request $request)
+    {
+
+        $result = Vehicle::where('id', $request->id)->get();
+        if (count($result)) {
+            return Response()->json($result);
+        } else {
+            return response()->json(['Result' => 'No vehicle'], 404);
+        }
+    }
+    public function editPrice(Request $request)
+    {
+
+        $result = SwipAccepted::where('id', $request->id)->get();
+        if (count($result)) {
+            return Response()->json($result);
+        } else {
+            return response()->json(['Result' => 'No vehicle'], 404);
+        }
+    }
     public function UpdateVehicle(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -247,7 +268,57 @@ class APIController extends Controller
                 'transport_type' => $request->transport_type,
                 'seats' => $request->seats,
                 'luggage_type' => $request->luggage_type,
+                'destination_type' => $request->destination_type,
+                'currency' => $request->currency,
+                'departure_address' => $request->departure_address,
+                'destination_address' => $request->destination_address,
+                'fixed_price' => $request->fixed_price,
+                'description' => $request->description,
+            ]);
+            if ($response) {
 
+                $output['response'] = true;
+                $output['message'] = "Offer Update Successfully";
+                $output['data'] = $response;
+                header('Content-Type: application/json');
+                print_r(json_encode($output));
+            } else {
+                $output['response'] = false;
+                $output['message'] = 'Invalid';
+                print_r(json_encode($output));
+            }
+        }
+    }
+    public function UpdatePrice(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            // 'ride_type' => 'required',
+            // 'luggage_type' => 'required',
+            // 'destination_type' => 'required',
+            // 'currency' => 'required',
+            // 'departure_address' => 'required',
+            // 'description' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            $output['response'] = false;
+            $output['message'] = $validator->errors();
+        } else {
+
+
+            $output['response'] = true;
+
+            $response = SwipAccepted::where('id', '=', $request->id)->update([
+                'vehicle_photo_name' => $request->vehicle_photo_name,
+                'type' => $request->type,
+                'driver_photo' => $request->driver_photo,
+                'photo_type' => $request->photo_type,
+                'nick_name' => $request->nick_name,
+                'ride_type' => $request->ride_type,
+                'transport_type' => $request->transport_type,
+                'seats' => $request->seats,
+                'luggage_type' => $request->luggage_type,
+                'destination_type' => $request->destination_type,
                 'currency' => $request->currency,
                 'departure_address' => $request->departure_address,
                 'destination_address' => $request->destination_address,
@@ -311,6 +382,49 @@ class APIController extends Controller
             }
         }
     }
+    public function AcceptedRequest(Request $request)
+    {
+        $validator = Validator::make($request->all(), []);
+
+        if ($validator->fails()) {
+            $output['response'] = false;
+            $output['message'] = $validator->errors();
+        } else {
+
+
+            $output['response'] = true;
+
+            $response = MatchesRequest::create([
+                'vehicle_photo_name' => $request->vehicle_photo_name,
+                'type' => $request->type,
+                'driver_photo' => $request->driver_photo,
+                'photo_type' => $request->photo_type,
+                'nick_name' => $request->nick_name,
+                'ride_type' => $request->ride_type,
+                'transport_type' => $request->transport_type,
+                'seats' => $request->seats,
+                'luggage_type' => $request->luggage_type,
+                'destination_type' => $request->destination_type,
+                'currency' => $request->currency,
+                'departure_address' => $request->departure_address,
+                'destination_address' => $request->destination_address,
+                'fixed_price' => $request->fixed_price,
+                'description' => $request->description,
+            ]);
+            if ($response) {
+
+                $output['response'] = true;
+                $output['message'] = "Request Add Successfully";
+                $output['data'] = $response;
+                header('Content-Type: application/json');
+                print_r(json_encode($output));
+            } else {
+                $output['response'] = false;
+                $output['message'] = 'Invalid';
+                print_r(json_encode($output));
+            }
+        }
+    }
     public function deleteuser(Request $request)
     {
         $id = $request->user_id;
@@ -335,6 +449,21 @@ class APIController extends Controller
 
         $output['response'] = true;
         $output['message'] = 'Request deleted Successfully';
+
+
+        header('Content-Type: application/json');
+        print_r(json_encode($output));
+    }
+
+    public function deleteMatches(Request $request)
+    {
+        $id = $request->id;
+        $data = DB::table('matches_request')
+            ->where('id', $id)
+            ->delete();
+
+        $output['response'] = true;
+        $output['message'] = 'Matches deleted Successfully';
 
 
         header('Content-Type: application/json');
@@ -544,16 +673,7 @@ class APIController extends Controller
         }
     }
 
-    public function editVehicle(Request $request)
-    {
 
-        $result = Vehicle::where('id', $request->id)->get();
-        if (count($result)) {
-            return Response()->json($result);
-        } else {
-            return response()->json(['Result' => 'No vehicle'], 404);
-        }
-    }
 
     public function ResetPassword(Request $request)
     {
