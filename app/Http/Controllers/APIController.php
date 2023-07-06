@@ -414,8 +414,11 @@ class APIController extends Controller
                 'destination_address' => $request->destination_address,
                 'fixed_price' => $request->fixed_price,
                 'description' => $request->description,
-                'matches_id' => $request->id,
+                'matches_id' => $request->matches_id,
             ]);
+            $data = DB::table('ride_requests')
+                ->where('id', $request->matches_id)
+                ->delete();
             if ($response) {
 
                 $output['response'] = true;
