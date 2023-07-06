@@ -33,9 +33,9 @@ Route::post('/UpdateVehicle', [APIController::class, 'UpdateVehicle']);
 Route::post('/editPrice', [APIController::class, 'editPrice']);
 Route::post('/UpdatePrice', [APIController::class, 'UpdatePrice']);
 Route::post('/deleteMatches', [APIController::class, 'deleteMatches']);
+Route::post('/matches', [APIController::class, 'matches']);
 
 
-Route::post('/AcceptedRequest', [APIController::class, 'AcceptedRequest']);
 Route::get('/getMatches', [APIController::class, 'getMatches']);
 Route::get('/search', [APIController::class, 'search']);
 Route::post('/deleteuser', [APIController::class, 'deleteuser']);

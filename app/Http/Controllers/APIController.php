@@ -16,7 +16,7 @@ use App\Models\PasswordReset;
 use App\Models\users;
 use App\Models\Travelver;
 use App\Models\SwipAccepted;
-use App\Models\MatchesRequest;
+use App\Models\Matche;
 use App\Models\Currencies;
 use App\Models\Language;
 use App\Models\LuggageType;
@@ -84,7 +84,6 @@ class APIController extends Controller
             'workman_id' => 'required',
             'email' => 'required|email',
             'password' => 'required',
-
             'security_date' => 'required',
             'name' => 'required',
             'profile_photo' => 'required',
@@ -196,6 +195,7 @@ class APIController extends Controller
                 'nick_name' => $request->nick_name,
                 'ride_type' => $request->ride_type,
                 'transport_type' => $request->transport_type,
+                'cargo_type' => $request->cargo_type,
                 'seats' => $request->seats,
                 'luggage_type' => $request->luggage_type,
                 'destination_type' => $request->destination_type,
@@ -266,6 +266,7 @@ class APIController extends Controller
                 'nick_name' => $request->nick_name,
                 'ride_type' => $request->ride_type,
                 'transport_type' => $request->transport_type,
+                'cargo_type' => $request->cargo_type,
                 'seats' => $request->seats,
                 'luggage_type' => $request->luggage_type,
                 'destination_type' => $request->destination_type,
@@ -316,6 +317,7 @@ class APIController extends Controller
                 'nick_name' => $request->nick_name,
                 'ride_type' => $request->ride_type,
                 'transport_type' => $request->transport_type,
+                'cargo_type' => $request->cargo_type,
                 'seats' => $request->seats,
                 'luggage_type' => $request->luggage_type,
                 'destination_type' => $request->destination_type,
@@ -359,6 +361,7 @@ class APIController extends Controller
                 'nick_name' => $request->nick_name,
                 'ride_type' => $request->ride_type,
                 'transport_type' => $request->transport_type,
+                'cargo_type' => $request->cargo_type,
                 'seats' => $request->seats,
                 'luggage_type' => $request->luggage_type,
                 'destination_type' => $request->destination_type,
@@ -382,7 +385,7 @@ class APIController extends Controller
             }
         }
     }
-    public function AcceptedRequest(Request $request)
+    public function matches(Request $request)
     {
         $validator = Validator::make($request->all(), []);
 
@@ -394,7 +397,7 @@ class APIController extends Controller
 
             $output['response'] = true;
 
-            $response = MatchesRequest::create([
+            $response = Matche::create([
                 'vehicle_photo_name' => $request->vehicle_photo_name,
                 'type' => $request->type,
                 'driver_photo' => $request->driver_photo,
@@ -402,6 +405,7 @@ class APIController extends Controller
                 'nick_name' => $request->nick_name,
                 'ride_type' => $request->ride_type,
                 'transport_type' => $request->transport_type,
+                'cargo_type' => $request->cargo_type,
                 'seats' => $request->seats,
                 'luggage_type' => $request->luggage_type,
                 'destination_type' => $request->destination_type,
@@ -410,6 +414,7 @@ class APIController extends Controller
                 'destination_address' => $request->destination_address,
                 'fixed_price' => $request->fixed_price,
                 'description' => $request->description,
+                'matches_id' => $request->id,
             ]);
             if ($response) {
 
@@ -515,6 +520,10 @@ class APIController extends Controller
                 'email' => $request->email,
                 'remainder' => $request->remainder,
                 'security_date' => $request->security_date,
+                'profile_photo' => $request->profile_photo,
+                'type' => $request->type,
+                'location' => $request->location,
+
             ]);
             $output['response'] = true;
 
@@ -577,7 +586,10 @@ class APIController extends Controller
     {
         return PushNotification::all();
     }
-
+    public function getMatches()
+    {
+        return Matche::all();
+    }
     public function change_password(Request $request)
     {
         $validator = Validator::make($request->all(), [
