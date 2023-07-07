@@ -169,12 +169,12 @@ class APIController extends Controller
     public function PostVehicle(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'ride_type' => 'required',
-            'luggage_type' => 'required',
+            // 'ride_type' => 'required',
+            // 'luggage_type' => 'required',
             'destination_type' => 'required',
-            'currency' => 'required',
-            'departure_address' => 'required',
-            'description' => 'required',
+            // 'currency' => 'required',
+            // 'departure_address' => 'required',
+            // 'description' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -204,6 +204,7 @@ class APIController extends Controller
                 'departure_address' => $request->departure_address,
                 'destination_address' => $request->destination_address,
                 'fixed_price' => $request->fixed_price,
+                'driver_id' => $request->driver_id,
                 'description' => $request->description,
             ]);
             if ($response) {
@@ -275,6 +276,7 @@ class APIController extends Controller
                 'departure_address' => $request->departure_address,
                 'destination_address' => $request->destination_address,
                 'fixed_price' => $request->fixed_price,
+                'driver_id' => $request->driver_id,
                 'description' => $request->description,
             ]);
             if ($response) {
@@ -326,6 +328,7 @@ class APIController extends Controller
                 'departure_address' => $request->departure_address,
                 'destination_address' => $request->destination_address,
                 'fixed_price' => $request->fixed_price,
+                'driver_id' => $request->driver_id,
                 'description' => $request->description,
             ]);
             if ($response) {
@@ -370,6 +373,8 @@ class APIController extends Controller
                 'departure_address' => $request->departure_address,
                 'destination_address' => $request->destination_address,
                 'fixed_price' => $request->fixed_price,
+                'user_id' => $request->user_id,
+                'driver_id' => $request->driver_id,
                 'description' => $request->description,
             ]);
             if ($response) {
@@ -415,6 +420,8 @@ class APIController extends Controller
                 'destination_address' => $request->destination_address,
                 'fixed_price' => $request->fixed_price,
                 'description' => $request->description,
+                'user_id' => $request->user_id,
+                'driver_id' => $request->driver_id,
                 'matches_id' => $request->matches_id,
             ]);
             $data = DB::table('ride_requests')
@@ -500,10 +507,15 @@ class APIController extends Controller
     }
     public function getTraveler()
     {
-        return Travelver::all();
+        $sql = "SELECT * FROM travelvers_manifest_data  order by id desc limit 1";
+        return    $data = DB::select($sql);
+        // $check = Travelver::where('user_id', '=', '5')->get();
+        // return Travelver::all();
     }
-    public function getRequests()
+    public function getRequests(Request $request)
     {
+        // $sql = "SELECT * FROM ride_requests  where ";
+        //               return    $data = DB::select($sql);
         return SwipAccepted::all();
     }
 
@@ -594,7 +606,7 @@ class APIController extends Controller
     {
         return PushNotification::all();
     }
-    public function getMatches()
+    public function getMatches(Request $request)
     {
         return Matche::all();
     }
