@@ -35,7 +35,7 @@ Route::post('/UpdatePrice', [APIController::class, 'UpdatePrice']);
 Route::post('/deleteMatches', [APIController::class, 'deleteMatches']);
 Route::post('/matches', [APIController::class, 'matches']);
 
-
+Route::get('/getTraveler', [APIController::class, 'getTraveler']);
 Route::get('/getMatches', [APIController::class, 'getMatches']);
 Route::get('/search', [APIController::class, 'search']);
 Route::post('/deleteuser', [APIController::class, 'deleteuser']);

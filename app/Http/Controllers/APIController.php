@@ -146,6 +146,7 @@ class APIController extends Controller
 
 
             $response = Travelver::updateOrCreate([
+                'user_id' => $request->user_id,
                 'passenger_name' => $request->passenger_name,
                 'passenger_mobile_number' => $request->passenger_mobile_number,
                 'name_next_kind' => $request->name_next_kind,
@@ -496,6 +497,10 @@ class APIController extends Controller
     public function languages()
     {
         return Language::all();
+    }
+    public function getTraveler()
+    {
+        return Travelver::all();
     }
     public function getRequests()
     {
