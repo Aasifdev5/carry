@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\Hash as FacadesHash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\App;
 use App\Models\PersonalAccess;
-use App\Models\Users;
+use App\Models\users;
+use App\Models\Matche;
+use App\Models\SwipAccepted;
 
 class User extends Controller
 {
@@ -87,7 +89,13 @@ class User extends Controller
             $data = Customers::where('id', '=', Session::get('loginId'))->first();
         }
         if (!empty($check)) {
-            return view('dashboard', compact('data'));
+           
+            $premium_user=users::where('user_type','premium')->get();
+            $users=users::all();
+            $matches=Matche::all();
+            $requests=SwipAccepted::all();
+            
+            return view('dashboard', compact('data','users','matches','requests','premium_user'));
         } else {
             Session::forget('loginId');
             $request->session()->invalidate();
@@ -117,7 +125,7 @@ class User extends Controller
         $token = Session::get('token');
         $check = PersonalAccess::where('token', '=', $token)->first();
         if (!empty($check)) {
-            $users = Users::all();
+            $users = users::all();
             return view('users', compact('data', 'users'));
         } else {
             Session::forget('loginId');

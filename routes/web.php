@@ -18,7 +18,6 @@ use App\Http\Controllers\Push;
 use App\Http\Controllers\UserTerms;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\APIController;
-use App\Http\Controllers\Auth\FacebookSocialiteController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,17 +29,6 @@ use App\Http\Controllers\Auth\FacebookSocialiteController;
 |
 */
 
-Route::middleware([
-   'auth:sanctum',
-   config('jetstream.auth_session'),
-   'verified'
-])->group(function () {
-   Route::get('/dashboard', function () {
-      return view('dashboard');
-   })->name('dashboard');
-});
-Route::get('auth/facebook', [FacebookSocialiteController::class, 'redirectToFB']);
-Route::get('callback/facebook', [FacebookSocialiteController::class, 'handleCallback']);
 
 Route::get('/ResetPasswordLoad', [APIController::class, 'ResetPasswordLoad'])->name('ResetPasswordLoad');
 Route::post('/ResetPassword', [APIController::class, 'ResetPassword'])->name('ResetPassword');

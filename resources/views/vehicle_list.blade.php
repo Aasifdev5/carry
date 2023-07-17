@@ -35,13 +35,13 @@ Vehicle List
                      <tr>
                         <th>#</th>
                         <th>Vehicle Name</th>
-                        <th>Vehicle Nickname</th>
-                        <th>Ride Type</th>
+                         <th>Vehicle Nickname</th>
+                         <th>Ride Type</th>
                         <th>Seats</th>
                         <th>Departure address</th>
                         <th>Destination address</th>
                         <th>Fixed price</th>
-                        <th>Luggage</th>
+                        <th>Luggage Type</th>
                         <th>Vehicle Photo</th>
                         <th>Vehicle Description</th>
                         <th>Action</th>
@@ -55,13 +55,13 @@ Vehicle List
                      <tr>
                         <td><?php echo $count++; ?></td>
                         <td>{{$vehicle->vehicle_name}}</td>
-                        <td>{{$vehicle->nick_name}}</td>
+                         <td>{{$vehicle->nick_name}}</td>
                         <td>{{$vehicle->ride_type}}</td>
                         <td>{{$vehicle->seats}}</td>
                         <td>{{$vehicle->departure_address}}</td>
                         <td>{{$vehicle->destination_address}}</td>
                         <td>{{$vehicle->fixed_price}}</td>
-                        <td>{{$vehicle->luggage}}</td>
+                        <td>{{$vehicle->luggage_type}}</td>
                         <td><img src="images/vehicles/{{$vehicle->vehicle_photo_name}}" width="100" height="100"></td>
                         <td>{{$vehicle->description}}</td>
                         <td>

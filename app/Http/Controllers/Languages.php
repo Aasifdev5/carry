@@ -65,7 +65,7 @@ class Languages extends Controller
             $language->language_photo = $request->file('language_photo')->getClientOriginalName();
 
             $image = $request->file('language_photo')->getClientOriginalName();
-            $request->language_photo->move(public_path('images/language'), $image);
+            $request->language_photo->move('images/language', $image);
             $language->code = $request->language_code;
             $response = $language->save();
 
@@ -122,7 +122,7 @@ class Languages extends Controller
                 $language->language_photo = $request->file('language_photo')->getClientOriginalName();
 
                 $image = $request->file('language_photo')->getClientOriginalName();
-                $request->language_photo->move(public_path('images/language'), $image);
+                $request->language_photo->move('images/language', $image);
             }
 
 

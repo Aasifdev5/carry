@@ -19,7 +19,7 @@ Users List
                   <thead>
                      <tr class="ligth">
                         <th>#</th>
-                        <th>Profile Photo</th>
+                        <!--<th>Profile Photo</th>-->
                         <th>Full Name</th>
                         <th>User Type</th>
                         <th>Language Code</th>
@@ -29,7 +29,7 @@ Users List
                         <th>Security Date</th>
                         <th>Status</th>
                         <th>Join Date</th>
-                        <th>Notify</th>
+                        <!--<th>Notify</th>-->
                         <th style="min-width: 100px">Delete</th>
                      </tr>
                   </thead>
@@ -41,8 +41,8 @@ Users List
                      @foreach($users as $row)
                      <tr>
                         <td><?php echo $count++; ?></td>
-                        <td class="text-center"><img class="bg-soft-primary rounded img-fluid avatar-40 me-3"
-                              src="{{asset('images/shapes/01.png')}}" alt="profile"></td>
+                        <!--<td class="text-center"><img class="bg-soft-primary rounded img-fluid avatar-40 me-3"-->
+                        <!--      src="{{asset('images/shapes/')}}" alt="profile"></td>-->
                         <td>{{$row->name}}</td>
                         <td>{{$row->user_type}}</td>
                         <td>{{$row->lang_id}}</td>
@@ -53,21 +53,21 @@ Users List
                         <td><span class="badge bg-primary">Active</span></td>
 
                         <td>{{$row->created_at}}</td>
-                        <td>
-                           <div id="svg-container-64">
-                              <svg class="icon-32" width="32" viewBox="0 0 24 24" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                 <path
-                                    d="M17.9028 8.85107L13.4596 12.4641C12.6201 13.1301 11.4389 13.1301 10.5994 12.4641L6.11865 8.85107"
-                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round"></path>
-                                 <path fill-rule="evenodd" clip-rule="evenodd"
-                                    d="M16.9089 21C19.9502 21.0084 22 18.5095 22 15.4384V8.57001C22 5.49883 19.9502 3 16.9089 3H7.09114C4.04979 3 2 5.49883 2 8.57001V15.4384C2 18.5095 4.04979 21.0084 7.09114 21H16.9089Z"
-                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round"></path>
-                              </svg>
-                           </div>
-                        </td>
+                        <!--<td>-->
+                        <!--   <div id="svg-container-64">-->
+                        <!--      <svg class="icon-32" width="32" viewBox="0 0 24 24" fill="none"-->
+                        <!--         xmlns="http://www.w3.org/2000/svg">-->
+                        <!--         <path-->
+                        <!--            d="M17.9028 8.85107L13.4596 12.4641C12.6201 13.1301 11.4389 13.1301 10.5994 12.4641L6.11865 8.85107"-->
+                        <!--            stroke="currentColor" stroke-width="1.5" stroke-linecap="round"-->
+                        <!--            stroke-linejoin="round"></path>-->
+                        <!--         <path fill-rule="evenodd" clip-rule="evenodd"-->
+                        <!--            d="M16.9089 21C19.9502 21.0084 22 18.5095 22 15.4384V8.57001C22 5.49883 19.9502 3 16.9089 3H7.09114C4.04979 3 2 5.49883 2 8.57001V15.4384C2 18.5095 4.04979 21.0084 7.09114 21H16.9089Z"-->
+                        <!--            stroke="currentColor" stroke-width="1.5" stroke-linecap="round"-->
+                        <!--            stroke-linejoin="round"></path>-->
+                        <!--      </svg>-->
+                        <!--   </div>-->
+                        <!--</td>-->
                         <td>
                            <div class="flex align-items-center list-user-action">
 

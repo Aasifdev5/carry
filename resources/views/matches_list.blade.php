@@ -27,6 +27,23 @@ Matches List
                         <th style="min-width: 100px">Action</th>
                      </tr>
                   </thead>
+                  <tbody>
+                       <?php
+                     // print_r($users);
+                     $count = 1;
+                     ?>
+                      @foreach($matches as $row)
+                      <tr>
+                        <td><?php echo $count++; ?></td>
+                        <td>{{$row->ride_type}}</td>
+                         <td>{{$row->departure_address}}</td>
+                          <td>{{$row->destination_address}}</td>
+                           <td>{{$row->fixed_price}}</td>
+                            <td>{{$row->created_at}}</td>
+                            <th></th>
+                      </tr>
+                      @endforeach
+                  </tbody>
 
                </table>
             </div>

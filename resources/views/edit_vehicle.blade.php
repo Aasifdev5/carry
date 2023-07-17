@@ -35,7 +35,7 @@
                            <span class="text-danger">@error ('vehicle_name') {{$message}} @enderror</span>
                         </div>
                      </div>
-                     <div class="form-group row">
+                      <div class="form-group row">
                         <label class="control-label col-sm-3 align-self-center mb-0" for="email1">Vehicle
                            Nickname:</label>
                         <div class="col-sm-9">
@@ -43,17 +43,19 @@
                            <span class="text-danger">@error ('nick_name') {{$message}} @enderror</span>
                         </div>
                      </div>
-                     <div class="form-group row">
+                      <div class="form-group row">
                         <label class="control-label col-sm-3 align-self-center mb-0" for="email1">Ride Type:</label>
                         <div class="col-sm-9">
-                           <input type="text" class="form-control" id="ride_type" name="ride_type" value="{{$vehicle->ride_type}}" placeholder="Enter Your Ride Type">
+                           <input type="text" class="form-control" id="ride_type" name="ride_type"
+                              value="{{$vehicle->ride_type}}" placeholder="Enter Your Ride Type">
                            <span class="text-danger">@error ('ride_type') {{$message}} @enderror</span>
                         </div>
                      </div>
                      <div class="form-group row">
                         <label class="control-label col-sm-3 align-self-center mb-0" for="email1">Seats:</label>
                         <div class="col-sm-9">
-                           <input type="text" class="form-control" id="seats" name="seats" value="{{$vehicle->seats}}" placeholder="Enter Your Seats">
+                           <input type="text" class="form-control" id="seats" name="seats" value="{{$vehicle->seats}}"
+                              placeholder="Enter Your Seats">
                            <span class="text-danger">@error ('seats') {{$message}} @enderror</span>
                         </div>
                      </div>
@@ -61,7 +63,8 @@
                         <label class="control-label col-sm-3 align-self-center mb-0" for="email1">Departure
                            address:</label>
                         <div class="col-sm-9">
-                           <input type="text" class="form-control" id="departure_address" name="departure_address" value="{{$vehicle->departure_address}}" placeholder="Enter Your Departure Address">
+                           <input type="text" class="form-control" id="departure_address" name="departure_address"
+                              value="{{$vehicle->departure_address}}" placeholder="Enter Your Departure Address">
                            <span class="text-danger">@error ('departure_address') {{$message}} @enderror</span>
                         </div>
                      </div>
@@ -69,21 +72,24 @@
                         <label class="control-label col-sm-3 align-self-center mb-0" for="email1">Destination
                            address:</label>
                         <div class="col-sm-9">
-                           <input type="text" class="form-control" id="destination_address" name="destination_address" value="{{$vehicle->destination_address}}" placeholder="Enter Your Destination Address">
+                           <input type="text" class="form-control" id="destination_address" name="destination_address"
+                              value="{{$vehicle->destination_address}}" placeholder="Enter Your Destination Address">
                            <span class="text-danger">@error ('destination_address') {{$message}} @enderror</span>
                         </div>
                      </div>
                      <div class="form-group row">
                         <label class="control-label col-sm-3 align-self-center mb-0" for="email1">Fixed price:</label>
                         <div class="col-sm-9">
-                           <input type="text" class="form-control" id="fixed_price" name="fixed_price" value="{{$vehicle->fixed_price}}" placeholder="Enter Your Fixed Price">
+                           <input type="text" class="form-control" id="fixed_price" name="fixed_price"
+                              value="{{$vehicle->fixed_price}}" placeholder="Enter Your Fixed Price">
                            <span class="text-danger">@error ('fixed_price') {{$message}} @enderror</span>
                         </div>
                      </div>
                      <div class="form-group row">
                         <label class="control-label col-sm-3 align-self-center mb-0" for="email1">Luggage :</label>
                         <div class="col-sm-9">
-                           <input type="text" class="form-control" id="luggage" name="luggage" value="{{$vehicle->luggage}}">
+                           <input type="text" class="form-control" id="luggage" name="luggage"
+                              value="{{$vehicle->luggage}}">
                            <span class="text-danger">@error ('luggage') {{$message}} @enderror</span>
                         </div>
                      </div>

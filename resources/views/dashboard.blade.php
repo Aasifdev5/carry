@@ -28,7 +28,14 @@ Dashboard
                   </i>
                   <div class="progress-detail">
                      <p class="mb-2">New Users this Month</p>
-                     <h4 class="counter">60K</h4>
+                     <h4 class="counter"><?php
+                     $start_date=date('Y-m-01');
+                       $current_date = date('Y-m-d');
+                      $sql = "SELECT count(id) as month FROM `users` where created_at  between '".$start_date."' and '" . $current_date . "'  ";
+                           $month_data = DB::select($sql);
+                           print_r(array_column($month_data,'month','0')['0']);
+                           
+                     ?></h4>
                   </div>
                </div>
             </div>
@@ -50,7 +57,14 @@ Dashboard
                   </i>
                   <div class="progress-detail">
                      <p class="mb-2">New Premium Users this Month</p>
-                     <h4 class="counter">30K</h4>
+                     <h4 class="counter"><?php
+                     $start_date=date('Y-m-01');
+                       $current_date = date('Y-m-d');
+                      $sql = "SELECT count(id) as month FROM `users` where created_at  between '".$start_date."' and '" . $current_date . "' and user_type='premium' ";
+                           $month_data = DB::select($sql);
+                           print_r(array_column($month_data,'month','0')['0']);
+                           
+                     ?></h4>
                   </div>
                </div>
             </div>
@@ -72,7 +86,9 @@ Dashboard
                   </i>
                   <div class="progress-detail">
                      <p class="mb-2">Total Users</p>
-                     <h4 class="counter">23K</h4>
+                     <h4 class="counter"> <?php 
+                     print_r(count($users));
+                     ?></h4>
                   </div>
                </div>
             </div>
@@ -94,7 +110,13 @@ Dashboard
                   </i>
                   <div class="progress-detail">
                      <p class="mb-2">Total premium Users</p>
-                     <h4 class="counter">36K</h4>
+                     <h4 class="counter"><?php
+                    
+                    
+                          
+                           print_r(count($premium_user));
+                           
+                     ?></h4>
                   </div>
                </div>
             </div>
@@ -116,7 +138,14 @@ Dashboard
                   </i>
                   <div class="progress-detail">
                      <p class="mb-2">New Premium Users with Invite Code this Month</p>
-                     <h4 class="counter">160K</h4>
+                     <h4 class="counter"><?php
+                     $start_date=date('Y-m-01');
+                       $current_date = date('Y-m-d');
+                      $sql = "SELECT count(id) as month FROM `users` where created_at  between '".$start_date."' and '" . $current_date . "' and invite_code !='' ";
+                           $month_data = DB::select($sql);
+                           print_r(array_column($month_data,'month','0')['0']);
+                           
+                     ?></h4>
                   </div>
                </div>
             </div>
@@ -138,7 +167,13 @@ Dashboard
                   </i>
                   <div class="progress-detail">
                      <p class="mb-2">Total premium Users with Invite Code</p>
-                     <h4 class="counter">360K</h4>
+                     <h4 class="counter"><?php
+                    
+                      $sql = "SELECT * FROM `users` where invite_code !=''  ";
+                           $today_data = DB::select($sql);
+                           print_r(count($today_data));
+                           
+                     ?></h4>
                   </div>
                </div>
             </div>
@@ -151,7 +186,14 @@ Dashboard
 
                   <div class="progress-detail">
                      <p class="mb-2">Request today</p>
-                     <h4 class="counter">10K</h4>
+                     <h4 class="counter"><?php
+                     $start_date=date('Y-m-01');
+                       $current_date = date('Y-m-d');
+                      $sql = "SELECT count(id) as today FROM `ride_requests` where created_at='" . $current_date . "'  ";
+                           $today_data = DB::select($sql);
+                           print_r(array_column($today_data,'today','0')['0']);
+                           
+                     ?></h4>
                   </div>
                </div>
             </div>
@@ -164,7 +206,14 @@ Dashboard
 
                   <div class="progress-detail">
                      <p class="mb-2">Request This Month</p>
-                     <h4 class="counter">11K</h4>
+                     <h4 class="counter"><?php
+                     $start_date=date('Y-m-01');
+                       $current_date = date('Y-m-d');
+                      $sql = "SELECT count(id) as month FROM `ride_requests` where created_at  between '".$start_date."' and '" . $current_date . "'  ";
+                           $month_data = DB::select($sql);
+                           print_r(array_column($month_data,'month','0')['0']);
+                           
+                     ?></h4>
                   </div>
                </div>
             </div>
@@ -177,7 +226,9 @@ Dashboard
 
                   <div class="progress-detail">
                      <p class="mb-2">Total requests</p>
-                     <h4 class="counter">37K</h4>
+                     <h4 class="counter"><?php
+                     print_r(count($requests));
+                     ?></h4>
                   </div>
                </div>
             </div>
@@ -190,7 +241,14 @@ Dashboard
 
                   <div class="progress-detail">
                      <p class="mb-2">Matches today</p>
-                     <h4 class="counter">560K</h4>
+                     <h4 class="counter"><?php
+                     $start_date=date('Y-m-01');
+                       $current_date = date('Y-m-d');
+                      $sql = "SELECT count(id) as today FROM `matches_request` where created_at='" . $current_date . "'  ";
+                           $today_data = DB::select($sql);
+                           print_r(array_column($today_data,'today','0')['0']);
+                           
+                     ?></h4>
                   </div>
                </div>
             </div>
@@ -203,7 +261,14 @@ Dashboard
 
                   <div class="progress-detail">
                      <p class="mb-2">Matches this Month</p>
-                     <h4 class="counter">560K</h4>
+                     <h4 class="counter"><?php
+                     $start_date=date('Y-m-01');
+                       $current_date = date('Y-m-d');
+                      $sql = "SELECT count(id) as month FROM `matches_request` where created_at  between '".$start_date."' and '" . $current_date . "'  ";
+                           $month_data = DB::select($sql);
+                           print_r(array_column($month_data,'month','0')['0']);
+                           
+                     ?></h4>
                   </div>
                </div>
             </div>
@@ -216,66 +281,68 @@ Dashboard
 
                   <div class="progress-detail">
                      <p class="mb-2">Total Matches</p>
-                     <h4 class="counter">560K</h4>
+                     <h4 class="counter"><?php
+                     print_r(count($matches));
+                     ?></h4>
                   </div>
                </div>
             </div>
          </li>
       </div>
-      <div class="col-sm-4">
-         <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1200">
-            <div class="card-body">
-               <div class="progress-widget">
+      <!--<div class="col-sm-4">-->
+      <!--   <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1200">-->
+      <!--      <div class="card-body">-->
+      <!--         <div class="progress-widget">-->
 
-                  <div class="progress-detail">
-                     <p class="mb-2">Upgrades This Month</p>
-                     <h4 class="counter">560K</h4>
-                  </div>
-               </div>
-            </div>
-         </li>
-      </div>
-      <div class="col-sm-4">
-         <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1200">
-            <div class="card-body">
-               <div class="progress-widget">
+      <!--            <div class="progress-detail">-->
+      <!--               <p class="mb-2">Upgrades This Month</p>-->
+      <!--               <h4 class="counter">560K</h4>-->
+      <!--            </div>-->
+      <!--         </div>-->
+      <!--      </div>-->
+      <!--   </li>-->
+      <!--</div>-->
+      <!--<div class="col-sm-4">-->
+      <!--   <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1200">-->
+      <!--      <div class="card-body">-->
+      <!--         <div class="progress-widget">-->
 
-                  <div class="progress-detail">
-                     <p class="mb-2">Downgrade this Month</p>
-                     <h4 class="counter">560K</h4>
-                  </div>
-               </div>
-            </div>
-         </li>
-      </div>
-      <div class="col-sm-4">
-         <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1200">
-            <div class="card-body">
-               <div class="progress-widget">
+      <!--            <div class="progress-detail">-->
+      <!--               <p class="mb-2">Downgrade this Month</p>-->
+      <!--               <h4 class="counter">560K</h4>-->
+      <!--            </div>-->
+      <!--         </div>-->
+      <!--      </div>-->
+      <!--   </li>-->
+      <!--</div>-->
+      <!--<div class="col-sm-4">-->
+      <!--   <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1200">-->
+      <!--      <div class="card-body">-->
+      <!--         <div class="progress-widget">-->
 
-                  <div class="progress-detail">
-                     <p class="mb-2">Total Upgrade</p>
-                     <h4 class="counter">560K</h4>
-                  </div>
-               </div>
-            </div>
-         </li>
-      </div>
+      <!--            <div class="progress-detail">-->
+      <!--               <p class="mb-2">Total Upgrade</p>-->
+      <!--               <h4 class="counter">560K</h4>-->
+      <!--            </div>-->
+      <!--         </div>-->
+      <!--      </div>-->
+      <!--   </li>-->
+      <!--</div>-->
    </div>
 </div>
-<div class="col-sm-4">
-   <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1200">
-      <div class="card-body">
-         <div class="progress-widget">
+<!--<div class="col-sm-4">-->
+<!--   <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1200">-->
+<!--      <div class="card-body">-->
+<!--         <div class="progress-widget">-->
 
-            <div class="progress-detail">
-               <p class="mb-2">Total Downgrade</p>
-               <h4 class="counter">560K</h4>
-            </div>
-         </div>
-      </div>
-   </li>
-</div>
+<!--            <div class="progress-detail">-->
+<!--               <p class="mb-2">Total Downgrade</p>-->
+<!--               <h4 class="counter">560K</h4>-->
+<!--            </div>-->
+<!--         </div>-->
+<!--      </div>-->
+<!--   </li>-->
+<!--</div>-->
 </div>
 </div>
 </div>
