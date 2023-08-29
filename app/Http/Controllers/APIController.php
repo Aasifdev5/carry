@@ -33,11 +33,11 @@ class APIController extends Controller
 {
     function search(Request $request)
     {
-        $result = Vehicle::where('departure_address', 'LIKE', '%' . $request->departure_address . '%' )
-        // ->where('destination_address', 'LIKE', '%' . $request->destination_address . '%')
-        ->get();
-        $statement = "select * from vehicles where departure_address LIKE   '%". $request->departure_address ."%'   and destination_address LIKE  '%". $request->destination_address ."%'";
-              $query = DB::select($statement);
+        $result = Vehicle::where('departure_address', 'LIKE', '%' . $request->departure_address . '%')
+            // ->where('destination_address', 'LIKE', '%' . $request->destination_address . '%')
+            ->get();
+        $statement = "select * from vehicles where departure_address LIKE   '%" . $request->departure_address . "%'   and destination_address LIKE  '%" . $request->destination_address . "%'";
+        $query = DB::select($statement);
         if (count($query)) {
             return Response()->json($result);
         } else {
@@ -56,14 +56,16 @@ class APIController extends Controller
             $output['response'] = false;
             $output['message'] = $validator->errors();
         } else {
-            
+
             $input = $request->all();
             $v = $input['password'];
             $output['response'] = true;
             $var = DB::table('users')->where('email', $input['email'])->first();
 
             if (Hash::check($v, $var->password) || $v == $var->password) {
-            
+                $update = DB::table('users')->where('id', $var->id)->update([
+                    "fcm_token" => $request->fcm_token ? $request->fcm_token : null
+                ]);
                 $output['response'] = true;
 
                 $output['message'] = "LoggedIn  SuccessfullY";
@@ -80,39 +82,39 @@ class APIController extends Controller
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'lang_id'=>'required',
-            'workman_id'=>'required',
+            'lang_id' => 'required',
+            'workman_id' => 'required',
             'email' => 'required|email',
             'password' => 'required',
-            'security_date'=>'required',
+            'security_date' => 'required',
             'name' => 'required',
-            'profile_photo'=>'required',
-            
-            ]);
+            'profile_photo' => 'required',
+
+        ]);
 
         if ($validator->fails()) {
             $output['response'] = false;
             $output['message'] = $validator->errors();
         } else {
-            
+
             $output['response'] = true;
-         
+
             // $image = $request->file('profile_photo')->getClientOriginalName();
             // $image_path = 'images/profile/'.$request->name;
             // $request->profile_photo->move($image_path, $image);
             // $final=$image_path.'/'.$image;
             $response = users::create([
-               'lang_id' => $request->lang_id,
-               'workman_id' => $request->workman_id,
-               'email' => $request->email,
-               'password' => FacadesHash::make($request->password),
-               'invite_code' => $request->invite_code,
-               'remainder' => $request->remainder,
-               'security_date' => $request->security_date,
-               'name' => $request->name,
-               'profile_photo' => $request->profile_photo,
+                'lang_id' => $request->lang_id,
+                'workman_id' => $request->workman_id,
+                'email' => $request->email,
+                'password' => FacadesHash::make($request->password),
+                'invite_code' => $request->invite_code,
+                'remainder' => $request->remainder,
+                'security_date' => $request->security_date,
+                'name' => $request->name,
+                'profile_photo' => $request->profile_photo,
                 'type' => $request->type,
-                ]);
+            ]);
             if ($response) {
 
                 $output['response'] = true;
@@ -127,31 +129,31 @@ class APIController extends Controller
             }
         }
     }
-    
+
     public function UpdateTravelverData(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'passenger_name'=>'required',
-            'passenger_mobile_number'=>'required',
+            'passenger_name' => 'required',
+            'passenger_mobile_number' => 'required',
             'name_next_kind' => 'required',
             'mobile_number_next_kind' => 'required',
-             ]);
+        ]);
 
         if ($validator->fails()) {
             $output['response'] = false;
             $output['message'] = $validator->errors();
         } else {
-            
+
             $output['response'] = true;
-         
-            
+
+
             $response = Travelver::updateOrCreate([
-               'user_id' => $request->user_id,
-               'passenger_name' => $request->passenger_name,
-               'passenger_mobile_number' => $request->passenger_mobile_number,
-               'name_next_kind' => $request->name_next_kind,
-               'mobile_number_next_kind' =>$request->mobile_number_next_kind,
-                ]);
+                'user_id' => $request->user_id,
+                'passenger_name' => $request->passenger_name,
+                'passenger_mobile_number' => $request->passenger_mobile_number,
+                'name_next_kind' => $request->name_next_kind,
+                'mobile_number_next_kind' => $request->mobile_number_next_kind,
+            ]);
             if ($response) {
 
                 $output['response'] = true;
@@ -175,7 +177,7 @@ class APIController extends Controller
             // 'currency' => 'required',
             // 'departure_address' => 'required',
             // 'description' => 'required',
-             ]);
+        ]);
 
         if ($validator->fails()) {
             $output['response'] = false;
@@ -203,9 +205,10 @@ class APIController extends Controller
                 'currency' => $request->currency,
                 'departure_address' => $request->departure_address,
                 'destination_address' => $request->destination_address,
-                'fixed_price'=>$request->fixed_price,
-                 'driver_id'=>$request->driver_id,
+                'fixed_price' => $request->fixed_price,
+                'driver_id' => $request->driver_id,
                 'description' => $request->description,
+                'mobile_number' => $request->mobile_number,
             ]);
             if ($response) {
 
@@ -221,27 +224,25 @@ class APIController extends Controller
             }
         }
     }
-     public function editVehicle(Request $request)
+    public function editVehicle(Request $request)
     {
- 
+
         $result = Vehicle::where('id', $request->id)->get();
         if (count($result)) {
             return Response()->json($result);
         } else {
             return response()->json(['Result' => 'No vehicle'], 404);
         }
-            
     }
-     public function editPrice(Request $request)
+    public function editPrice(Request $request)
     {
- 
+
         $result = SwipAccepted::where('id', $request->id)->get();
         if (count($result)) {
             return Response()->json($result);
         } else {
             return response()->json(['Result' => 'No vehicle'], 404);
         }
-            
     }
     public function UpdateVehicle(Request $request)
     {
@@ -252,7 +253,7 @@ class APIController extends Controller
             // 'currency' => 'required',
             // 'departure_address' => 'required',
             // 'description' => 'required',
-             ]);
+        ]);
 
         if ($validator->fails()) {
             $output['response'] = false;
@@ -261,7 +262,7 @@ class APIController extends Controller
 
 
             $output['response'] = true;
-           
+
             $response = Vehicle::where('id', '=', $request->id)->update([
                 'vehicle_photo_name' => $request->vehicle_photo_name,
                 'type' => $request->type,
@@ -277,8 +278,8 @@ class APIController extends Controller
                 'currency' => $request->currency,
                 'departure_address' => $request->departure_address,
                 'destination_address' => $request->destination_address,
-                'fixed_price'=>$request->fixed_price,
-                'driver_id'=>$request->driver_id,
+                'fixed_price' => $request->fixed_price,
+                'driver_id' => $request->driver_id,
                 'description' => $request->description,
             ]);
             if ($response) {
@@ -304,7 +305,7 @@ class APIController extends Controller
             // 'currency' => 'required',
             // 'departure_address' => 'required',
             // 'description' => 'required',
-             ]);
+        ]);
 
         if ($validator->fails()) {
             $output['response'] = false;
@@ -313,7 +314,7 @@ class APIController extends Controller
 
 
             $output['response'] = true;
-           
+
             $response = SwipAccepted::where('id', '=', $request->id)->update([
                 'vehicle_photo_name' => $request->vehicle_photo_name,
                 'type' => $request->type,
@@ -329,9 +330,10 @@ class APIController extends Controller
                 'currency' => $request->currency,
                 'departure_address' => $request->departure_address,
                 'destination_address' => $request->destination_address,
-                'fixed_price'=>$request->fixed_price,
-                'driver_id'=>$request->driver_id,
+                'fixed_price' => $request->fixed_price,
+                'driver_id' => $request->driver_id,
                 'description' => $request->description,
+                'mobile_number' => $request->mobile_number,
             ]);
             if ($response) {
 
@@ -349,9 +351,7 @@ class APIController extends Controller
     }
     public function SwipAccepted(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-           
-             ]);
+        $validator = Validator::make($request->all(), []);
 
         if ($validator->fails()) {
             $output['response'] = false;
@@ -360,7 +360,7 @@ class APIController extends Controller
 
 
             $output['response'] = true;
-           
+
             $response = SwipAccepted::create([
                 'vehicle_photo_name' => $request->vehicle_photo_name,
                 'type' => $request->type,
@@ -376,10 +376,11 @@ class APIController extends Controller
                 'currency' => $request->currency,
                 'departure_address' => $request->departure_address,
                 'destination_address' => $request->destination_address,
-                'fixed_price'=>$request->fixed_price,
-                'user_id'=>$request->user_id,
-                'driver_id'=>$request->driver_id,
+                'fixed_price' => $request->fixed_price,
+                'user_id' => $request->user_id,
+                'driver_id' => $request->driver_id,
                 'description' => $request->description,
+                'mobile_number' => $request->mobile_number,
             ]);
             if ($response) {
 
@@ -397,9 +398,7 @@ class APIController extends Controller
     }
     public function matches(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-           
-             ]);
+        $validator = Validator::make($request->all(), []);
 
         if ($validator->fails()) {
             $output['response'] = false;
@@ -408,7 +407,7 @@ class APIController extends Controller
 
 
             $output['response'] = true;
-           
+
             $response = Matche::create([
                 'vehicle_photo_name' => $request->vehicle_photo_name,
                 'type' => $request->type,
@@ -424,15 +423,16 @@ class APIController extends Controller
                 'currency' => $request->currency,
                 'departure_address' => $request->departure_address,
                 'destination_address' => $request->destination_address,
-                'fixed_price'=>$request->fixed_price,
+                'fixed_price' => $request->fixed_price,
                 'description' => $request->description,
-                'user_id'=>$request->user_id,
-                'driver_id'=>$request->driver_id,
+                'mobile_number' => $request->mobile_number,
+                'user_id' => $request->user_id,
+                'driver_id' => $request->driver_id,
                 'matches_id' => $request->matches_id,
             ]);
             $data = DB::table('ride_requests')
-            ->where('id', $request->matches_id)
-            ->delete();
+                ->where('id', $request->matches_id)
+                ->delete();
             if ($response) {
 
                 $output['response'] = true;
@@ -456,12 +456,12 @@ class APIController extends Controller
 
         $output['response'] = true;
         $output['message'] = 'Account deleted Successfully';
-      
+
 
         header('Content-Type: application/json');
         print_r(json_encode($output));
     }
-    
+
     public function deleteRequest(Request $request)
     {
         $id = $request->id;
@@ -471,27 +471,27 @@ class APIController extends Controller
 
         $output['response'] = true;
         $output['message'] = 'Request deleted Successfully';
-      
+
 
         header('Content-Type: application/json');
         print_r(json_encode($output));
     }
-    
+
     public function deleteMatches(Request $request)
     {
         $id = $request->id;
         $data = DB::table('matches_request')
             ->where('id', $id)
             ->delete();
-       
+
         $output['response'] = true;
         $output['message'] = 'Matches deleted Successfully';
-      
+
 
         header('Content-Type: application/json');
         print_r(json_encode($output));
     }
-    
+
     public function deleteVehicle(Request $request)
     {
         $id = $request->id;
@@ -501,7 +501,7 @@ class APIController extends Controller
 
         $output['response'] = true;
         $output['message'] = 'Offer deleted Successfully';
-      
+
 
         header('Content-Type: application/json');
         print_r(json_encode($output));
@@ -513,8 +513,8 @@ class APIController extends Controller
     }
     public function getTraveler()
     {
-         $sql = "SELECT * FROM travelvers_manifest_data  order by id desc limit 1";
-                       return    $data = DB::select($sql);
+        $sql = "SELECT * FROM travelvers_manifest_data  order by id desc limit 1";
+        return    $data = DB::select($sql);
         // $check = Travelver::where('user_id', '=', '5')->get();
         // return Travelver::all();
     }
@@ -524,13 +524,13 @@ class APIController extends Controller
         //               return    $data = DB::select($sql);
         return SwipAccepted::all();
     }
-    
+
     public function editProfile(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required',
-           
+
         ]);
 
         if ($validator->fails()) {
@@ -544,12 +544,12 @@ class APIController extends Controller
             $data = users::where('id', '=', $data->id)->update([
                 'name' => $request->name,
                 'email' => $request->email,
-                'remainder'=>$request->remainder,
+                'remainder' => $request->remainder,
                 'security_date' => $request->security_date,
                 'profile_photo' => $request->profile_photo,
                 'type' => $request->type,
                 'location' => $request->location,
-                
+
             ]);
             $output['response'] = true;
 
@@ -612,7 +612,7 @@ class APIController extends Controller
     {
         return PushNotification::all();
     }
-   public function getMatches(Request $request)
+    public function getMatches(Request $request)
     {
         return Matche::all();
     }
@@ -630,8 +630,8 @@ class APIController extends Controller
         } else {
             $output['response'] = true;
             $data = users::find($request->user_id);
-            
-                if (!FacadesHash::check($request->old_password, $data->password)) {
+
+            if (!FacadesHash::check($request->old_password, $data->password)) {
                 $output['response'] = false;
                 $output['message'] = 'Old Password Does not match!';
                 return json_encode($output);
@@ -652,7 +652,6 @@ class APIController extends Controller
                 header('Content-Type: application/json');
                 return json_encode($output);
             }
-            
         }
     }
 
@@ -661,11 +660,11 @@ class APIController extends Controller
         try {
             $customer = users::where('email', $request->email)->get();
             $security = users::where('security_date', $request->security_date)->get();
-           
+
             if (count($customer) > 0) {
- if(count($security) < 0){
-               return response()->json(['success' => false, 'msg' => 'security date invalid']); 
-            }
+                if (count($security) < 0) {
+                    return response()->json(['success' => false, 'msg' => 'security date invalid']);
+                }
                 $token = Str::random(40);
                 $domain = URL::to('/');
                 $url = $domain . '/ResetPasswordLoad?token=' . $token;
@@ -697,9 +696,7 @@ class APIController extends Controller
                 );
 
                 return response()->json(['success' => true, 'msg' => 'Please check your mail to reset your password.']);
-            } 
-           
-            else {
+            } else {
                 return response()->json(['success' => false, 'msg' => 'User not found']);
             }
         } catch (\Exception $e) {
@@ -716,8 +713,8 @@ class APIController extends Controller
             return view('ResetPasswordLoad', ['customer' => $customer]);
         }
     }
-    
-    
+
+
 
     public function ResetPassword(Request $request)
     {
@@ -736,5 +733,58 @@ class APIController extends Controller
         PasswordReset::where('email', $data->email)->delete();
 
         echo "<h1>Successfully Reset Password</h1>";
+    }
+
+    public function send_notification(Request $request)
+    {
+
+        $check = DB::table('users')->select('fcm_token')->where('id', $request->receiver_id)->first();
+        if (!empty($check)) {
+            $URL = 'https://fcm.googleapis.com/fcm/send';
+            $fcm_key = "AAAAI0zq2pA:APA91bFMmarrm38zrC1GmhNl3J_iDO5DgY5udM2cPiLn0y-135AeY3B1vYY316heWtSNdvEqLmDZHzODXcgrfhPCK9-JGX44rcHPM0Vv8FBkrDe5UhutyswQUFf2wpjGahtM9c9OQoEc";
+            $fcm_token = $check->fcm_token ? $check->fcm_token : null;
+            $payload = array(
+                'title' => "You've notification",
+                'body' => "You've new notification",
+                'reference_id' => '14',
+                'type' => 1,
+                'type_for' => 1,
+                'sound' => 'default'
+            );
+
+            $post_data = [
+                'registration_ids' => array($fcm_token), //firebase token array
+                'data' => $payload, //msg for andriod
+                'notification' => $payload, //msg for ios
+
+            ];
+            $crl = curl_init();
+            $headr = [];
+            $headr[] = 'Content-type: application/json';
+            // $headr[] = 'Authorization: key=AIzaSyAZzOsOFmY1w0FivAp1Y4zaW6nPUa8nBmY';
+
+            $headr[] = 'Authorization: key=' . $fcm_key;
+            curl_setopt($crl, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($crl, CURLOPT_URL, $URL);
+            curl_setopt($crl, CURLOPT_HTTPHEADER, $headr);
+            curl_setopt($crl, CURLOPT_POST, true);
+            curl_setopt($crl, CURLOPT_POSTFIELDS, json_encode($post_data));
+            curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
+
+            $rest = curl_exec($crl);
+            curl_close($crl);
+            // return $rest;
+            $dta = json_decode($rest);
+            return $dta;
+            if (!empty($rest)) {
+                if ($dta->success == 1) {
+                    return response()->json(["success" => true, 'msg' => "Notification succrssfully send"], 200);
+                } else {
+                    return response()->json(["success" => false, 'msg' => "failed try again"], 200);
+                }
+            }
+        } else {
+            return response()->json(["success" => false, 'msg' => "User not found"], 200);
+        }
     }
 }

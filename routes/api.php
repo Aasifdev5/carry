@@ -50,3 +50,4 @@ Route::get('/premium_plan', [APIController::class, 'premium_plan']);
 Route::get('/user_terms', [APIController::class, 'user_terms']);
 Route::get('/multilanguage', [APIController::class, 'multilanguage']);
 Route::get('/push_notification', [APIController::class, 'push_notification']);
+Route::post('/send_notification', [APIController::class, 'send_notification']);
